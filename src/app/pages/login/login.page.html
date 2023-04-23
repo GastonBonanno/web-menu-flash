@@ -1,0 +1,118 @@
+<ion-content>
+
+  <ion-col size="2" text-center>
+    <ion-img [src]="itemSrc" class="logo-img"></ion-img>
+  </ion-col>
+
+<!--  <ion-slides #mainSlide>-->
+
+<!--    <ion-slide>-->
+
+      <form #fLogin="ngForm">
+        <ion-grid fixed>
+
+
+          <ion-row>
+            <ion-col>
+
+                <ion-list>
+
+                  <ion-item>
+                    <ion-label>Email</ion-label>
+                    <ion-input name="id"
+                                type="text"
+                                [(ngModel)]="loginUser.userId"
+                                required></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label>Password</ion-label>
+                    <ion-input name="password"
+                                type="password"
+                                [(ngModel)]="loginUser.userPass"
+                                ></ion-input>
+                  </ion-item>
+
+                </ion-list>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-button (click)="login(fLogin)" color="tertiary"
+                          shape="round">
+                Login
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+<!--          <ion-row>-->
+<!--            <ion-col>-->
+<!--              <ion-button (click)="toGuestPage()"-->
+<!--                          color="tertiary"-->
+<!--                          shape="round">-->
+<!--                Ingresar como invitado-->
+<!--              </ion-button>-->
+<!--            </ion-col>-->
+<!--          </ion-row>-->
+
+        </ion-grid>
+
+
+
+<!--    </ion-slide>-->
+<!--    <ion-slide>-->
+
+<!--      <form #fPasswords="ngForm">-->
+<!--        <ion-grid fixed>-->
+
+<!--          <ion-row>-->
+<!--            <ion-col>-->
+
+<!--                <ion-list>-->
+
+<!--                  <ion-item>-->
+<!--                    <ion-label>Nueva contraseña</ion-label>-->
+<!--                    <ion-input name="newPass"-->
+<!--                                type="text"-->
+<!--                                [(ngModel)]="newPasswords.newPass"-->
+<!--                                required></ion-input>-->
+<!--                  </ion-item>-->
+
+<!--                  <ion-item>-->
+<!--                    <ion-label>Repita contraseña</ion-label>-->
+<!--                    <ion-input name="repeatPass"-->
+<!--                                type="text"-->
+<!--                                [(ngModel)]="newPasswords.repeatPass"-->
+<!--                                required></ion-input>-->
+<!--                  </ion-item>-->
+
+<!--                </ion-list>-->
+<!--            </ion-col>-->
+<!--          </ion-row>-->
+
+<!--          <ion-row>-->
+<!--            <ion-col>-->
+<!--              <ion-button (click)="updatePassword(fPasswords)"-->
+<!--                          color="tertiary"-->
+<!--                          shape="round">-->
+<!--                Guardar-->
+<!--              </ion-button>-->
+<!--            </ion-col>-->
+<!--          </ion-row>-->
+
+<!--        </ion-grid>-->
+      </form>
+
+
+
+<!--    </ion-slide>-->
+<!--  </ion-slides>-->
+
+
+
+</ion-content>
+
+
+<ion-footer no-border>
+</ion-footer>
