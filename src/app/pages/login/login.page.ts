@@ -1,8 +1,12 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import { NgForm } from '@angular/forms';
-// import { NavController } from '@ionic/angular';
-// import { UiServiceService } from 'src/app/services/ui-service.service';
-// import { UsuarioService } from '../../services/usuario.service';
+import {
+  CreateUserRequest, CreateUserResponse,
+  LoginUserRequest,
+  LoginUserResponse
+} from "../../interfaces/user.interface";
+import {UserService} from "../../services/user.service";
+import {IonModal, NavController} from "@ionic/angular";
+import {Toast} from "../../utils/toast";
 
 
 @Component({
@@ -12,23 +16,21 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginPage implements OnInit, AfterViewInit {
 
-  // @ViewChild('mainSlide') slides: IonSlides;
+  itemSrc: string = '/assets/logo.png';
 
-  itemSrc = '/assets/logo.png';
-
-  loginUser = {
-    userId: 1,
-    userPass: 'pass'
+  loginUser: LoginUserRequest = {
+    email: '',
+    password: ''
   };
 
-  newPasswords = {
-    newPass: '',
-    repeatPass: ''
+  userToCreate: CreateUserRequest = {
+    email: '',
+    password: '',
+    repeatedPassword: ''
   };
-  // constructor( private usuarioService: UsuarioService,
-  //              private navCtrl: NavController,
-  //              private uiService: UiServiceService ) { }
 
+  constructor(private userService: UserService, private navCtrl: NavController, private toast: Toast) {
+  }
 
   ngOnInit() {
     // this.usuarioService.clearToken();
@@ -38,56 +40,30 @@ export class LoginPage implements OnInit, AfterViewInit {
     // this.slides.lockSwipes(true);
   }
 
-  async login( fLogin: NgForm ) {
-    //
-    // if ( fLogin.invalid ) {return;}
-    //
-    // // let response  = {isEmptyPass: false, isLogin: false};
-    //
-    // const response = await this.usuarioService.login ( this.loginUser.userId, this.loginUser.userPass);
-    //
-    // if(response[0]) {
-    //   this.slideTo(1);
-    // } else if(response[1]) {
-    //   console.log('response1: '+ response[1]);
-    //   this.navCtrl.navigateRoot( '/home' , {animated: true});
-    // } else {
-    //   this.uiService.alertInfo('Usuario o contraseña incorrectos');
-    // }
+  login() {
+    this.userService.login(this.loginUser).subscribe({
+        next: (resp: LoginUserResponse) => {
+          this.navCtrl.navigateRoot('/home', {animated: true});
+          return resp
+        },
+        error: (err) => {
+          console.log('error: ', err)
+        }
+      })
   }
 
-  async updatePassword( fPasswords: NgForm ) {
-
-    // if( this.newPasswords.newPass == null || this.newPasswords.newPass === '') {
-    //   this.uiService.alertInfo('Ingrese una contraseña');
-    //   return;
-    // }
-    // if( this.newPasswords.newPass !== this.newPasswords.repeatPass) {
-    //   this.uiService.alertInfo('Las contraseñas ingresadas no son iguales');
-    //   return;
-    // }
-    //
-    // const validLogin = await this.usuarioService.updatePassword (this.loginUser.userId, this.newPasswords.newPass);
-    // if(validLogin) {
-    //   await this.uiService.presentToast('bottom', 'Contraseña actualizada correctamente');
-    //   // await this.uiService.alertInfoHandler('Contraseña actualizada correctamente', () => this.slideTo(0));
-    // } else {
-    //   await this.uiService.presentToast('bottom', 'Error al guardar, intentelo nuevamente mas tarde');
-    //   // await this.uiService.alertInfoHandler('Error al guardar, intentelo nuevamente mas tarde', () => this.slideTo(0));
-    // }
-    //
-    // await this.slideTo(0);
+  async createUser(modal: IonModal) {
+    this.userService.createUser(this.userToCreate).subscribe({
+      next: (resp: CreateUserResponse) => {
+        this.toast.present('bottom', "Usuario creado correctamente")
+        modal.dismiss()
+        return resp
+      },
+      error: (err) => {
+        console.log('error createUser: ', err)
+        this.toast.present('bottom', "Error al crear usuario")
+        modal.dismiss()
+      }
+    })
   }
-
-  // private async slideTo(i: number){
-  //   this.slides.lockSwipes( false );
-  //   this.slides.slideTo(i);
-  //   this.slides.lockSwipes( true );
-  // }
-
-  // private async toGuestPage(){
-  //   this.navCtrl.navigateRoot('/guest', {animated: true});
-  // }
-
-
 }

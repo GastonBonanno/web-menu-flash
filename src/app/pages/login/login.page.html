@@ -1,118 +1,105 @@
 <ion-content>
 
-  <ion-col size="2" text-center>
+  <ion-col>
     <ion-img [src]="itemSrc" class="logo-img"></ion-img>
   </ion-col>
 
-<!--  <ion-slides #mainSlide>-->
-
-<!--    <ion-slide>-->
-
       <form #fLogin="ngForm">
-        <ion-grid fixed>
+        <ion-grid fixed="true">
 
 
-          <ion-row>
-            <ion-col>
-
+          <ion-row class="form">
+            <ion-col size="8">
                 <ion-list>
-
                   <ion-item>
-                    <ion-label>Email</ion-label>
-                    <ion-input name="id"
+                    <ion-input name="email"
                                 type="text"
-                                [(ngModel)]="loginUser.userId"
-                                required></ion-input>
+                               placeholder="Email"
+                               [(ngModel)]="loginUser.email"
+                               required="true"></ion-input>
                   </ion-item>
 
                   <ion-item>
-                    <ion-label>Password</ion-label>
                     <ion-input name="password"
                                 type="password"
-                                [(ngModel)]="loginUser.userPass"
-                                ></ion-input>
+                               placeholder="Contraseña"
+                               [(ngModel)]="loginUser.password"
+                               required="true"></ion-input>
                   </ion-item>
-
                 </ion-list>
             </ion-col>
           </ion-row>
 
-          <ion-row>
+          <ion-row class="buttons">
             <ion-col>
-              <ion-button (click)="login(fLogin)" color="tertiary"
+              <ion-button (click)="login()" color="tertiary"
                           shape="round">
                 Login
               </ion-button>
             </ion-col>
           </ion-row>
+          <ion-row class="buttons">
+            <ion-col>
+              <ion-button color="tertiary"
+                          shape="round"
+                          id="create-user">
+                 Registrate
+              </ion-button>
+            </ion-col>
+          </ion-row>
 
-<!--          <ion-row>-->
-<!--            <ion-col>-->
-<!--              <ion-button (click)="toGuestPage()"-->
-<!--                          color="tertiary"-->
-<!--                          shape="round">-->
-<!--                Ingresar como invitado-->
-<!--              </ion-button>-->
-<!--            </ion-col>-->
-<!--          </ion-row>-->
 
         </ion-grid>
-
-
-
-<!--    </ion-slide>-->
-<!--    <ion-slide>-->
-
-<!--      <form #fPasswords="ngForm">-->
-<!--        <ion-grid fixed>-->
-
-<!--          <ion-row>-->
-<!--            <ion-col>-->
-
-<!--                <ion-list>-->
-
-<!--                  <ion-item>-->
-<!--                    <ion-label>Nueva contraseña</ion-label>-->
-<!--                    <ion-input name="newPass"-->
-<!--                                type="text"-->
-<!--                                [(ngModel)]="newPasswords.newPass"-->
-<!--                                required></ion-input>-->
-<!--                  </ion-item>-->
-
-<!--                  <ion-item>-->
-<!--                    <ion-label>Repita contraseña</ion-label>-->
-<!--                    <ion-input name="repeatPass"-->
-<!--                                type="text"-->
-<!--                                [(ngModel)]="newPasswords.repeatPass"-->
-<!--                                required></ion-input>-->
-<!--                  </ion-item>-->
-
-<!--                </ion-list>-->
-<!--            </ion-col>-->
-<!--          </ion-row>-->
-
-<!--          <ion-row>-->
-<!--            <ion-col>-->
-<!--              <ion-button (click)="updatePassword(fPasswords)"-->
-<!--                          color="tertiary"-->
-<!--                          shape="round">-->
-<!--                Guardar-->
-<!--              </ion-button>-->
-<!--            </ion-col>-->
-<!--          </ion-row>-->
-
-<!--        </ion-grid>-->
       </form>
 
+  <ion-modal id="create-user-modal" #modal trigger="create-user">
+    <ng-template>
+      <div class="wrapper">
+        <h1>Registro</h1>
 
+        <ion-list lines="none">
 
-<!--    </ion-slide>-->
-<!--  </ion-slides>-->
+          <ion-item>
+            <ion-input name="email"
+                       type="text"
+                       placeholder="Email"
+                       [(ngModel)]="userToCreate.email"
+                       required="true"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input name="password"
+                       type="password"
+                       placeholder="Contraseña"
+                       [(ngModel)]="userToCreate.password"
+                       required="true"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input name="repetead-password"
+                       type="password"
+                       placeholder="Repita contraseña"
+                       [(ngModel)]="userToCreate.repeatedPassword"
+                       required="true"></ion-input>
+          </ion-item>
 
+        </ion-list>
 
+        <ion-row class="buttons">
+          <ion-col>
+            <ion-button (click)="createUser(modal)"
+                        color="tertiary"
+                        shape="round"
+                        id="create">
+              Crear
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+      </div>
+    </ng-template>
+  </ion-modal>
 
 </ion-content>
 
 
-<ion-footer no-border>
+<ion-footer>
 </ion-footer>
