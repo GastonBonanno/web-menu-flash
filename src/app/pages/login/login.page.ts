@@ -14,7 +14,7 @@ import {Toast} from "../../utils/toast";
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit, AfterViewInit {
+export class LoginPage{
 
   itemSrc: string = '/assets/logo.png';
 
@@ -30,14 +30,6 @@ export class LoginPage implements OnInit, AfterViewInit {
   };
 
   constructor(private userService: UserService, private navCtrl: NavController, private toast: Toast) {
-  }
-
-  ngOnInit() {
-    // this.usuarioService.clearToken();
-  }
-
-  ngAfterViewInit() {
-    // this.slides.lockSwipes(true);
   }
 
   login() {
