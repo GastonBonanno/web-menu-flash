@@ -35,7 +35,7 @@ export class LoginPage{
   login() {
     this.userService.login(this.loginUser).subscribe({
         next: (resp: LoginUserResponse) => {
-          this.navCtrl.navigateRoot('/home', {animated: true});
+          this.navCtrl.navigateRoot('/home', {animated: true})
           return resp
         },
         error: (err) => {

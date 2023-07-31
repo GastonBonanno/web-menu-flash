@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import {NavController} from '@ionic/angular';
+import {Toast} from "../../utils/toast";
+import {MenuService} from "../../services/menu.service";
+import {MenuResponse} from "../../interfaces/menu.interface";
 
 @Component({
   selector: 'home',
@@ -7,5 +10,18 @@ import { IonicModule } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  constructor() {}
+
+  constructor(private menuService: MenuService, private navCtrl: NavController, private toast: Toast) {
+  }
+
+  testBack() {
+    this.menuService.getMenu().subscribe({
+      next: (resp: MenuResponse) => {
+        console.log(resp)
+      },
+      error: (err) => {
+        console.log('error: ', err)
+      }
+    })
+  }
 }
