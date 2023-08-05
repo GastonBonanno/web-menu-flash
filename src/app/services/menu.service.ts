@@ -16,7 +16,7 @@ export class MenuService {
   }
 
   getMenu(): Observable<MenuResponse> {
-    return this.http.get<MenuResponse>( `http://localhost:8081/company-menu/1`)
+    return this.http.get<MenuResponse>( `http://localhost:8080/company-menu/1`)
   }
 
 }

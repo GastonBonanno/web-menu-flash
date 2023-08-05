@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { DataService } from '../../services/data.service';
+import { DataService } from '../../services/data.service';
 import { Observable } from 'rxjs';
 import {ComponentSideBar} from '../../interfaces/side-bar.interface';
 
@@ -12,10 +12,10 @@ export class MenuComponent implements OnInit {
 
   components: Observable<ComponentSideBar[]> | undefined;
 
-  // constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    // this.components = this.dataService.getMenuOptions();
+    this.components = this.dataService.getMenuOptions();
   }
 
 }
