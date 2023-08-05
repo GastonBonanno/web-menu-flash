@@ -16,8 +16,8 @@ export class UserService {
 
 
   login(loginUser: LoginUserRequest): Observable<LoginUserResponse> {
-    // return this.http.post<LoginUserResponse>( `${URL}/login`, loginUser)
-    return this.http.post<LoginUserResponse>( `https://menuflash.free.beeceptor.com/login`, loginUser)
+    return this.http.post<LoginUserResponse>( `${URL}/user/login`, loginUser)
+    // return this.http.post<LoginUserResponse>( `https://menuflash.free.beeceptor.com/login`, loginUser)
   }
 
   createUser(loginUser: CreateUserRequest): Observable<CreateUserResponse> {
