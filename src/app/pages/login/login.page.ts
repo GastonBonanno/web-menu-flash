@@ -1,20 +1,25 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import {IonicModule, IonModal, NavController} from '@ionic/angular';
 import {
-  CreateUserRequest, CreateUserResponse,
+  CreateUserRequest,
+  CreateUserResponse,
   LoginUserRequest,
   LoginUserResponse
 } from "../../interfaces/user.interface";
 import {UserService} from "../../services/user.service";
-import {IonModal, NavController} from "@ionic/angular";
 import {Toast} from "../../utils/toast";
-
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
+  standalone: true,
+  imports: [IonicModule, CommonModule, FormsModule]
 })
-export class LoginPage{
+export class LoginPage implements OnInit {
+
 
   itemSrc: string = '/assets/logo.png';
 
@@ -34,14 +39,14 @@ export class LoginPage{
 
   login() {
     this.userService.login(this.loginUser).subscribe({
-        next: (resp: LoginUserResponse) => {
-          this.navCtrl.navigateRoot('/home', {animated: true})
-          return resp
-        },
-        error: (err) => {
-          console.log('error: ', err)
-        }
-      })
+      next: (resp: LoginUserResponse) => {
+        this.navCtrl.navigateRoot('/home', {animated: true})
+        return resp
+      },
+      error: (err) => {
+        console.log('error: ', err)
+      }
+    })
   }
 
   async createUser(modal: IonModal) {
@@ -57,5 +62,8 @@ export class LoginPage{
         modal.dismiss()
       }
     })
+  }
+
+  ngOnInit(): void {
   }
 }

@@ -7,15 +7,15 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'menu',
+    loadComponent: () => import('./pages/menu/menu.page').then( m => m.MenuPage)
+  },
+  {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginPageModule),
+    loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
   },
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
-  },
-  {
-    path: 'menu',
-    loadComponent: () => import('./pages/menu/menu.page').then( m => m.MenuPage)
+    loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage)
   },
 ];
