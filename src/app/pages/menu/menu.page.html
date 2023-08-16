@@ -7,9 +7,82 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+      <ion-grid fixed="true">
+      <ion-row class="form">
+        <ion-col size="8">
+          <ion-list>
+
+            <ion-input name="Header"
+                       type="text"
+                       placeholder="Encabezado"
+                       [(ngModel)]="menu.header"
+                       required="true"></ion-input>
+
+              <ion-input name="title"
+                         type="text"
+                         placeholder="Titulo Menu"
+                         [(ngModel)]="menu.title"
+                         required="true"></ion-input>
+
+              <ion-input name="Descripcion"
+                         type="text"
+                         placeholder="Descripcion"
+                         [(ngModel)]="menu.description"
+                         required="true"></ion-input>
+
+              <ion-input name="Footer"
+                         type="text"
+                         placeholder="Pie de Página"
+                         [(ngModel)]="menu.footer"
+                         required="true"></ion-input>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+        <ion-row class="buttons">
+          <ion-col>
+            <ion-button (click)="save()" color="tertiary"
+                        shape="round">
+              Save
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    <ion-grid fixed="true">
+      <ion-row class="form">
+        <ion-col size="8">
+          <ion-list>
+            <ion-input name="Category"
+                       type="text"
+                       placeholder="Categoria"
+                       [(ngModel)]="category.name"
+                       required="true">
+            </ion-input>
+        </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let category of listCategory">
+
+        <ion-col>
+          {{category.name}}
+        </ion-col>
+
+      </ion-row>
+      <ion-row class="buttons">
+        <ion-col>
+          <ion-button (click)="save()" color="tertiary"
+                      shape="round">
+            Save
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="addCategory()" color="tertiary"
+                      shape="round">
+            Agregar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+  </ion-grid>
 </ion-content>
