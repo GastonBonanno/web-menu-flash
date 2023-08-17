@@ -1,0 +1,10 @@
+.no-spin-buttons::-webkit-inner-spin-button,
+.no-spin-buttons::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.no-spin-buttons {
+
+  appearance: none;
+  -moz-appearance: textfield; /* Para Firefox */
+}

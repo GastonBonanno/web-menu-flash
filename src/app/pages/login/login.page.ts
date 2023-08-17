@@ -21,7 +21,7 @@ import {Toast} from "../../utils/toast";
 export class LoginPage implements OnInit {
 
 
-  itemSrc: string = '/assets/logo.png';
+  itemSrc: string = '/assets/logoMenuFlash.png';
 
   loginUser: LoginUserRequest = {
     email: '',

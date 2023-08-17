@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { MenuComponent } from './menu/menu.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
-  declarations: [MenuComponent],
+  declarations: [SidebarComponent],
   imports: [ CommonModule, IonicModule, RouterModule ],
-  exports: [ MenuComponent ]
+  exports: [ SidebarComponent ]
 })
 export class ComponentsModule { }

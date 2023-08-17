@@ -85,4 +85,67 @@
       </ion-row>
 
   </ion-grid>
+
+  <ion-grid fixed="true">
+    <ion-row class="form">
+      <ion-col size="8">
+        <ion-list>
+          <ion-input name="ItemName"
+                     type="text"
+                     placeholder="Nombre del Item"
+                     [(ngModel)]="itemMenu.name"
+                     required="true">
+          </ion-input>
+          <ion-input name="ItemDescription"
+                     type="text"
+                     placeholder="Descricpion del item"
+                     [(ngModel)]="itemMenu.description"
+                     required="true">
+          </ion-input>
+          <ion-input class="no-spin-buttons"
+                     name="ItemPrice"
+                     label="Precio"
+                     labelPlacement="stacked"
+                     type="number"
+                     placeholder="Precio del item"
+                     [(ngModel)]="itemMenu.price"
+                     required="true">
+          </ion-input>
+          <ion-input class="no-spin-buttons"
+                     name="ItemQuantity"
+                     label="Cantidad"
+                     labelPlacement="stacked"
+                     type="number"
+                     placeholder="Cantidad"
+                     [(ngModel)]="itemMenu.quantity"
+                     required="true">
+          </ion-input>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let category of listCategory">
+
+      <ion-col>
+        {{category.name}}
+      </ion-col>
+
+    </ion-row>
+    <ion-row class="buttons">
+      <ion-col>
+        <ion-button (click)="save()" color="tertiary"
+                    shape="round">
+          Save
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="addCategory()" color="tertiary"
+                    shape="round">
+          Agregar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+
 </ion-content>

@@ -54,8 +54,8 @@ export class MenuPage implements OnInit {
 
   addCategory() {
     this.listCategory.push(this.category)
-    this.category.name= ''
-    this.category.menuId = 0
+    //this.category.name= ''
+    //this.category.menuId = 0
   }
 
   ngOnInit() {
