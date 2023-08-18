@@ -1,16 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons>
-      <ion-menu-button color="primary" menu="menu"></ion-menu-button>
+      <ion-menu-button color="primary" menu="sidebar"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
+
+
       <ion-grid fixed="true">
       <ion-row class="form">
-        <ion-col size="8">
+        <ion-col size="4">
+          <ion-textarea>Datos del menú</ion-textarea>
+          <ion-title></ion-title>
           <ion-list>
 
             <ion-input name="Header"
@@ -41,9 +45,8 @@
       </ion-row>
         <ion-row class="buttons">
           <ion-col>
-            <ion-button (click)="save()" color="tertiary"
-                        shape="round">
-              Save
+            <ion-button (click)="save()" color="warning" shape="round" size="small">
+              Guardar
             </ion-button>
           </ion-col>
         </ion-row>
@@ -51,7 +54,7 @@
 
     <ion-grid fixed="true">
       <ion-row class="form">
-        <ion-col size="8">
+        <ion-col size="4">
           <ion-list>
             <ion-input name="Category"
                        type="text"
@@ -60,35 +63,37 @@
                        required="true">
             </ion-input>
         </ion-list>
+
+        </ion-col>
+        <ion-col>
+        <ion-fab>
+          <ion-fab-button size="small" color="warning">
+            <ion-icon (click)="addCategory()" color="medium" name="add" size="small"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let category of listCategory">
 
+      <ion-row *ngFor="let category of listCategory">
         <ion-col>
           {{category.name}}
         </ion-col>
-
       </ion-row>
+
       <ion-row class="buttons">
         <ion-col>
-          <ion-button (click)="save()" color="tertiary"
-                      shape="round">
-            Save
+          <ion-button (click)="save()" color="warning" shape="round" size="small">
+            Guardar
           </ion-button>
         </ion-col>
-        <ion-col>
-          <ion-button (click)="addCategory()" color="tertiary"
-                      shape="round">
-            Agregar
-          </ion-button>
-        </ion-col>
+
       </ion-row>
 
   </ion-grid>
 
   <ion-grid fixed="true">
     <ion-row class="form">
-      <ion-col size="8">
+      <ion-col size="4">
         <ion-list>
           <ion-input name="ItemName"
                      type="text"
@@ -98,7 +103,7 @@
           </ion-input>
           <ion-input name="ItemDescription"
                      type="text"
-                     placeholder="Descricpion del item"
+                     placeholder="Descripción del item"
                      [(ngModel)]="itemMenu.description"
                      required="true">
           </ion-input>
@@ -106,7 +111,7 @@
                      name="ItemPrice"
                      label="Precio"
                      labelPlacement="stacked"
-                     type="number"
+                     type="decimal"
                      placeholder="Precio del item"
                      [(ngModel)]="itemMenu.price"
                      required="true">
@@ -115,37 +120,35 @@
                      name="ItemQuantity"
                      label="Cantidad"
                      labelPlacement="stacked"
-                     type="number"
+                     type="decimal"
                      placeholder="Cantidad"
                      [(ngModel)]="itemMenu.quantity"
                      required="true">
           </ion-input>
         </ion-list>
       </ion-col>
-    </ion-row>
-    <ion-row *ngFor="let category of listCategory">
-
       <ion-col>
-        {{category.name}}
+        <ion-fab>
+          <ion-fab-button size="small" color="warning">
+            <ion-icon (click)="addItem()" color="medium" size="small" name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
       </ion-col>
-
+    </ion-row>
+    <ion-row *ngFor="let itemMenu of listItem">
+      <ion-col>
+        {{itemMenu.name}}
+      </ion-col>
+      <ion-col>
+        {{itemMenu.description}}
+      </ion-col>
     </ion-row>
     <ion-row class="buttons">
       <ion-col>
-        <ion-button (click)="save()" color="tertiary"
-                    shape="round">
-          Save
-        </ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button (click)="addCategory()" color="tertiary"
-                    shape="round">
-          Agregar
+        <ion-button (click)="save()" color="warning" shape="round" size="small">
+          Guardar
         </ion-button>
       </ion-col>
     </ion-row>
-
   </ion-grid>
-
-
 </ion-content>

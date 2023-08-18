@@ -1,8 +1,12 @@
   <ion-menu swipe-gesture="false" side="start" menuId="sidebar" contentId="main">
-    <ion-header class="title-div" >
+    <ion-header>
       <ion-toolbar color="transparent">
-        <ion-img [src]="itemSrc" class="logo-img"></ion-img>
-        <ion-title class="title">Menu Flash</ion-title>
+        <ion-item class="ion-no-padding" lines="none">
+          <ion-avatar slot="start">
+            <ion-img [src]="itemSrc"></ion-img>
+          </ion-avatar>
+          <ion-label>Menú Flash</ion-label>
+        </ion-item>
       </ion-toolbar>
     </ion-header>
     <ion-content>

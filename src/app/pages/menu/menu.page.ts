@@ -38,6 +38,7 @@ export class MenuPage implements OnInit {
   };
 
   listCategory: CategoryRequest[] = [];
+  listItem: ItemMenuRequest[] = [];
 
   constructor(private menuService: MenuService,  private toast: Toast) { }
 
@@ -56,6 +57,15 @@ export class MenuPage implements OnInit {
     this.listCategory.push(this.category)
     //this.category.name= ''
     //this.category.menuId = 0
+  }
+
+  addItem() {
+    this.listItem.push(this.itemMenu)
+    this.itemMenu.categoryMenuId= 0
+    this.itemMenu.name = ""
+    this.itemMenu.description = ""
+    this.itemMenu.price = 0
+    this.itemMenu.quantity = 0
   }
 
   ngOnInit() {
