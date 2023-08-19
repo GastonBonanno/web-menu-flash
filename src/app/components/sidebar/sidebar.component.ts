@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../services/data.service';
-import { Observable } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {DataService} from '../../services/data.service';
+import {Observable} from 'rxjs';
 import {ComponentSidebar} from '../../interfaces/sidebar.interface';
+import {NavController} from "@ionic/angular";
 
 @Component({
   selector: 'app-sidebar',
@@ -10,10 +11,13 @@ import {ComponentSidebar} from '../../interfaces/sidebar.interface';
 })
 export class SidebarComponent implements OnInit {
   itemSrc: string = '/assets/iconoMF.png';
+  redirectHome: string = '/home';
 
   components: Observable<ComponentSidebar[]> | undefined;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private navCtrl: NavController) { }
+
+
 
   ngOnInit() {
     this.components = this.dataService.getSidebarOptions();

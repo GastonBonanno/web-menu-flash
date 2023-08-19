@@ -1,26 +1,26 @@
 [
   {
-    "icon": "card-outline",
+    "icon": "person-circle-outline",
     "name": "Mi perfil",
     "redirectTo": "/profile"
   },
   {
-    "icon": "accessibility-outline",
+    "icon": "qr-code-outline",
     "name": "Mesas",
     "redirectTo": "/tables"
   },
   {
-    "icon": "accessibility-outline",
+    "icon": "restaurant-outline",
     "name": "Menú",
     "redirectTo": "/menu"
   },
   {
-    "icon": "accessibility-outline",
+    "icon": "reader-outline",
     "name": "Pedidos",
     "redirectTo": "/orders"
   },
   {
-    "icon": "accessibility-outline",
+    "icon": "return-down-back-outline",
     "name": "Cerrar sesión",
     "redirectTo": "/login"
   }

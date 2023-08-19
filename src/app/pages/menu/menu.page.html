@@ -1,12 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons>
-      <ion-menu-button color="primary" menu="sidebar"></ion-menu-button>
+      <ion-menu-button color="warning" menu="sidebar"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div class="bloque-superior">
+  <div class="bloque-superior ion-padding">
     <ion-title class="titulo">Menú</ion-title>
   </div>
   <ion-grid>
@@ -51,7 +51,7 @@
               </ion-item>
               <ion-item>
                 <ion-input labelPlacement="stacked" label="Ingresa el pié de página de tu menú"
-                           [(ngModel)]="menu.header"
+                           [(ngModel)]="menu.footer"
                            placeholder="Pié de Página"></ion-input>
               </ion-item>
             </ion-list>
@@ -65,7 +65,6 @@
           </ion-footer>
         </ng-template>
       </ion-modal>
-
       <ion-modal [isOpen]="isModalOpen2">
         <ng-template>
           <ion-header>
@@ -80,7 +79,7 @@
                 <ion-input class="ion-text-wrap"label="Agrega las categorías: " [(ngModel)]="category.name"
                            placeholder="Categorías"></ion-input>
                 <ion-fab-button size="small" color="warning">
-                  <ion-icon (click)="addCategory()" color="medium" name="add" size="small"></ion-icon>
+                  <ion-icon (click)="addCategory()" color="medium" name="add"></ion-icon>
                 </ion-fab-button>
               </ion-item>
             </ion-list>
@@ -126,7 +125,7 @@
                          placeholder="Cantidad"></ion-input>
             </ion-item>
             <ion-fab-button size="small" color="warning">
-              <ion-icon (click)="addItem()" color="medium" name="add" size="small"></ion-icon>
+              <ion-icon (click)="addItem()" color="medium" name="add"></ion-icon>
             </ion-fab-button>
             <ion-row *ngFor="let itemMenu of listItem">
               <ion-col>
@@ -146,7 +145,6 @@
           </ion-footer>
         </ng-template>
       </ion-modal>
-
     </ion-row>
   </ion-grid>
 </ion-content>
