@@ -1,10 +1,35 @@
-.no-spin-buttons::-webkit-inner-spin-button,
-.no-spin-buttons::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.no-spin-buttons {
+.imagen-boton {
+  cursor: pointer; /* Cambia el cursor a una mano cuando se coloca sobre la tarjeta */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Alineación del contenido al centro */
+  padding: 0; /* Elimina el relleno para que la imagen ocupe todo el espacio */
 
-  appearance: none;
-  -moz-appearance: textfield; /* Para Firefox */
+
+}
+
+.card-contenedor {
+  justify-content: center;
+}
+
+.tarjeta {
+  /* Card styles */
+  transition: box-shadow 0.2s; /* Add a transition for smooth effect */
+
+  &:hover {
+    box-shadow: 0px 4px 8px rgba(255, 206, 1, 1); /* Add a shadow effect on hover */
+  }
+}
+
+.bloque-superior {
+  background-color: rgba(255, 206, 1, 0.5);
+  height: 100px; /* Altura del bloque */
+  width: 100%; /* Ancho completo */
+  display: flex; /* Usar Flexbox para centrar vertical y horizontalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+}
+
+.titulo {
+  font-size: 24px;
+  text-align: center;
 }

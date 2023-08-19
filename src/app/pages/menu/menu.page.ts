@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {IonicModule, NavController} from '@ionic/angular';
+import {ActionSheetController, CheckboxCustomEvent, IonicModule, NavController} from '@ionic/angular';
 import {LoginUserRequest, LoginUserResponse} from "../../interfaces/user.interface";
 import {CategoryRequest, ItemMenuRequest, MenuRequest} from "../../interfaces/menu.interface";
 import {UserService} from "../../services/user.service";
@@ -39,8 +39,12 @@ export class MenuPage implements OnInit {
 
   listCategory: CategoryRequest[] = [];
   listItem: ItemMenuRequest[] = [];
+  isModalOpen = false;
+  isModalOpen2 = false;
+  isModalOpen3 = false;
 
-  constructor(private menuService: MenuService,  private toast: Toast) { }
+  itemSrc: string = '/assets/comida.png';
+  constructor(private menuService: MenuService,  private toast: Toast, private actionSheetCtrl: ActionSheetController) { }
 
   save() {
     this.menuService.save(this.menu).subscribe({
@@ -54,10 +58,14 @@ export class MenuPage implements OnInit {
   }
 
   addCategory() {
-    this.listCategory.push(this.category)
-    //this.category.name= ''
-    //this.category.menuId = 0
+    let categoryClone: CategoryRequest = {
+      name: this.category.name,
+      menuId: this.category.menuId,
+    }
+    this.listCategory.push(categoryClone)
   }
+
+  saveCategory(){}
 
   addItem() {
     this.listItem.push(this.itemMenu)
@@ -67,8 +75,20 @@ export class MenuPage implements OnInit {
     this.itemMenu.price = 0
     this.itemMenu.quantity = 0
   }
+  saveItems(){}
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+  setOpen2(isOpen: boolean) {
+    this.isModalOpen2 = isOpen;
+  }
+  setOpen3(isOpen: boolean) {
+    this.isModalOpen3 = isOpen;
+  }
 
   ngOnInit() {
+
   }
 
 }

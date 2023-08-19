@@ -5,150 +5,148 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-
-
-
-      <ion-grid fixed="true">
-      <ion-row class="form">
-        <ion-col size="4">
-          <ion-textarea>Datos del menú</ion-textarea>
-          <ion-title></ion-title>
-          <ion-list>
-
-            <ion-input name="Header"
-                       type="text"
-                       placeholder="Encabezado"
-                       [(ngModel)]="menu.header"
-                       required="true"></ion-input>
-
-              <ion-input name="title"
-                         type="text"
-                         placeholder="Titulo Menu"
-                         [(ngModel)]="menu.title"
-                         required="true"></ion-input>
-
-              <ion-input name="Descripcion"
-                         type="text"
-                         placeholder="Descripcion"
-                         [(ngModel)]="menu.description"
-                         required="true"></ion-input>
-
-              <ion-input name="Footer"
-                         type="text"
-                         placeholder="Pie de Página"
-                         [(ngModel)]="menu.footer"
-                         required="true"></ion-input>
-          </ion-list>
-        </ion-col>
-      </ion-row>
-        <ion-row class="buttons">
-          <ion-col>
-            <ion-button (click)="save()" color="warning" shape="round" size="small">
-              Guardar
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
-    <ion-grid fixed="true">
-      <ion-row class="form">
-        <ion-col size="4">
-          <ion-list>
-            <ion-input name="Category"
-                       type="text"
-                       placeholder="Categoria"
-                       [(ngModel)]="category.name"
-                       required="true">
-            </ion-input>
-        </ion-list>
-
-        </ion-col>
-        <ion-col>
-        <ion-fab>
-          <ion-fab-button size="small" color="warning">
-            <ion-icon (click)="addCategory()" color="medium" name="add" size="small"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
-        </ion-col>
-      </ion-row>
-
-      <ion-row *ngFor="let category of listCategory">
-        <ion-col>
-          {{category.name}}
-        </ion-col>
-      </ion-row>
-
-      <ion-row class="buttons">
-        <ion-col>
-          <ion-button (click)="save()" color="warning" shape="round" size="small">
-            Guardar
-          </ion-button>
-        </ion-col>
-
-      </ion-row>
-
-  </ion-grid>
-
-  <ion-grid fixed="true">
-    <ion-row class="form">
-      <ion-col size="4">
-        <ion-list>
-          <ion-input name="ItemName"
-                     type="text"
-                     placeholder="Nombre del Item"
-                     [(ngModel)]="itemMenu.name"
-                     required="true">
-          </ion-input>
-          <ion-input name="ItemDescription"
-                     type="text"
-                     placeholder="Descripción del item"
-                     [(ngModel)]="itemMenu.description"
-                     required="true">
-          </ion-input>
-          <ion-input class="no-spin-buttons"
-                     name="ItemPrice"
-                     label="Precio"
-                     labelPlacement="stacked"
-                     type="decimal"
-                     placeholder="Precio del item"
-                     [(ngModel)]="itemMenu.price"
-                     required="true">
-          </ion-input>
-          <ion-input class="no-spin-buttons"
-                     name="ItemQuantity"
-                     label="Cantidad"
-                     labelPlacement="stacked"
-                     type="decimal"
-                     placeholder="Cantidad"
-                     [(ngModel)]="itemMenu.quantity"
-                     required="true">
-          </ion-input>
-        </ion-list>
+<ion-content>
+  <div class="bloque-superior">
+    <ion-title class="titulo">Menú</ion-title>
+  </div>
+  <ion-grid>
+    <ion-row class="card-contenedor">
+      <ion-col size="2">
+        <ion-card  (click)="setOpen(true)" class="imagen-boton tarjeta">
+          <ion-img src='/assets/Datos.png'></ion-img>
+        </ion-card>
       </ion-col>
-      <ion-col>
-        <ion-fab>
-          <ion-fab-button size="small" color="warning">
-            <ion-icon (click)="addItem()" color="medium" size="small" name="add"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
+      <ion-col size="2">
+        <ion-card  (click)="setOpen2(true)" class="imagen-boton tarjeta">
+          <ion-img src='/assets/Categorias.png'></ion-img>
+        </ion-card>
       </ion-col>
-    </ion-row>
-    <ion-row *ngFor="let itemMenu of listItem">
-      <ion-col>
-        {{itemMenu.name}}
+      <ion-col size="2">
+        <ion-card  (click)="setOpen3(true)" class="imagen-boton tarjeta">
+          <ion-img src='/assets/Items.png'></ion-img>
+        </ion-card>
       </ion-col>
-      <ion-col>
-        {{itemMenu.description}}
-      </ion-col>
-    </ion-row>
-    <ion-row class="buttons">
-      <ion-col>
-        <ion-button (click)="save()" color="warning" shape="round" size="small">
-          Guardar
-        </ion-button>
-      </ion-col>
+      <ion-modal [isOpen]="isModalOpen">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>Menú</ion-title>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+            <p>Datos generales del Menú</p>
+            <ion-list>
+              <ion-item>
+                <ion-input labelPlacement="stacked" label="Ingresa el encabezado de tu menú" [(ngModel)]="menu.header"
+                           placeholder="Encabezado"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input labelPlacement="stacked" label="Ingresa el título de tu menú" [(ngModel)]="menu.title"
+                           placeholder="Título"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input labelPlacement="stacked" label="Podés ingresar una descripción de tu Empresa"
+                           [(ngModel)]="menu.description"
+                           placeholder="Descripción"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input labelPlacement="stacked" label="Ingresa el pié de página de tu menú"
+                           [(ngModel)]="menu.header"
+                           placeholder="Pié de Página"></ion-input>
+              </ion-item>
+            </ion-list>
+          </ion-content>
+          <ion-footer>
+            <ion-toolbar>
+              <ion-buttons slot="end">
+                <ion-button (click)="setOpen(false)" (click)="save()">Guardar</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-footer>
+        </ng-template>
+      </ion-modal>
+
+      <ion-modal [isOpen]="isModalOpen2">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>Categorías del Menú</ion-title>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+            <p>Categorías</p>
+            <ion-list>
+              <ion-item>
+                <ion-input class="ion-text-wrap"label="Agrega las categorías: " [(ngModel)]="category.name"
+                           placeholder="Categorías"></ion-input>
+                <ion-fab-button size="small" color="warning">
+                  <ion-icon (click)="addCategory()" color="medium" name="add" size="small"></ion-icon>
+                </ion-fab-button>
+              </ion-item>
+            </ion-list>
+            <ion-list *ngFor="let category of listCategory">
+              <ion-col>
+                {{category.name}}
+              </ion-col>
+            </ion-list>
+          </ion-content>
+          <ion-footer>
+            <ion-toolbar>
+              <ion-buttons slot="end">
+                <ion-button (click)="setOpen2(false); saveCategory()">Confirmar</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-footer>
+        </ng-template>
+      </ion-modal>
+
+      <ion-modal [isOpen]="isModalOpen3">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>Menú</ion-title>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+            <p>Ítems</p>
+            <ion-item>
+              <ion-input class="ion-text-wrap"label="Agrega el nombre del ítem: " [(ngModel)]="itemMenu.name"
+                         placeholder="Nombre del ítem"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input class="ion-text-wrap"label="Agrega la descripción: " [(ngModel)]="itemMenu.description"
+                         placeholder="Descripción"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input class="ion-text-wrap"label="Agrega el precio: " [(ngModel)]="itemMenu.price"
+                         placeholder="Precio"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input class="ion-text-wrap"label="Cantidad de productos disponible: " [(ngModel)]="itemMenu.quantity"
+                         placeholder="Cantidad"></ion-input>
+            </ion-item>
+            <ion-fab-button size="small" color="warning">
+              <ion-icon (click)="addItem()" color="medium" name="add" size="small"></ion-icon>
+            </ion-fab-button>
+            <ion-row *ngFor="let itemMenu of listItem">
+              <ion-col>
+                {{itemMenu.name}}
+              </ion-col>
+              <ion-col>
+                {{itemMenu.description}}
+              </ion-col>
+            </ion-row>
+          </ion-content>
+          <ion-footer>
+            <ion-toolbar>
+              <ion-buttons slot="end">
+                <ion-button (click)="setOpen3(false); saveItems()">Guardar</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-footer>
+        </ng-template>
+      </ion-modal>
+
     </ion-row>
   </ion-grid>
 </ion-content>
