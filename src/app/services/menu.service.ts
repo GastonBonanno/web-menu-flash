@@ -19,8 +19,8 @@ export class MenuService {
     return this.http.get<MenuResponse>( `${URL}/company-menu/1`)
   }
 
-  save(menu: MenuRequest): Observable<void> {
-    return this.http.post<void>( `${URL}/company-menu`, menu)
+  saveMenu(menu: MenuRequest): Observable<MenuResponse> {
+    return this.http.post<MenuResponse>( `${URL}/company-menu`, menu)
   }
 
 }

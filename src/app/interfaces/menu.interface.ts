@@ -6,9 +6,9 @@ export interface MenuResponse {
   footer: string;
   companyDataId: number;
   active: boolean;
-  createdAt: Date;
-  modifiedAt: Date;
-  deletedAt: Date;
+  createdAt: Date | null;
+  modifiedAt: Date | null;
+  deletedAt: Date | null;
 }
 
 export interface MenuRequest{

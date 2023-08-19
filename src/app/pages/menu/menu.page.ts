@@ -2,9 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
-import {CategoryRequest, ItemMenuRequest, MenuRequest} from "../../interfaces/menu.interface";
+import {CategoryRequest, ItemMenuRequest, MenuRequest, MenuResponse} from "../../interfaces/menu.interface";
 import {Toast} from "../../utils/toast";
 import {MenuService} from "../../services/menu.service";
+import {LoginUserResponse} from "../../interfaces/user.interface";
 
 @Component({
   selector: 'app-menu',
@@ -20,6 +21,19 @@ export class MenuPage implements OnInit {
     description: '',
     header: '',
     footer: ''
+  };
+
+  menuResponse: MenuResponse = {
+    id: 0,
+    title: '',
+    description: '',
+    header: '',
+    footer: '',
+    companyDataId: 0,
+    active: true,
+    createdAt: null,
+    modifiedAt: null,
+    deletedAt: null
   };
 
   category: CategoryRequest = {
@@ -43,10 +57,11 @@ export class MenuPage implements OnInit {
 
   constructor(private menuService: MenuService,  private toast: Toast) { }
 
-  save() {
-    this.menuService.save(this.menu).subscribe({
-      next: () => {
-        this.toast.present('middle', "Cargado con éxito")
+  saveMenu() {
+    this.menuService.saveMenu(this.menu).subscribe({
+      next: (resp: MenuResponse) => {
+        this.toast.present('bottom', "Cargado con éxito").then()
+        this.menuResponse = resp
       },
       error: (err) => {
         console.log('error: ', err)
@@ -57,12 +72,22 @@ export class MenuPage implements OnInit {
   addCategory() {
     let categoryClone: CategoryRequest = {
       name: this.category.name,
-      menuId: this.category.menuId,
+      menuId: this.menuResponse.id
     }
     this.listCategory.push(categoryClone)
   }
 
-  saveCategory(){}
+  // saveCategory() {
+  //   this.menuService.saveCategory(this.listCategory).subscribe({
+  //     next: (resp: MenuResponse) => {
+  //       this.toast.present('bottom', "Cargado con éxito").then()
+  //       this.menuResponse = resp
+  //     },
+  //     error: (err) => {
+  //       console.log('error: ', err)
+  //     }
+  //   })
+  // }
 
   addItem() {
     let itemClone: ItemMenuRequest = {

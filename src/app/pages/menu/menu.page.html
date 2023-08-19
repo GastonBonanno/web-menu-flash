@@ -26,7 +26,7 @@
           <ion-img src='/assets/Items.png'></ion-img>
         </ion-card>
       </ion-col>
-      <ion-modal [isOpen]="isModalOpen">
+      <ion-modal [isOpen]="isModalOpen" [backdropDismiss]="false">
         <ng-template>
           <ion-header>
             <ion-toolbar>
@@ -59,13 +59,13 @@
           <ion-footer>
             <ion-toolbar>
               <ion-buttons slot="end">
-                <ion-button (click)="setOpen(false)" (click)="save()">Guardar</ion-button>
+                <ion-button (click)="setOpen(false)" (click)="saveMenu()" (click)="setOpen2(true)">Guardar</ion-button>
               </ion-buttons>
             </ion-toolbar>
           </ion-footer>
         </ng-template>
       </ion-modal>
-      <ion-modal [isOpen]="isModalOpen2">
+      <ion-modal [isOpen]="isModalOpen2" [backdropDismiss]="false">
         <ng-template>
           <ion-header>
             <ion-toolbar>
@@ -92,14 +92,14 @@
           <ion-footer>
             <ion-toolbar>
               <ion-buttons slot="end">
-                <ion-button (click)="setOpen2(false); saveCategory()">Confirmar</ion-button>
+                <ion-button (click)="setOpen2(false); saveCategory()" (click)="setOpen3(true)">Confirmar</ion-button>
               </ion-buttons>
             </ion-toolbar>
           </ion-footer>
         </ng-template>
       </ion-modal>
 
-      <ion-modal [isOpen]="isModalOpen3">
+      <ion-modal [isOpen]="isModalOpen3" [backdropDismiss]="false">
         <ng-template>
           <ion-header>
             <ion-toolbar>
