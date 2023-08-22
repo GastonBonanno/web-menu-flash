@@ -7,23 +7,13 @@
 </ion-header>
 <ion-content>
   <div class="bloque-superior ion-padding">
-    <ion-title class="titulo">Menú</ion-title>
+    <ion-title class="titulo">Acá podés crear tu menú</ion-title>
   </div>
   <ion-grid>
     <ion-row class="card-contenedor">
       <ion-col size="2">
         <ion-card  (click)="setOpen(true)" class="imagen-boton tarjeta">
-          <ion-img src='/assets/Datos.png'></ion-img>
-        </ion-card>
-      </ion-col>
-      <ion-col size="2">
-        <ion-card  (click)="setOpen2(true)" class="imagen-boton tarjeta">
-          <ion-img src='/assets/Categorias.png'></ion-img>
-        </ion-card>
-      </ion-col>
-      <ion-col size="2">
-        <ion-card  (click)="setOpen3(true)" class="imagen-boton tarjeta">
-          <ion-img src='/assets/Items.png'></ion-img>
+          <ion-img src='/assets/menu.png'></ion-img>
         </ion-card>
       </ion-col>
       <ion-modal [isOpen]="isModalOpen" [backdropDismiss]="false">
@@ -31,6 +21,11 @@
           <ion-header>
             <ion-toolbar>
               <ion-title>Menú</ion-title>
+              <ion-fab (click)="setOpen(false)" slot="end" horizontal="end">
+                <ion-fab-button color="medium" size="small">
+                  <ion-icon name="close-outline"></ion-icon>
+                </ion-fab-button>
+              </ion-fab>
             </ion-toolbar>
           </ion-header>
           <ion-content class="ion-padding">
@@ -70,13 +65,18 @@
           <ion-header>
             <ion-toolbar>
               <ion-title>Categorías del Menú</ion-title>
+              <ion-fab (click)="setOpen2(false)" slot="end" horizontal="end">
+                <ion-fab-button color="medium" size="small">
+                  <ion-icon name="close-outline"></ion-icon>
+                </ion-fab-button>
+              </ion-fab>
             </ion-toolbar>
           </ion-header>
           <ion-content class="ion-padding">
             <p>Categorías</p>
             <ion-list>
               <ion-item>
-                <ion-input class="ion-text-wrap"label="Agrega las categorías: " [(ngModel)]="category.name"
+                <ion-input class="ion-text-wrap" label="Agrega las categorías: " [(ngModel)]="category.name"
                            placeholder="Categorías"></ion-input>
                 <ion-fab-button size="small" color="warning">
                   <ion-icon (click)="addCategory()" color="medium" name="add"></ion-icon>
@@ -103,25 +103,30 @@
         <ng-template>
           <ion-header>
             <ion-toolbar>
-              <ion-title>Menú</ion-title>
+              <ion-title>Ítems del Menú</ion-title>
+              <ion-fab (click)="setOpen3(false)" slot="end" horizontal="end">
+                <ion-fab-button color="medium" size="small">
+                  <ion-icon name="close-outline"></ion-icon>
+                </ion-fab-button>
+              </ion-fab>
             </ion-toolbar>
           </ion-header>
           <ion-content class="ion-padding">
             <p>Ítems</p>
             <ion-item>
-              <ion-input class="ion-text-wrap"label="Agrega el nombre del ítem: " [(ngModel)]="itemMenu.name"
+              <ion-input class="ion-text-wrap" label="Agrega el nombre del ítem: " [(ngModel)]="itemMenu.name"
                          placeholder="Nombre del ítem"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input class="ion-text-wrap"label="Agrega la descripción: " [(ngModel)]="itemMenu.description"
+              <ion-input class="ion-text-wrap" label="Agrega la descripción: " [(ngModel)]="itemMenu.description"
                          placeholder="Descripción"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input class="ion-text-wrap"label="Agrega el precio: " [(ngModel)]="itemMenu.price"
+              <ion-input class="ion-text-wrap" label="Agrega el precio: " [(ngModel)]="itemMenu.price"
                          placeholder="Precio"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input class="ion-text-wrap"label="Cantidad de productos disponible: " [(ngModel)]="itemMenu.quantity"
+              <ion-input class="ion-text-wrap" label="Cantidad de productos disponible: " [(ngModel)]="itemMenu.quantity"
                          placeholder="Cantidad"></ion-input>
             </ion-item>
             <ion-fab-button size="small" color="warning">

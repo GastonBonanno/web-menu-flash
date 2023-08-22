@@ -22,7 +22,7 @@
 
 .bloque-superior {
   background-color:rgba(255, 206, 1, 0.7);
-  height: 100px; /* Altura del bloque */
+  height: 200px; /* Altura del bloque */
   width: 100%; /* Ancho completo */
   display: flex; /* Usar Flexbox para centrar vertical y horizontalmente */
   justify-content: center; /* Centrar horizontalmente */
@@ -34,4 +34,6 @@
   text-align: center;
 }
 
-
+.boton {
+  --ion-color-medium-shade: #808289;
+}

@@ -77,7 +77,7 @@ export class MenuPage implements OnInit {
     this.listCategory.push(categoryClone)
   }
 
-  // saveCategory() {
+   saveCategory() {
   //   this.menuService.saveCategory(this.listCategory).subscribe({
   //     next: (resp: MenuResponse) => {
   //       this.toast.present('bottom', "Cargado con éxito").then()
@@ -87,7 +87,7 @@ export class MenuPage implements OnInit {
   //       console.log('error: ', err)
   //     }
   //   })
-  // }
+   }
 
   addItem() {
     let itemClone: ItemMenuRequest = {
