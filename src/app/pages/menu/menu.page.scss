@@ -37,3 +37,10 @@
 .boton {
   --ion-color-medium-shade: #808289;
 }
+
+.ion-modal {
+  ion-content {
+    max-width: 90%; /* Ajusta el ancho máximo del contenido del modal */
+    margin: 0 auto; /* Centra el contenido horizontalmente */
+  }
+}

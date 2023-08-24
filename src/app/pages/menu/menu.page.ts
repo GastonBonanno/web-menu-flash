@@ -49,8 +49,34 @@ export class MenuPage implements OnInit {
     quantity: 0
   };
 
+
+
   listCategory: CategoryRequest[] = [];
   listItem: ItemMenuRequest[] = [];
+  listMenu: MenuResponse[] = [{
+    id: 0,
+    title: '',
+    description: '',
+    header: '',
+    footer: '',
+    companyDataId: 0,
+    active: true,
+    createdAt: null,
+    modifiedAt: null,
+    deletedAt: null
+  },
+    {
+      id: 0,
+      title: '',
+      description: '',
+      header: '',
+      footer: '',
+      companyDataId: 0,
+      active: true,
+      createdAt: null,
+      modifiedAt: null,
+      deletedAt: null
+    }];
   isModalOpen = false;
   isModalOpen2 = false;
   isModalOpen3 = false;
