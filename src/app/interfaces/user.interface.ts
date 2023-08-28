@@ -4,13 +4,16 @@ export interface LoginUserRequest {
 }
 
 export interface LoginUserResponse {
-  id: string;
+  user: LoginUser;
+  token: string;
+}
+
+export interface LoginUser {
   email: string;
-  company_id: string;
-  active: boolean;
-  created_at: string;
-  modificated_at: string;
-  deleted_at: string;
+  name: string;
+  cuit: string;
+  address: string;
+  phoneNumber: string;
 }
 
 export interface CreateUserRequest {

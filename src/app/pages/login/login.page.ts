@@ -10,6 +10,7 @@ import {
 } from "../../interfaces/user.interface";
 import {UserService} from "../../services/user.service";
 import {Toast} from "../../utils/toast";
+import {TokenService} from "../../services/token.service";
 
 @Component({
   selector: 'app-login',
@@ -34,18 +35,23 @@ export class LoginPage implements OnInit {
     repeatedPassword: ''
   };
 
-  constructor(private userService: UserService, private navCtrl: NavController, private toast: Toast) {
+  constructor(private userService: UserService, private navCtrl: NavController, private toast: Toast, private tokenService: TokenService) {
   }
 
   login() {
-    this.userService.login(this.loginUser).subscribe({
-      next: (resp: LoginUserResponse) => {
-        this.navCtrl.navigateRoot('/home', {animated: true})
-        return resp
-      },
-      error: (err) => {
-        console.log('error: ', err)
-      }
+    this.userService.login(this.loginUser).then(a => {
+      a.subscribe({
+        next: (resp: LoginUserResponse) => {
+          this.tokenService.saveToken(resp.token).then(() => {
+            this.navCtrl.navigateRoot('/home', {animated: true}).then()
+          })
+          return resp
+        },
+        error: (err) => {
+          console.log('error: ', err)
+          this.toast.present('bottom', "Usuario o contraseña incorrectos").then()
+        }
+      })
     })
   }
 
@@ -65,5 +71,6 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit(): void {
+    this.tokenService.clearToken().then()
   }
 }
