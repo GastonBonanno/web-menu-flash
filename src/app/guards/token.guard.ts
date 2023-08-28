@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CanLoad, UrlTree} from '@angular/router';
+import {CanMatchFn, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {UserService} from "../services/user.service";
 import {LoginUserResponse} from "../interfaces/user.interface";
@@ -9,11 +9,13 @@ import {NavController} from "@ionic/angular";
 @Injectable({
   providedIn: 'root'
 })
-export class TokenGuard{
+export class TokenGuard {
 
   constructor( private userService: UserService, private tokenService: TokenService, private navCtrl: NavController) { }
 
-  canLoad(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  
+
+  canMatch(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     console.log('canLoadddddddddddddddddddddddddd')
     this.userService.validateToken().subscribe({
       next: (resp: LoginUserResponse) => {
@@ -28,5 +30,24 @@ export class TokenGuard{
     })
     return false
   }
+
+  canActivate:CanMatchFn = this.canMatch;
+
+  /*const isAuthenticated = (): | boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> => {
+    const authService = inject(AuthService);
+    const router = inject(Router);
+    return authService.isAuthenticated$.pipe(
+        take(1),
+        tap((isAuthenticated: boolean) => {
+            if (!isAuthenticated) {
+                this.router.navigate(['/account/login']);
+            }
+        }),
+    );
+}
+
+const canActivate:CanActivateFn = isAuthenticated;
+const canMatch:CanMatchFn = isAuthenticated;
+  */
 
 }

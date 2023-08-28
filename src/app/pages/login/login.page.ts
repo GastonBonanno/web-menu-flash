@@ -1,76 +1,76 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {IonicModule, IonModal, NavController} from '@ionic/angular';
+import { IonicModule, IonModal, NavController } from '@ionic/angular';
 import {
   CreateUserRequest,
   CreateUserResponse,
   LoginUserRequest,
-  LoginUserResponse
-} from "../../interfaces/user.interface";
-import {UserService} from "../../services/user.service";
-import {Toast} from "../../utils/toast";
-import {TokenService} from "../../services/token.service";
+  LoginUserResponse,
+} from '../../interfaces/user.interface';
+import { UserService } from '../../services/user.service';
+import { Toast } from '../../utils/toast';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule],
 })
 export class LoginPage implements OnInit {
-
-
   itemSrc: string = '/assets/logoMenuFlash.png';
 
   loginUser: LoginUserRequest = {
     email: '',
-    password: ''
+    password: '',
   };
 
   userToCreate: CreateUserRequest = {
     email: '',
     password: '',
-    repeatedPassword: ''
+    repeatedPassword: '',
   };
 
-  constructor(private userService: UserService, private navCtrl: NavController, private toast: Toast, private tokenService: TokenService) {
-  }
+  constructor(
+    private userService: UserService,
+    private navCtrl: NavController,
+    private toast: Toast,
+    private tokenService: TokenService
+  ) {}
 
   login() {
-    this.userService.login(this.loginUser).then(a => {
-      a.subscribe({
-        next: (resp: LoginUserResponse) => {
-          this.tokenService.saveToken(resp.token).then(() => {
-            this.navCtrl.navigateRoot('/home', {animated: true}).then()
-          })
-          return resp
-        },
-        error: (err) => {
-          console.log('error: ', err)
-          this.toast.present('bottom', "Usuario o contraseña incorrectos").then()
-        }
-      })
-    })
+    this.userService.login(this.loginUser).subscribe({
+      next: (resp: LoginUserResponse) => {
+        this.tokenService.saveToken(resp.token).then(() => {
+          this.navCtrl.navigateRoot('/home', { animated: true }).then();
+        });
+        return resp;
+      },
+      error: (err) => {
+        console.log('error: ', err);
+        this.toast.present('bottom', 'Usuario o contraseña incorrectos').then();
+      },
+    });
   }
 
   async createUser(modal: IonModal) {
     this.userService.createUser(this.userToCreate).subscribe({
       next: (resp: CreateUserResponse) => {
-        this.toast.present('bottom', "Usuario creado correctamente")
-        modal.dismiss()
-        return resp
+        this.toast.present('bottom', 'Usuario creado correctamente');
+        modal.dismiss();
+        return resp;
       },
       error: (err) => {
-        console.log('error createUser: ', err)
-        this.toast.present('bottom', "Error al crear usuario")
-        modal.dismiss()
-      }
-    })
+        console.log('error createUser: ', err);
+        this.toast.present('bottom', 'Error al crear usuario');
+        modal.dismiss();
+      },
+    });
   }
 
   ngOnInit(): void {
-    this.tokenService.clearToken().then()
+    this.tokenService.clearToken().then();
   }
 }

@@ -15,6 +15,9 @@ export class SecureService {
   constructor( private http: HttpClient, private tokenService: TokenService) {
   }
 
+  postLogin(path: string, body: any | null): Observable<any> {
+    return this.http.post<any>(`${URL}/${path}`, body)
+  }
 
   async post(path: string, body: any | null): Promise<Observable<any>> {
     return await this.createTokenHeader().then(httpHeaders => {

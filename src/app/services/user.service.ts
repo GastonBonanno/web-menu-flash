@@ -16,8 +16,8 @@ export class UserService {
   }
 
 
-  async login(loginUser: LoginUserRequest): Promise<Observable<LoginUserResponse>> {
-    return await this.secureService.post('user/login', loginUser)
+   login(loginUser: LoginUserRequest): Observable<LoginUserResponse> {
+    return this.secureService.postLogin('user/login', loginUser)
   }
 
   createUser(loginUser: CreateUserRequest): Observable<CreateUserResponse> {
