@@ -25,7 +25,7 @@ export class UserService {
     return this.http.post<CreateUserResponse>( `https://menuflash.free.beeceptor.com/create-account`, loginUser)
   }
 
-  validateToken(): Observable<any> {
+  validateToken(): Observable<LoginUserResponse> {
     return this.secureService.get('user/validate-token');
   }
 
