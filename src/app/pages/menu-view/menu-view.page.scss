@@ -1,0 +1,33 @@
+.banner {
+  background-image: url("/assets/menuData.png");
+  background-size: inherit;
+  background-position: center;
+  padding: 50px;
+  text-align: center;
+}
+.title {
+  -webkit-text-fill-color: rgba(255, 206, 1, 0.8); /* Color de fondo del texto con transparencia */
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+}
+.subtitle {
+  font-size: 18px;
+  margin-bottom: 10px;
+  -webkit-text-fill-color: #dbdbdb;
+}
+.text {
+  font-size: 16px;
+  -webkit-text-fill-color: #dbdbdb;
+}
+.contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.imgs {
+  background-size: inherit;
+  background-position: center;
+  padding: 50px;
+  text-align: center;
+}

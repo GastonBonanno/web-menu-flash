@@ -10,7 +10,7 @@ import {NavController} from "@ionic/angular";
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
-  itemSrc: string = '/assets/iconoMF.png';
+  itemSrc: string = '/assets/logoMenu-Flash.png';
   redirectHome: string = '/home';
 
   components: Observable<ComponentSidebar[]> | undefined;

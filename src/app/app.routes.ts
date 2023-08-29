@@ -17,5 +17,9 @@ export const routes: Routes = [
   {
     path: 'home',
     loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage)
+  },  {
+    path: 'menu-view',
+    loadComponent: () => import('./pages/menu-view/menu-view.page').then( m => m.MenuViewPage)
   },
+
 ];

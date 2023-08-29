@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {IonicModule} from '@ionic/angular';
+import {IonicModule, NavController} from '@ionic/angular';
 import {CategoryRequest, ItemMenuRequest, MenuRequest, MenuResponse} from "../../interfaces/menu.interface";
 import {Toast} from "../../utils/toast";
 import {MenuService} from "../../services/menu.service";
@@ -81,20 +81,20 @@ export class MenuPage implements OnInit {
   isModalOpen2 = false;
   isModalOpen3 = false;
 
-  constructor(private menuService: MenuService,  private toast: Toast) { }
+  constructor(private menuService: MenuService,  private toast: Toast, private navCtrl: NavController) { }
 
   saveMenu() {
     this.menuService.saveMenu(this.menu).subscribe({
       next: (resp: MenuResponse) => {
-        this.toast.present('bottom', "Cargado con éxito").then()
-        this.menuResponse = resp
+        this.navCtrl.navigateRoot('/menu-view', {animated: true})
+        return resp
       },
       error: (err) => {
+        this.toast.present('bottom', "Error menu").then()
         console.log('error: ', err)
       }
     })
   }
-
   addCategory() {
     let categoryClone: CategoryRequest = {
       name: this.category.name,

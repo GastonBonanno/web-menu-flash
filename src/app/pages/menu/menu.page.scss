@@ -44,3 +44,10 @@
     margin: 0 auto; /* Centra el contenido horizontalmente */
   }
 }
+.banner {
+  background-image: url("/assets/menuData.png");
+  background-size: inherit;
+  background-position: center;
+  padding: 50px;
+  text-align: center;
+}
