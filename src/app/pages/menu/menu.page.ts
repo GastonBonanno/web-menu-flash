@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {IonicModule, NavController} from '@ionic/angular';
@@ -6,6 +6,7 @@ import {CategoryRequest, ItemMenuRequest, MenuRequest, MenuResponse} from "../..
 import {Toast} from "../../utils/toast";
 import {MenuService} from "../../services/menu.service";
 import {LoginUserResponse} from "../../interfaces/user.interface";
+import {menu} from "ionicons/icons";
 
 @Component({
   selector: 'app-menu',
@@ -54,7 +55,7 @@ export class MenuPage implements OnInit {
   listCategory: CategoryRequest[] = [];
   listItem: ItemMenuRequest[] = [];
   listMenu: MenuResponse[] = [{
-    id: 0,
+    id: 10,
     title: '',
     description: '',
     header: '',
@@ -66,7 +67,7 @@ export class MenuPage implements OnInit {
     deletedAt: null
   },
     {
-      id: 0,
+      id: 40,
       title: '',
       description: '',
       header: '',
@@ -86,7 +87,7 @@ export class MenuPage implements OnInit {
   saveMenu() {
     this.menuService.saveMenu(this.menu).subscribe({
       next: (resp: MenuResponse) => {
-        this.navCtrl.navigateRoot('/menu-view', {animated: true})
+        this.navCtrl.navigateRoot(['/menu-view', resp.id], {animated: true})
         return resp
       },
       error: (err) => {
@@ -95,6 +96,12 @@ export class MenuPage implements OnInit {
       }
     })
   }
+
+  editMenu(menuId: number) {
+    this.navCtrl.navigateRoot(['/menu-view', menuId], {animated: true})
+    return menuId
+  }
+
   addCategory() {
     let categoryClone: CategoryRequest = {
       name: this.category.name,
