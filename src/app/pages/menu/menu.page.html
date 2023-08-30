@@ -5,19 +5,25 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-  <div class="bloque-superior ion-padding">
+  <ion-grid>
+
+  <div class="banner">
     <ion-title class="titulo">Acá podés crear tu menú</ion-title>
   </div>
-  <ion-grid>
+
+
     <ion-row class="card-contenedor">
       <ion-col size="2">
         <ion-card  (click)="setOpen(true)" class="imagen-boton tarjeta">
           <ion-img src='/assets/menu.png'></ion-img>
         </ion-card>
       </ion-col>
+      </ion-row>
+
       <ion-modal [isOpen]="isModalOpen" [backdropDismiss]="false"  class="ion-modal">
-        <ng-template class="ion-modal">
+        <ng-template class="ion-modal card-contenedor">
           <ion-header>
             <ion-toolbar>
               <ion-title>Menú</ion-title>
@@ -28,8 +34,7 @@
               </ion-fab>
             </ion-toolbar>
           </ion-header>
-          <ion-row>
-            <ion-col size="8">
+          <ion-content class="ion-padding card-contenedor">
               <p>Datos generales del Menú</p>
               <ion-list>
                 <ion-item>
@@ -51,127 +56,112 @@
                              placeholder="Pié de Página"></ion-input>
                 </ion-item>
               </ion-list>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-card class="ion-modal">
-              <ion-col size="4">
-                <ion-card-header>
-                  <ion-card-subtitle>Header</ion-card-subtitle>
-                  <ion-card-title>Título del menú</ion-card-title>
-                  <ion-card-subtitle>Pié de página</ion-card-subtitle>
-                </ion-card-header>
-                <ion-card-content>
-                  Descripcion: Here's a small text description for the card content. Nothing more, nothing less.
-                </ion-card-content>
-              </ion-col>
-            </ion-card>
-          </ion-row>
-          <ion-footer>
-            <ion-toolbar>
-              <ion-buttons slot="end">
-                <ion-button (click)="setOpen(false)" (click)="saveMenu()" (click)="setOpen2(true)">Guardar</ion-button>
-              </ion-buttons>
-            </ion-toolbar>
-          </ion-footer>
-        </ng-template>
-      </ion-modal>
-      <ion-modal [isOpen]="isModalOpen2" [backdropDismiss]="false">
-        <ng-template>
-          <ion-header>
-            <ion-toolbar>
-              <ion-title>Categorías del Menú</ion-title>
-              <ion-fab (click)="setOpen2(false)" slot="end" horizontal="end">
-                <ion-fab-button color="medium" size="small">
-                  <ion-icon name="close-outline"></ion-icon>
-                </ion-fab-button>
-              </ion-fab>
-            </ion-toolbar>
-          </ion-header>
-          <ion-content class="ion-padding">
-            <p>Categorías</p>
-            <ion-list>
-              <ion-item>
-                <ion-input class="ion-text-wrap" label="Agrega las categorías: " [(ngModel)]="category.name"
-                           placeholder="Categorías"></ion-input>
-                <ion-fab-button size="small" color="warning">
-                  <ion-icon (click)="addCategory()" color="medium" name="add"></ion-icon>
-                </ion-fab-button>
-              </ion-item>
-            </ion-list>
-            <ion-list *ngFor="let category of listCategory">
-              <ion-col>
-                {{category.name}}
-              </ion-col>
-            </ion-list>
           </ion-content>
-          <ion-footer>
+                  <ion-footer>
             <ion-toolbar>
               <ion-buttons slot="end">
-                <ion-button (click)="setOpen2(false); saveCategory()" (click)="setOpen3(true)">Guardar</ion-button>
+                <ion-button (click)="setOpen(false)" (click)="saveMenu()">Crear</ion-button>
               </ion-buttons>
             </ion-toolbar>
           </ion-footer>
         </ng-template>
       </ion-modal>
 
-      <ion-modal [isOpen]="isModalOpen3" [backdropDismiss]="false">
-        <ng-template>
-          <ion-header>
-            <ion-toolbar>
-              <ion-title>Ítems del Menú</ion-title>
-              <ion-fab (click)="setOpen3(false)" slot="end" horizontal="end">
-                <ion-fab-button color="medium" size="small">
-                  <ion-icon name="close-outline"></ion-icon>
-                </ion-fab-button>
-              </ion-fab>
-            </ion-toolbar>
-          </ion-header>
-          <ion-content class="ion-padding">
-            <p>Ítems</p>
-            <ion-item>
-              <ion-input class="ion-text-wrap" label="Agrega el nombre del ítem: " [(ngModel)]="itemMenu.name"
-                         placeholder="Nombre del ítem"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input class="ion-text-wrap" label="Agrega la descripción: " [(ngModel)]="itemMenu.description"
-                         placeholder="Descripción"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input class="ion-text-wrap" label="Agrega el precio: " [(ngModel)]="itemMenu.price"
-                         placeholder="Precio"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input class="ion-text-wrap" label="Cantidad de productos disponible: " [(ngModel)]="itemMenu.quantity"
-                         placeholder="Cantidad"></ion-input>
-            </ion-item>
-            <ion-fab-button size="small" color="warning">
-              <ion-icon (click)="addItem()" color="medium" name="add"></ion-icon>
-            </ion-fab-button>
-            <ion-row *ngFor="let itemMenu of listItem">
-              <ion-col>
-                {{itemMenu.name}}
-              </ion-col>
-              <ion-col>
-                {{itemMenu.description}}
-              </ion-col>
-            </ion-row>
-          </ion-content>
-          <ion-footer>
-            <ion-toolbar>
-              <ion-buttons slot="end">
-                <ion-button (click)="setOpen3(false); saveItems()">Guardar</ion-button>
-              </ion-buttons>
-            </ion-toolbar>
-          </ion-footer>
-        </ng-template>
-      </ion-modal>
-    </ion-row>
-  </ion-grid>
+<!--      <ion-modal [isOpen]="isModalOpen2" [backdropDismiss]="false">-->
+<!--        <ng-template>-->
+<!--          <ion-header>-->
+<!--            <ion-toolbar>-->
+<!--              <ion-title>Categorías del Menú</ion-title>-->
+<!--              <ion-fab (click)="setOpen2(false)" slot="end" horizontal="end">-->
+<!--                <ion-fab-button color="medium" size="small">-->
+<!--                  <ion-icon name="close-outline"></ion-icon>-->
+<!--                </ion-fab-button>-->
+<!--              </ion-fab>-->
+<!--            </ion-toolbar>-->
+<!--          </ion-header>-->
+<!--          <ion-content class="ion-padding">-->
+<!--            <p>Categorías</p>-->
+<!--            <ion-list>-->
+<!--              <ion-item>-->
+<!--                <ion-input class="ion-text-wrap" label="Agrega las categorías: " [(ngModel)]="category.name"-->
+<!--                           placeholder="Categorías"></ion-input>-->
+<!--                <ion-fab-button size="small" color="warning">-->
+<!--                  <ion-icon (click)="addCategory()" color="medium" name="add"></ion-icon>-->
+<!--                </ion-fab-button>-->
+<!--              </ion-item>-->
+<!--            </ion-list>-->
+<!--            <ion-list *ngFor="let category of listCategory">-->
+<!--              <ion-col>-->
+<!--                {{category.name}}-->
+<!--              </ion-col>-->
+<!--            </ion-list>-->
+<!--          </ion-content>-->
+<!--          <ion-footer>-->
+<!--            <ion-toolbar>-->
+<!--              <ion-buttons slot="end">-->
+<!--                <ion-button (click)="setOpen2(false); saveCategory()" (click)="setOpen3(true)">Guardar</ion-button>-->
+<!--              </ion-buttons>-->
+<!--            </ion-toolbar>-->
+<!--          </ion-footer>-->
+<!--        </ng-template>-->
+<!--      </ion-modal>-->
+
+<!--      <ion-modal [isOpen]="isModalOpen3" [backdropDismiss]="false">-->
+<!--        <ng-template>-->
+<!--          <ion-header>-->
+<!--            <ion-toolbar>-->
+<!--              <ion-title>Ítems del Menú</ion-title>-->
+<!--              <ion-fab (click)="setOpen3(false)" slot="end" horizontal="end">-->
+<!--                <ion-fab-button color="medium" size="small">-->
+<!--                  <ion-icon name="close-outline"></ion-icon>-->
+<!--                </ion-fab-button>-->
+<!--              </ion-fab>-->
+<!--            </ion-toolbar>-->
+<!--          </ion-header>-->
+<!--          <ion-content class="ion-padding">-->
+<!--            <p>Ítems</p>-->
+<!--            <ion-item>-->
+<!--              <ion-input class="ion-text-wrap" label="Agrega el nombre del ítem: " [(ngModel)]="itemMenu.name"-->
+<!--                         placeholder="Nombre del ítem"></ion-input>-->
+<!--            </ion-item>-->
+<!--            <ion-item>-->
+<!--              <ion-input class="ion-text-wrap" label="Agrega la descripción: " [(ngModel)]="itemMenu.description"-->
+<!--                         placeholder="Descripción"></ion-input>-->
+<!--            </ion-item>-->
+<!--            <ion-item>-->
+<!--              <ion-input class="ion-text-wrap" label="Agrega el precio: " [(ngModel)]="itemMenu.price"-->
+<!--                         placeholder="Precio"></ion-input>-->
+<!--            </ion-item>-->
+<!--            <ion-item>-->
+<!--              <ion-input class="ion-text-wrap" label="Cantidad de productos disponible: " [(ngModel)]="itemMenu.quantity"-->
+<!--                         placeholder="Cantidad"></ion-input>-->
+<!--            </ion-item>-->
+<!--            <ion-fab-button size="small" color="warning">-->
+<!--              <ion-icon (click)="addItem()" color="medium" name="add"></ion-icon>-->
+<!--            </ion-fab-button>-->
+<!--            <ion-row *ngFor="let itemMenu of listItem">-->
+<!--              <ion-col>-->
+<!--                {{itemMenu.name}}-->
+<!--              </ion-col>-->
+<!--              <ion-col>-->
+<!--                {{itemMenu.description}}-->
+<!--              </ion-col>-->
+<!--            </ion-row>-->
+<!--          </ion-content>-->
+<!--          <ion-footer>-->
+<!--            <ion-toolbar>-->
+<!--              <ion-buttons slot="end">-->
+<!--                <ion-button (click)="setOpen3(false); saveItems()">Guardar</ion-button>-->
+<!--              </ion-buttons>-->
+<!--            </ion-toolbar>-->
+<!--          </ion-footer>-->
+<!--        </ng-template>-->
+<!--      </ion-modal>-->
 
 
-  <ion-content class="ion-padding">
-    <ion-grid>
+
+
+
       <ion-list>
         <ion-row class="card-contenedor" *ngFor="let menu of listMenu">
           <ion-col size="4">
@@ -192,7 +182,6 @@
           </ion-col>
         </ion-row>
       </ion-list>
-    </ion-grid>
-  </ion-content>
 
+</ion-grid>
 </ion-content>
