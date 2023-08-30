@@ -9,10 +9,6 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'login',
-    loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage),
-  },
-  {
     path: 'menu',
     loadComponent: () => import('./pages/menu/menu.page').then( m => m.MenuPage),
     // canMatch: [(route: Routes, segments: UrlSegment[])=> {
@@ -21,11 +17,15 @@ export const routes: Routes = [
     // }]
   },
   {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
+  },
+  {
     path: 'home',
     loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage)
   },
   {
-    path: 'menu-view',
+    path: 'menu-view/:menu-id',
     loadComponent: () => import('./pages/menu-view/menu-view.page').then( m => m.MenuViewPage)
   },
 ];

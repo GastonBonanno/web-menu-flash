@@ -9,6 +9,8 @@
 
 .card-contenedor {
   justify-content: center;
+  background-color: transparent;
+
 }
 
 .tarjeta {
@@ -50,4 +52,17 @@
   background-position: center;
   padding: 50px;
   text-align: center;
+}
+
+.img-menu-mini {
+  background-image: url("/assets/fondoCard.png");
+}
+.card-menu-list {
+  align-items: center;
+}
+.card-contenedor-list {
+  justify-content: center;
+  height: 300px;
+  width: 100%;
+  display: flex;
 }

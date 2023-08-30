@@ -31,3 +31,15 @@
   padding: 50px;
   text-align: center;
 }
+.imagen-boton {
+  cursor: pointer; /* Cambia el cursor a una mano cuando se coloca sobre la tarjeta */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Alineación del contenido al centro */
+  padding: 0; /* Elimina el relleno para que la imagen ocupe todo el espacio */
+
+
+}
+.tarjeta {
+  /* Card styles */
+  transition: box-shadow 0.2s; /* Add a transition for smooth effect */
+}
