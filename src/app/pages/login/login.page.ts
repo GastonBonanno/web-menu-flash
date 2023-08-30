@@ -20,7 +20,7 @@ import { TokenService } from '../../services/token.service';
   imports: [IonicModule, CommonModule, FormsModule],
 })
 export class LoginPage implements OnInit {
-  itemSrc: string = '/assets/logoMenuFlash.png';
+  itemSrc: string = '/assets/logoMenu-Flash.png';
 
   loginUser: LoginUserRequest = {
     email: '',

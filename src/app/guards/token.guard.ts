@@ -17,13 +17,13 @@ export class TokenGuard {
 
   canMatch(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    console.log('canLoadddddddddddddddddddddddddd')
-    return this.userService.validateToken().pipe(
-      mergeMap((resp: LoginUserResponse) => {
-        console.log('resp: ', resp)
-        return of(true)
-      }),
-    )
+    // console.log('canLoadddddddddddddddddddddddddd')
+    // return this.userService.validateToken().pipe(
+    //   mergeMap((resp: LoginUserResponse) => {
+    //     console.log('resp: ', resp)
+    //     return of(true)
+    //   }),
+    // )
 
 
 
@@ -42,7 +42,7 @@ export class TokenGuard {
     // })
     // console.log('isValid::: ', isValid)
     // return isValid
+    return true
   }
-
   // canActivate:CanMatchFn = this.canMatch;
 }

@@ -15,13 +15,17 @@ export const routes: Routes = [
   {
     path: 'menu',
     loadComponent: () => import('./pages/menu/menu.page').then( m => m.MenuPage),
-    canMatch: [(route: Routes, segments: UrlSegment[])=> {
-      let a = inject(TokenGuard).canMatch()
-      return a
-    }]
+    // canMatch: [(route: Routes, segments: UrlSegment[])=> {
+    //   let a = inject(TokenGuard).canMatch()
+    //   return a
+    // }]
   },
   {
     path: 'home',
     loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage)
+  },
+  {
+    path: 'menu-view',
+    loadComponent: () => import('./pages/menu-view/menu-view.page').then( m => m.MenuViewPage)
   },
 ];
