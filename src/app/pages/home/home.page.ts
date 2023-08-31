@@ -19,16 +19,6 @@ export class HomePage implements OnInit {
   constructor(private menuService: MenuService, private navCtrl: NavController, private toast: Toast) {
   }
 
-  testBack() {
-    this.menuService.getMenu().subscribe({
-      next: (resp: MenuResponse) => {
-        console.log(resp)
-      },
-      error: (err) => {
-        console.log('error: ', err)
-      }
-    })
-  }
   ngOnInit() {
   }
 

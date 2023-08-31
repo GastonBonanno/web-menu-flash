@@ -54,30 +54,7 @@ export class MenuPage implements OnInit {
 
   listCategory: CategoryRequest[] = [];
   listItem: ItemMenuRequest[] = [];
-  listMenu: MenuResponse[] = [{
-    id: 10,
-    title: '',
-    description: '',
-    header: '',
-    footer: '',
-    companyDataId: 0,
-    active: true,
-    createdAt: null,
-    modifiedAt: null,
-    deletedAt: null
-  },
-    {
-      id: 40,
-      title: '',
-      description: '',
-      header: '',
-      footer: '',
-      companyDataId: 0,
-      active: true,
-      createdAt: null,
-      modifiedAt: null,
-      deletedAt: null
-    }];
+  listMenu: MenuResponse[] = [];
   isModalOpen = false;
   isModalOpen2 = false;
   isModalOpen3 = false;
@@ -145,7 +122,18 @@ export class MenuPage implements OnInit {
   }
 
   ngOnInit() {
-
+    console.log('holaa')
+    this.menuService.getMenuList().subscribe({
+      next: (resp: MenuResponse[]) => {
+        console.log('resp: ', resp)
+        this.listMenu = resp
+      },
+      error: (err) => {
+        this.toast.present('bottom', "Error menu").then()
+        console.log('error: ', err)
+      }
+    })
+  console.log('llalalallala')
   }
 
 }

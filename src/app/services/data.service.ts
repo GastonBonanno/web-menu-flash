@@ -10,9 +10,7 @@ export class DataService {
   constructor( private http: HttpClient ) { }
 
   getSidebarOptions() {
-    let a = this.http.get<ComponentSidebar[]>('/assets/data/sidebar.json');
-    console.log('lista del menu: ', a)
-    return a
+    return this.http.get<ComponentSidebar[]>('/assets/data/sidebar.json');
   }
 
 

@@ -1,4 +1,6 @@
-import { Routes } from '@angular/router';
+import { Routes, UrlSegment } from '@angular/router';
+import {TokenGuard} from "./guards/token.guard";
+import {inject} from "@angular/core";
 
 export const routes: Routes = [
   {
@@ -8,7 +10,11 @@ export const routes: Routes = [
   },
   {
     path: 'menu',
-    loadComponent: () => import('./pages/menu/menu.page').then( m => m.MenuPage)
+    loadComponent: () => import('./pages/menu/menu.page').then( m => m.MenuPage),
+    // canMatch: [(route: Routes, segments: UrlSegment[])=> {
+    //   let a = inject(TokenGuard).canMatch()
+    //   return a
+    // }]
   },
   {
     path: 'login',
@@ -22,5 +28,4 @@ export const routes: Routes = [
     path: 'menu-view/:menu-id',
     loadComponent: () => import('./pages/menu-view/menu-view.page').then( m => m.MenuViewPage)
   },
-
 ];
