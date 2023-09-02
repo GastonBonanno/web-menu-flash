@@ -17,7 +17,7 @@ export class UserService {
 
 
    login(loginUser: LoginUserRequest): Observable<LoginUserResponse> {
-    return this.secureService.postLogin('user/login', loginUser)
+    return this.secureService.post('/user/login', loginUser)
   }
 
   createUser(loginUser: CreateUserRequest): Observable<CreateUserResponse> {
@@ -25,8 +25,8 @@ export class UserService {
     return this.http.post<CreateUserResponse>( `https://menuflash.free.beeceptor.com/create-account`, loginUser)
   }
 
-  validateToken(): Observable<LoginUserResponse> {
-    return this.secureService.get('user/validate-token');
+  validateToken(): Observable<boolean> {
+    return this.secureService.get('/user/validate-token');
   }
 
 

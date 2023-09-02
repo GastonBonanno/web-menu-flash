@@ -15,53 +15,34 @@ export class SecureService {
   constructor( private http: HttpClient, private tokenService: TokenService) {
   }
 
-  postLogin(path: string, body: any | null): Observable<any> {
-    return this.http.post<any>(`${URL}/${path}`, body)
+  post(path: string, body: any | null): Observable<any> {
+    return this.createTokenHeader().pipe(
+      mergeMap(header => this.http.post<any>(`${URL}${path}`, body, {headers: header}))
+    )
   }
-  //
-  // async post(path: string, body: any | null): Promise<Observable<any>> {
-  //   return await this.createTokenHeader().then(httpHeaders => {
-  //     return this.http.post<any>(`${URL}/${path}`, body, {headers: httpHeaders})
-  //   })
-  // }
 
   get(path: string): Observable<any> {
-    // const responsePromise = this.createTokenHeader().then((httpHeaders) => {
-    // return this.createTokenHeader().pipe(
-    //   mergeMap((header) => this.http.get<any>(`${URL}/${path}`, {headers: header})),
-    // )
-    let algo: string = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjp7ImNvbXBhbnlJZCI6MSwiZW1haWwiOiJwcnVlYmFFbWFpbCIsIm5hbWUiOiJjb21wYW5pYSBsb2NhIiwiY3VpdCI6IjEyMzQ1NDUzNCIsImFkZHJlc3MiOiJDYWxsZSBmYWxzYSAxMjMiLCJwaG9uZU51bWJlciI6IjExMzQ0NDU2NjQifSwiZXhwIjoxNjkzNDM2NTc5fQ.qsw3mWM9bU3az9GuXe-GGuwEtW6NxcgZTf8U-Qw50AY"
-    let header = new HttpHeaders({
-      'auth-token': algo
-    });
-    return this.http.get<any>(`${URL}/${path}`, {headers: header})
+    return this.createTokenHeader().pipe(
+      mergeMap(header => this.http.get<any>(`${URL}${path}`, {headers: header}))
+    )
   }
-  //
-  // patch(path: string, body: any | null): Observable<any> {
-  //   const responsePromise = this.createTokenHeader().then((httpHeaders) => {
-  //     this.http.patch<any>(`${URL}/${path}`, body, {headers: httpHeaders}).subscribe((resp) => {
-  //       return resp
-  //     })
-  //   })
-  //   return from(responsePromise)
-  // }
-  //
-  // delete(path: string): Observable<any> {
-  //   const responsePromise = this.createTokenHeader().then((httpHeaders) => {
-  //     this.http.delete<any>(`${URL}/${path}`, {headers: httpHeaders}).subscribe((resp) => {
-  //       return resp
-  //     })
-  //   })
-  //   return from(responsePromise)
-  // }
+
+  patch(path: string, body: any | null): Observable<any> {
+    return this.createTokenHeader().pipe(
+      mergeMap(header => this.http.patch<any>(`${URL}${path}`, body, {headers: header}))
+    )
+  }
+
+  delete(path: string): Observable<any> {
+    return this.createTokenHeader().pipe(
+      mergeMap(header => this.http.delete<any>(`${URL}${path}`, {headers: header}))
+    )
+  }
 
   private createTokenHeader(): Observable<HttpHeaders> {
-    const promiseHttpHeader =  this.tokenService.getToken().then((storedToken) => {
-      return new HttpHeaders({
-        'auth-token': storedToken ? storedToken : ''
-      });
-    })
-    return from(promiseHttpHeader)
+    return this.tokenService.getToken().pipe(
+      mergeMap(async (storedToken) => new HttpHeaders({'auth-token': storedToken ? storedToken : ''}))
+    )
   }
 
 }

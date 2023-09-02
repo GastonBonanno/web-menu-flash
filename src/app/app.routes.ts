@@ -1,4 +1,4 @@
-import { Routes, UrlSegment } from '@angular/router';
+import {Route, Routes, UrlSegment} from '@angular/router';
 import {TokenGuard} from "./guards/token.guard";
 import {inject} from "@angular/core";
 
@@ -11,10 +11,7 @@ export const routes: Routes = [
   {
     path: 'menu',
     loadComponent: () => import('./pages/menu/menu.page').then( m => m.MenuPage),
-    // canMatch: [(route: Routes, segments: UrlSegment[])=> {
-    //   let a = inject(TokenGuard).canMatch()
-    //   return a
-    // }]
+    canMatch: [(route: Route, segments: UrlSegment[])=> inject(TokenGuard).canMatch()]
   },
   {
     path: 'login',
@@ -22,10 +19,16 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage)
+    loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage),
+    canMatch: [(route: Route, segments: UrlSegment[])=> inject(TokenGuard).canMatch()]
   },
   {
     path: 'menu-view/:menu-id',
-    loadComponent: () => import('./pages/menu-view/menu-view.page').then( m => m.MenuViewPage)
+    loadComponent: () => import('./pages/menu-view/menu-view.page').then( m => m.MenuViewPage),
+    canMatch: [(route: Route, segments: UrlSegment[])=> inject(TokenGuard).canMatch()]
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
   },
 ];

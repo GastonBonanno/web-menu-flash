@@ -7,6 +7,8 @@ import {Toast} from "../../utils/toast";
 import {MenuService} from "../../services/menu.service";
 import {LoginUserResponse} from "../../interfaces/user.interface";
 import {menu} from "ionicons/icons";
+import {tap} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-menu',
@@ -59,7 +61,12 @@ export class MenuPage implements OnInit {
   isModalOpen2 = false;
   isModalOpen3 = false;
 
-  constructor(private menuService: MenuService,  private toast: Toast, private navCtrl: NavController) { }
+  constructor(private menuService: MenuService,  private toast: Toast, private navCtrl: NavController, route: ActivatedRoute) {
+    // console.log('constructorrrr: ')
+    // route.params.subscribe(val => {
+    //   console.log('route: ', route)
+    // });
+  }
 
   saveMenu() {
     this.menuService.saveMenu(this.menu).subscribe({
@@ -122,18 +129,16 @@ export class MenuPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log('holaa')
     this.menuService.getMenuList().subscribe({
       next: (resp: MenuResponse[]) => {
         console.log('resp: ', resp)
         this.listMenu = resp
       },
       error: (err) => {
-        this.toast.present('bottom', "Error menu").then()
+        this.toast.present('bottom', "Error al cargar la lista de menú").then()
         console.log('error: ', err)
       }
     })
-  console.log('llalalallala')
   }
 
 }

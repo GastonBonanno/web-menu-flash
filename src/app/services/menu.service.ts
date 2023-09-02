@@ -20,12 +20,12 @@ export class MenuService {
     // let params = new HttpParams()
     //   .set('companyId', companyId);
     // return this.http.get<MenuResponse>( `${URL}/company-menu/`, {params: params})
-    // return this.http.get<MenuResponse>( `${URL}/company-menu/`)
-    return this.secureService.get('company-menu');
+    // return this.http.get<MenuResponse[]>( `${URL}/company-menu/`)
+    return this.secureService.get('/company-menu');
   }
 
   saveMenu(menu: MenuRequest): Observable<MenuResponse> {
-    return this.http.post<MenuResponse>( `${URL}/company-menu`, menu)
+    return this.secureService.post( `/company-menu`, menu)
   }
 
 }

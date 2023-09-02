@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import { Storage } from '@ionic/storage';
+import {from, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +12,16 @@ export class TokenService {
     this.storage.create().then();
   }
 
-  async saveToken(token: string): Promise<void> {
-    await this.storage.set(this.KEY_TOKEN, token);
+  saveToken(token: string): Observable<void> {
+    return from(this.storage.set(this.KEY_TOKEN, token));
   }
 
-  async getToken(): Promise<string> {
-    return this.storage.get(this.KEY_TOKEN);
+  getToken(): Observable<string> {
+    return from(this.storage.get(this.KEY_TOKEN));
   }
 
-  async clearToken(): Promise<void> {
-    await this.storage.clear();
+  clearToken(): Observable<void> {
+    return from(this.storage.clear());
   }
 
 

@@ -171,9 +171,8 @@
           <ion-col size="4">
             <ion-card class="img-menu-mini">
               <ion-card-header class="card-menu-list">
-                <ion-card-subtitle>Header</ion-card-subtitle>
-                <ion-card-title>Titulo del menu</ion-card-title>
-                <ion-text class="ion-padding">Descripcion del menu</ion-text>
+                <ion-card-title>{{menu.title}}</ion-card-title>
+                <ion-text class="ion-padding">{{menu.description}}</ion-text>
               </ion-card-header>
               <ion-button fill="clear" color="warning" (click)="editMenu(menu.id)">Editar</ion-button>
               <ion-button fill="clear" color="danger" >Eliminar</ion-button>

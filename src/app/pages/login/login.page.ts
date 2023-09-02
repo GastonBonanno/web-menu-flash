@@ -11,6 +11,7 @@ import {
 import { UserService } from '../../services/user.service';
 import { Toast } from '../../utils/toast';
 import { TokenService } from '../../services/token.service';
+import {tap} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -43,11 +44,9 @@ export class LoginPage implements OnInit {
   login() {
     this.userService.login(this.loginUser).subscribe({
       next: (resp: LoginUserResponse) => {
-        this.tokenService.saveToken(resp.token).then(() => {
-          this.navCtrl.navigateRoot('/home', { animated: true }).then();
-        });
-        return resp;
-      },
+        this.tokenService.saveToken(resp.token)
+        this.navCtrl.navigateRoot('/home', {animated: true}).then()
+       },
       error: (err) => {
         console.log('error: ', err);
         this.toast.present('bottom', 'Usuario o contraseña incorrectos').then();
@@ -71,6 +70,6 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.tokenService.clearToken().then();
+    this.tokenService.clearToken();
   }
 }
