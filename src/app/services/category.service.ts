@@ -16,11 +16,7 @@ export class MenuService {
   constructor( private http: HttpClient, private secureService: SecureService) {
   }
 
-  getMenuList(): Observable<MenuResponse[]> {
-    // let params = new HttpParams()
-    //   .set('companyId', companyId);
-    // return this.http.get<MenuResponse>( `${URL}/company-menu/`, {params: params})
-    // return this.http.get<MenuResponse[]>( `${URL}/company-menu/`)
+  getCategoryList(): Observable<MenuResponse[]> {
     return this.secureService.get('/company-menu');
   }
 

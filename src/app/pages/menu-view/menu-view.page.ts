@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import {IonicModule, NavController} from '@ionic/angular';
 import {MenuService} from "../../services/menu.service";
 import {Toast} from "../../utils/toast";
-import {CategoryRequest} from "../../interfaces/menu.interface";
+import {CategoryRequest, MenuResponse} from "../../interfaces/menu.interface";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -17,6 +17,18 @@ import {ActivatedRoute} from "@angular/router";
 export class MenuViewPage implements OnInit {
   isModalOpen = false;
   isModalOpen2 = false;
+  menuResponse: MenuResponse = {
+    id: 0,
+    title: '',
+    description: '',
+    header: '',
+    footer: '',
+    companyDataId: 0,
+    active: true,
+    createdAt: null,
+    modifiedAt: null,
+    deletedAt: null
+  };
   listCategory: CategoryRequest[] = [];
   category: CategoryRequest = {
     name: '',
@@ -33,11 +45,11 @@ export class MenuViewPage implements OnInit {
 
 
    addCategory() {
-  //  let categoryClone: CategoryRequest = {
-    //   name: this.category.name,
-    //   menuId: this.category.menuId
-    // }
-    // this.listCategory.push(categoryClone)
+   let categoryClone: CategoryRequest = {
+      name: this.category.name,
+      menuId: this.category.menuId
+    }
+    this.listCategory.push(categoryClone)
   }
 
    saveCategory() {
@@ -52,8 +64,18 @@ export class MenuViewPage implements OnInit {
       // })
    }
   ngOnInit() {
-    const a = this.route.snapshot.paramMap.get('menu-id');
-    console.log('aaaa: ', a)
+    const menuId = this.route.snapshot.paramMap.get('menu-id');
+    this.menuService.getMenuById(menuId).subscribe(
+      {
+        next: (resp: MenuResponse) => {
+          console.log(resp)
+          this.menuResponse = resp
+        },
+        error: (err) => {
+          console.log('error: ', err)
+        }
+      }
+    );
   }
 
 }

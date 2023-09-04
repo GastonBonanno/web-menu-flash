@@ -8,9 +8,9 @@
 
 <ion-content class="ion-padding" [fullscreen]="true">
   <ion-card-content class="banner">
-    <ion-card-subtitle class="subtitle">Header</ion-card-subtitle>
-    <ion-card-title class="title">Menú Titulo</ion-card-title>
-    <ion-text class="text">Descripcion de la empresa</ion-text>
+    <ion-card-subtitle class="subtitle">{{menuResponse.header}}</ion-card-subtitle>
+    <ion-card-title class="title">{{menuResponse.title}}</ion-card-title>
+    <ion-text class="text">{{menuResponse.description}}</ion-text>
   </ion-card-content>
 
 
@@ -23,7 +23,7 @@
         </ion-card>
       </ion-col>
     </ion-row>
-    <ion-modal [isOpen]="isModalOpen2" [backdropDismiss]="false">
+    <ion-modal [isOpen]="isModalOpen" [backdropDismiss]="false">
       <ng-template>
         <ion-header>
           <ion-toolbar>
@@ -95,7 +95,7 @@
 
 <ion-footer [translucent]="true">
   <ion-toolbar>
-    <ion-title>Footer del menú</ion-title>
+    <ion-title>{{menuResponse.footer}}</ion-title>
   </ion-toolbar>
 </ion-footer>
 
