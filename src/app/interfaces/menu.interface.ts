@@ -9,6 +9,7 @@ export interface MenuResponse {
   createdAt: Date | null;
   modifiedAt: Date | null;
   deletedAt: Date | null;
+  listCategory: CategoryResponse[];
 }
 
 export interface MenuRequest{
@@ -20,12 +21,32 @@ export interface MenuRequest{
 
 export interface CategoryRequest{
   name: string;
-  menuId: number;
+  companyMenuId: number;
 }
+
+export interface CategoryResponse{
+  id: number;
+  name: string;
+  active: boolean;
+  menuItems: ItemMenuResponse[];
+}
+
 export interface ItemMenuRequest{
   categoryMenuId: number;
   name: string;
   description: string;
   price: number;
   quantity: number;
+}
+
+export interface ItemMenuResponse{
+  id: number;
+  categoryMenuId: number;
+  name: string;
+  description: string;
+  price: number;
+  quantity: number;
+  createdAt: Date | null;
+  modifiedAt: Date | null;
+  deletedAt: Date | null;
 }

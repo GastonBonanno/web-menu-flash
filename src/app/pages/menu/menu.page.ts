@@ -36,12 +36,13 @@ export class MenuPage implements OnInit {
     active: true,
     createdAt: null,
     modifiedAt: null,
-    deletedAt: null
+    deletedAt: null,
+    listCategory: []
   };
 
   category: CategoryRequest = {
     name: '',
-    menuId: 0
+    companyMenuId: 0
   };
 
   itemMenu: ItemMenuRequest = {
@@ -89,7 +90,7 @@ export class MenuPage implements OnInit {
   addCategory() {
     let categoryClone: CategoryRequest = {
       name: this.category.name,
-      menuId: this.menuResponse.id
+      companyMenuId: this.menuResponse.id
     }
     this.listCategory.push(categoryClone)
   }

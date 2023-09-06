@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 import {IonicModule, NavController} from '@ionic/angular';
 import {MenuService} from "../../services/menu.service";
 import {Toast} from "../../utils/toast";
-import {CategoryRequest, MenuResponse} from "../../interfaces/menu.interface";
+import {CategoryRequest, CategoryResponse, MenuResponse} from "../../interfaces/menu.interface";
 import {ActivatedRoute} from "@angular/router";
+import {CategoryService} from "../../services/category.service";
 
 @Component({
   selector: 'app-menu-view',
@@ -27,14 +28,15 @@ export class MenuViewPage implements OnInit {
     active: true,
     createdAt: null,
     modifiedAt: null,
-    deletedAt: null
+    deletedAt: null,
+    listCategory: []
   };
   listCategory: CategoryRequest[] = [];
   category: CategoryRequest = {
     name: '',
-    menuId: 0
+    companyMenuId: 0
   };
-  constructor(private menuService: MenuService,  private toast: Toast, private navCtrl: NavController, private route: ActivatedRoute) { }
+  constructor(private menuService: MenuService, private categoryService: CategoryService,  private toast: Toast, private navCtrl: NavController, private route: ActivatedRoute) { }
 
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
@@ -47,21 +49,21 @@ export class MenuViewPage implements OnInit {
    addCategory() {
    let categoryClone: CategoryRequest = {
       name: this.category.name,
-      menuId: this.category.menuId
+      companyMenuId: this.menuResponse.id
     }
     this.listCategory.push(categoryClone)
   }
 
    saveCategory() {
-      // this.menuService.saveCategory(this.listCategory).subscribe({
-      //   next: (resp: MenuResponse) => {
-      //     this.toast.present('bottom', "Cargado con éxito").then()
-      //     this.menuResponse = resp
-      //   },
-      //   error: (err) => {
-      //     console.log('error: ', err)
-      //   }
-      // })
+      this.categoryService.saveCategory(this.listCategory).subscribe({
+        next: (resp: CategoryResponse[]) => {
+          this.toast.present('bottom', "Cargado con éxito").then()
+          resp.forEach(category => this.menuResponse.listCategory.push(category))
+        },
+        error: (err) => {
+          console.log('error: ', err)
+        }
+      })
    }
   ngOnInit() {
     const menuId = this.route.snapshot.paramMap.get('menu-id');
@@ -70,6 +72,7 @@ export class MenuViewPage implements OnInit {
         next: (resp: MenuResponse) => {
           console.log(resp)
           this.menuResponse = resp
+          this.menuResponse.listCategory = resp.listCategory
         },
         error: (err) => {
           console.log('error: ', err)
