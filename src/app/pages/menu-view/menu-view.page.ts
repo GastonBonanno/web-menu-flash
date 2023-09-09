@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import {IonicModule, NavController} from '@ionic/angular';
 import {MenuService} from "../../services/menu.service";
 import {Toast} from "../../utils/toast";
-import {CategoryRequest, CategoryResponse, MenuResponse} from "../../interfaces/menu.interface";
+import {CategoryRequest, CategoryResponse, ItemMenuRequest, MenuResponse} from "../../interfaces/menu.interface";
 import {ActivatedRoute} from "@angular/router";
 import {CategoryService} from "../../services/category.service";
 
@@ -31,6 +31,14 @@ export class MenuViewPage implements OnInit {
     deletedAt: null,
     listCategory: []
   };
+  listItem: ItemMenuRequest[] = [];
+  itemMenu: ItemMenuRequest = {
+    categoryMenuId: 0,
+    name: '',
+    description: '',
+    price: 0,
+    quantity: 0
+  };
   listCategory: CategoryRequest[] = [];
   category: CategoryRequest = {
     name: '',
@@ -38,10 +46,10 @@ export class MenuViewPage implements OnInit {
   };
   constructor(private menuService: MenuService, private categoryService: CategoryService,  private toast: Toast, private navCtrl: NavController, private route: ActivatedRoute) { }
 
-  setOpen(isOpen: boolean) {
+  setOpenCategory(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }
-  setOpen2(isOpen: boolean) {
+  setOpenItem(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }
 
@@ -65,6 +73,18 @@ export class MenuViewPage implements OnInit {
         }
       })
    }
+
+  addItem() {
+    let itemClone: ItemMenuRequest = {
+      categoryMenuId: this.itemMenu.categoryMenuId,
+      name: this.itemMenu.name,
+      description: this.itemMenu.description,
+      price: this.itemMenu.price,
+      quantity: this.itemMenu.quantity
+    }
+    this.listItem.push(itemClone)
+  }
+  saveItems(){}
   ngOnInit() {
     const menuId = this.route.snapshot.paramMap.get('menu-id');
     this.menuService.getMenuById(menuId).subscribe(
