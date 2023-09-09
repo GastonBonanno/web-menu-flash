@@ -92,18 +92,8 @@ export class MenuViewPage implements OnInit {
      this.itemService.saveItem(this.itemMenu).subscribe({
        next: (resp: ItemMenuResponse) => {
          this.toast.present('bottom', "Cargado con éxito")
-         const itemCloned: ItemMenuResponse = {
-           id: resp.id,
-           categoryMenuId: resp.categoryMenuId,
-           description: resp.description,
-           name: resp.name,
-           price: resp.price,
-           quantity: resp.quantity,
-           createdAt: resp.createdAt,
-           modifiedAt: resp.modifiedAt,
-           deletedAt: resp.deletedAt
-         }
-         this.listItem.push(itemCloned)
+         this.listItem.push(resp)
+         this.ngOnInit()
        },
        error: (err) => {
          console.log('error: ', err)

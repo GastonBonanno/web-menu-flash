@@ -147,7 +147,8 @@ export class MenuPage implements OnInit {
     if (confirm) {
       this.menuService.deleteMenu(id).subscribe({
         next: () => {
-          window.location.reload()
+          // window.location.reload()
+          this.ngOnInit()
         },
         error: (err) => {
           this.toast.present('bottom', "Error borrando el menu").then()

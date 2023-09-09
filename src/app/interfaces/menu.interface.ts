@@ -45,6 +45,7 @@ export interface ItemMenuResponse{
   name: string;
   description: string;
   price: number;
+  active: boolean
   quantity: number;
   createdAt: Date | undefined;
   modifiedAt: Date | undefined ;
