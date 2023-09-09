@@ -142,4 +142,18 @@ export class MenuPage implements OnInit {
     })
   }
 
+  async deleteMenu(id: number): Promise<void> {
+    const confirm = await this.toast.alertConfirmation("Estas seguro que queres borrar el menu")
+    if (confirm) {
+      this.menuService.deleteMenu(id).subscribe({
+        next: () => {
+          window.location.reload()
+        },
+        error: (err) => {
+          this.toast.present('bottom', "Error borrando el menu").then()
+          console.log('error: ', err)
+        }
+      })
+    }
+  }
 }

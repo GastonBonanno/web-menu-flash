@@ -32,7 +32,7 @@ export interface CategoryResponse{
 }
 
 export interface ItemMenuRequest{
-  categoryMenuId: number;
+  categoryMenuId: number | undefined;
   name: string;
   description: string;
   price: number;
@@ -46,7 +46,7 @@ export interface ItemMenuResponse{
   description: string;
   price: number;
   quantity: number;
-  createdAt: Date | null;
-  modifiedAt: Date | null;
-  deletedAt: Date | null;
+  createdAt: Date | undefined;
+  modifiedAt: Date | undefined ;
+  deletedAt: Date | undefined;
 }

@@ -50,3 +50,13 @@
     }
   }
 
+.card-horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+
+  /* Establece la orientación horizontal // Alinea los elementos verticalmente en el centro, si es necesario /
+    / Puedes agregar otros estilos según tus preferencias, como width, padding, etc. */
+}

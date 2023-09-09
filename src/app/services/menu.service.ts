@@ -32,5 +32,7 @@ export class MenuService {
     return this.secureService.post( `/company-menu`, menu)
   }
 
-
+  deleteMenu(id: number): Observable<void> {
+    return this.secureService.delete( `/company-menu/${id}`)
+  }
 }

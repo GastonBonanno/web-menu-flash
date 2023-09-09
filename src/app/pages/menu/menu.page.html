@@ -134,7 +134,7 @@
               <ion-text class="ion-padding">{{menu.description}}</ion-text>
             </ion-card-header>
             <ion-button fill="clear" color="warning" (click)="editMenu(menu.id)">Editar</ion-button>
-            <ion-button fill="clear" color="danger" >Eliminar</ion-button>
+            <ion-button fill="clear" color="danger"(click)="deleteMenu(menu.id)">Eliminar</ion-button>
           </ion-card>
         </ion-col>
       </ion-row>

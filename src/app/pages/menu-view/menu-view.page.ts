@@ -4,9 +4,16 @@ import { FormsModule } from '@angular/forms';
 import {IonicModule, NavController} from '@ionic/angular';
 import {MenuService} from "../../services/menu.service";
 import {Toast} from "../../utils/toast";
-import {CategoryRequest, CategoryResponse, ItemMenuRequest, MenuResponse} from "../../interfaces/menu.interface";
+import {
+  CategoryRequest,
+  CategoryResponse,
+  ItemMenuRequest,
+  ItemMenuResponse,
+  MenuResponse
+} from "../../interfaces/menu.interface";
 import {ActivatedRoute} from "@angular/router";
 import {CategoryService} from "../../services/category.service";
+import {ItemService} from "../../services/item.service";
 
 @Component({
   selector: 'app-menu-view',
@@ -18,6 +25,7 @@ import {CategoryService} from "../../services/category.service";
 export class MenuViewPage implements OnInit {
   isModalOpen = false;
   isModalOpen2 = false;
+  modifiedItemCategoryId: number | undefined;
   menuResponse: MenuResponse = {
     id: 0,
     title: '',
@@ -44,15 +52,21 @@ export class MenuViewPage implements OnInit {
     name: '',
     companyMenuId: 0
   };
-  constructor(private menuService: MenuService, private categoryService: CategoryService,  private toast: Toast, private navCtrl: NavController, private route: ActivatedRoute) { }
+  constructor(private menuService: MenuService,
+              private itemService : ItemService,
+              private categoryService: CategoryService,
+              private toast: Toast,
+              private navCtrl: NavController,
+              private route: ActivatedRoute) { }
 
   setOpenCategory(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }
-  setOpenItem(isOpen: boolean) {
-    this.isModalOpen = isOpen;
+  setOpenItem(isOpen: boolean, id: number | undefined) {
+    this.isModalOpen2 = isOpen;
+    if (isOpen)
+      this.modifiedItemCategoryId = id;
   }
-
 
    addCategory() {
    let categoryClone: CategoryRequest = {
@@ -73,18 +87,29 @@ export class MenuViewPage implements OnInit {
         }
       })
    }
-
-  addItem() {
-    let itemClone: ItemMenuRequest = {
-      categoryMenuId: this.itemMenu.categoryMenuId,
-      name: this.itemMenu.name,
-      description: this.itemMenu.description,
-      price: this.itemMenu.price,
-      quantity: this.itemMenu.quantity
-    }
-    this.listItem.push(itemClone)
-  }
-  saveItems(){}
+   saveItems(){
+    this.itemMenu.categoryMenuId = this.modifiedItemCategoryId;
+     this.itemService.saveItem(this.itemMenu).subscribe({
+       next: (resp: ItemMenuResponse) => {
+         this.toast.present('bottom', "Cargado con éxito")
+         const itemCloned: ItemMenuResponse = {
+           id: resp.id,
+           categoryMenuId: resp.categoryMenuId,
+           description: resp.description,
+           name: resp.name,
+           price: resp.price,
+           quantity: resp.quantity,
+           createdAt: resp.createdAt,
+           modifiedAt: resp.modifiedAt,
+           deletedAt: resp.deletedAt
+         }
+         this.listItem.push(itemCloned)
+       },
+       error: (err) => {
+         console.log('error: ', err)
+       }
+     })
+   }
   ngOnInit() {
     const menuId = this.route.snapshot.paramMap.get('menu-id');
     this.menuService.getMenuById(menuId).subscribe(
