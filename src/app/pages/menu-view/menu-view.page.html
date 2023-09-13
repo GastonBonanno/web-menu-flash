@@ -66,33 +66,40 @@
       <ion-grid [fixed]="true">
 
 
-        <ion-row *ngFor="let category of menuResponse.listCategory">
-          <ion-col size="6">
+        <ion-row class="row-category" *ngFor="let category of menuResponse.listCategory">
+          <ion-col size="12">
 
             <ion-item-divider color="dark">
-              <ion-label> {{category.name}}</ion-label>
+              <ion-title class="title-category"> {{category.name}}</ion-title>
+
+            <ion-button slot="end" color="warning"  (click)="setOpenItem(true, category.id)">
+
+              Editar
+              <ion-icon name="restaurant-outline" ></ion-icon>
+            </ion-button>
+
+            <ion-button slot="end" color="warning"  (click)="setOpenItem(true, category.id)">
+              Eliminar
+              <ion-icon name="restaurant-outline" ></ion-icon>
+            </ion-button>
+
             </ion-item-divider>
           </ion-col>
-          <ion-button color="warning"  (click)="setOpenItem(true, category.id)">
-
-            + ítems de {{category.name}}
-            <ion-icon slot="start" name="restaurant-outline" ></ion-icon>
-          </ion-button>
-
           <ion-row *ngFor="let item of category.menuItems" class="container">
 
 
             <ion-col size="4">
               <img  class="" src="/assets/comida.jpg"/>
             </ion-col>
-            <ion-col size="8">
-              <ion-row>
-                <ion-col size="8">
-                  <ion-row>    <ion-card-title>{{item.name}}</ion-card-title></ion-row>
+            <ion-col size="4">
+
+                <ion-col >
+                  <ion-row> <ion-card-title >{{item.name}}</ion-card-title></ion-row>
                   <ion-row> <ion-card-subtitle>{{item.description}}</ion-card-subtitle></ion-row>
                   <ion-row> <ion-card-subtitle>{{item.price}}</ion-card-subtitle></ion-row>
                 </ion-col>
-
+            </ion-col>
+            <ion-col>
                 <ion-col>
                   <ion-row> <ion-card-subtitle>Cantidad: {{item.quantity}}</ion-card-subtitle></ion-row>
                   <ion-row> <ion-toggle [checked]="item.active" disabled="true">Habilitado/Deshabilitado</ion-toggle></ion-row>
@@ -103,16 +110,20 @@
                   </ion-row>
                 </ion-col>
 
-              </ion-row>
-
             </ion-col>
 
-
-
-
-
           </ion-row>
+          <ion-col class="button-center" size="12">
+
+          <ion-button  color="warning"  (click)="setOpenItem(true, category.id)">
+
+            Agregar Producto
+            <ion-icon slot="start" name="restaurant-outline" ></ion-icon>
+          </ion-button>
+
+          </ion-col>
         </ion-row>
+
       </ion-grid>
 
     </ion-item-group>

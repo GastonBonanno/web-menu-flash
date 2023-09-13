@@ -1,5 +1,5 @@
 .banner {
-  background-image: url("/assets/menuData.png");
+  background-image: url("../../../assets/menuData.png");
   background-size: inherit;
   background-position: center;
   padding: 50px;
@@ -68,4 +68,20 @@
   border: solid 1px #fff;
   color: #fff;
   text-align: center;
+  margin-bottom: 4px;
+}
+
+.row-category{
+  margin-bottom: 50px;
+}
+
+.button-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-category{
+  font-family: 'Roboto', sans-serif;
+  font-size: 35px;
 }
