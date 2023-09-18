@@ -28,5 +28,8 @@ export class CategoryService {
     return this.secureService.post( `/category-menu`, listCategory)
   }
 
+  deleteCategory(id: number): Observable<void>{
+    return this.secureService.delete(`/category-menu/${id}`)
+  }
 
 }

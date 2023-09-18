@@ -25,6 +25,7 @@ import {ItemService} from "../../services/item.service";
 export class MenuViewPage implements OnInit {
   isModalOpen = false;
   isModalOpen2 = false;
+  isItemUpdateModalOpen = false;
   modifiedItemCategoryId: number | undefined;
   menuResponse: MenuResponse = {
     id: 0,
@@ -47,6 +48,19 @@ export class MenuViewPage implements OnInit {
     price: 0,
     quantity: 0
   };
+  itemMenuUpdate: ItemMenuResponse = {
+    id: 0,
+    categoryMenuId: 0,
+    name: '',
+    description: '',
+    price: 0,
+    quantity: 0,
+    active: true,
+    createdAt: undefined,
+    modifiedAt: undefined,
+    deletedAt: undefined
+
+  };
   listCategory: CategoryRequest[] = [];
   category: CategoryRequest = {
     name: '',
@@ -66,6 +80,22 @@ export class MenuViewPage implements OnInit {
     this.isModalOpen2 = isOpen;
     if (isOpen)
       this.modifiedItemCategoryId = id;
+  }
+
+  setUpdateOpenItem(isOpen: boolean, item: ItemMenuResponse | undefined) {
+    this.isItemUpdateModalOpen = isOpen;
+    if (isOpen && item){
+      this.itemMenuUpdate.id = item.id,
+      this.itemMenuUpdate.categoryMenuId = item.categoryMenuId,
+      this.itemMenuUpdate.description = item.description,
+      this.itemMenuUpdate.name = item.name,
+      this.itemMenuUpdate.active = item.active,
+      this.itemMenuUpdate.createdAt = item.createdAt,
+      this.itemMenuUpdate.deletedAt = item.deletedAt,
+      this.itemMenuUpdate.modifiedAt = item.modifiedAt,
+      this.itemMenuUpdate.price = item.price;
+      this.itemMenuUpdate.quantity = item.quantity;
+    }
   }
 
    addCategory() {
@@ -100,6 +130,44 @@ export class MenuViewPage implements OnInit {
        }
      })
    }
+
+  deleteCategory(id: number){
+    this.categoryService.deleteCategory(id).subscribe({
+      next: () => {
+        this.ngOnInit()
+      },
+      error: (err) => {
+        this.toast.present('bottom', "Error borrando el categoría").then()
+        console.log('error: ', err)
+      }
+    })
+  }
+
+  editItem(item: ItemMenuResponse){
+    this.itemService.editItem(item).subscribe({
+      next: () => {
+        this.ngOnInit()
+        this.toast.present("bottom", "Actualizado con éxito").then()
+      },
+      error: (err) => {
+        this.toast.present('bottom', "Error borrando el item").then()
+        console.log('error: ', err)
+      }
+    })
+  }
+
+   deleteItem(id: number){
+      this.itemService.deleteItem(id).subscribe({
+        next: () => {
+          this.ngOnInit()
+        },
+        error: (err) => {
+          this.toast.present('bottom', "Error borrando el item").then()
+          console.log('error: ', err)
+        }
+      })
+   }
+
   ngOnInit() {
     const menuId = this.route.snapshot.paramMap.get('menu-id');
     this.menuService.getMenuById(menuId).subscribe(
@@ -115,5 +183,4 @@ export class MenuViewPage implements OnInit {
       }
     );
   }
-
 }

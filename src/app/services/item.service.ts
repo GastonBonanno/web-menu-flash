@@ -25,5 +25,12 @@ export class ItemService {
     return this.secureService.post( `/item-menu`, itemMenu)
   }
 
+  deleteItem(id: number): Observable<void>{
+    return this.secureService.delete(`/item-menu/${id}`)
+  }
+
+  editItem(item: ItemMenuResponse): Observable<void>{
+    return this.secureService.patch(`/item-menu/`, item)
+  }
 
 }
