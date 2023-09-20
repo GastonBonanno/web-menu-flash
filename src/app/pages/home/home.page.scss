@@ -25,3 +25,19 @@
 #container a {
   text-decoration: none;
 }
+
+ion-datetime {
+  --background: rgb(#222428);
+  --background-rgb:  #1e2023;
+  --wheel-highlight-background: rgb(#383a3e);
+  --wheel-fade-background-rgb: #1e2023;
+}
+
+ion-datetime::part(wheel-item) {
+  color: rgb(255, 206, 1, 0.8);
+
+}
+
+ion-datetime::part(wheel-item active) {
+  color: rgb(255, 206, 1, 0.8);
+}

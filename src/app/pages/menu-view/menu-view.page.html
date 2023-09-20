@@ -72,16 +72,16 @@
             <ion-item-divider color="dark">
               <ion-title class="title-category"> {{category.name}}</ion-title>
 
-            <ion-button slot="end" color="warning">
+              <ion-button slot="end" color="warning">
 
-              Editar
-              <ion-icon name="restaurant-outline" ></ion-icon>
-            </ion-button>
+                Editar
+                <ion-icon name="restaurant-outline" ></ion-icon>
+              </ion-button>
 
-            <ion-button slot="end" color="warning" (click)="deleteCategory(category.id)">
-              Eliminar
-              <ion-icon name="restaurant-outline" ></ion-icon>
-            </ion-button>
+              <ion-button slot="end" color="warning" (click)="deleteCategory(category.id)">
+                Eliminar
+                <ion-icon name="restaurant-outline" ></ion-icon>
+              </ion-button>
 
             </ion-item-divider>
           </ion-col>
@@ -94,20 +94,20 @@
             <ion-col size="4" class="grid">
 
 
-                  <ion-row> <ion-card-title >{{item.name}}</ion-card-title></ion-row>
-                  <ion-row> <ion-card-subtitle>{{item.description}}</ion-card-subtitle></ion-row>
-                  <ion-row> <ion-card-subtitle>$ {{item.price}}</ion-card-subtitle></ion-row>
+              <ion-row> <ion-card-title >{{item.name}}</ion-card-title></ion-row>
+              <ion-row> <ion-card-subtitle>{{item.description}}</ion-card-subtitle></ion-row>
+              <ion-row> <ion-card-subtitle>$ {{item.price}}</ion-card-subtitle></ion-row>
 
             </ion-col>
             <ion-col class="grid">
 
-                  <ion-row> <ion-card-subtitle>Cantidad: {{item.quantity}}</ion-card-subtitle></ion-row>
-                  <ion-row> <ion-toggle [checked]="item.active" disabled="true">Habilitado/Deshabilitado</ion-toggle></ion-row>
+              <ion-row> <ion-card-subtitle>Cantidad: {{item.quantity}}</ion-card-subtitle></ion-row>
+              <ion-row> <ion-toggle [checked]="item.active" disabled="true">Habilitado/Deshabilitado</ion-toggle></ion-row>
 
-                  <ion-row>
-                    <ion-button fill="clear" color="warning" (click)="setUpdateOpenItem(true, item);" >Editar</ion-button>
-                    <ion-button fill="clear" color="danger" (click)="deleteItem(item.id)" >Eliminar</ion-button>
-                  </ion-row>
+              <ion-row>
+                <ion-button fill="clear" color="warning" (click)="setUpdateOpenItem(true, item);" >Editar</ion-button>
+                <ion-button fill="clear" color="danger" (click)="deleteItem(item.id)" >Eliminar</ion-button>
+              </ion-row>
 
 
             </ion-col>
@@ -115,11 +115,11 @@
           </ion-row>
           <ion-col class="button-center" size="12">
 
-          <ion-button  color="warning"  (click)="setOpenItem(true, category.id)">
+            <ion-button  color="warning"  (click)="setOpenItem(true, category.id)">
 
-            Agregar Producto
-            <ion-icon slot="start" name="restaurant-outline" ></ion-icon>
-          </ion-button>
+              Agregar Producto
+              <ion-icon slot="start" name="restaurant-outline" ></ion-icon>
+            </ion-button>
 
           </ion-col>
         </ion-row>
@@ -130,46 +130,46 @@
   </ion-list>
 
 
-        <ion-modal [isOpen]="isModalOpen2" [backdropDismiss]="false">
-          <ng-template>
-            <ion-header>
-              <ion-toolbar>
-                <ion-title>Ítems del Menú</ion-title>
-                <ion-fab (click)="setOpenItem(false,undefined)" slot="end" horizontal="end">
-                  <ion-fab-button color="medium" size="small">
-                    <ion-icon name="close-outline"></ion-icon>
-                  </ion-fab-button>
-                </ion-fab>
-              </ion-toolbar>
-            </ion-header>
-            <ion-content class="ion-padding">
-              <p>Ítems</p>
-              <ion-item>
-                <ion-input class="ion-text-wrap" label="Agrega el nombre del ítem: " [(ngModel)]="itemMenu.name"
-                           placeholder="Nombre del ítem"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input class="ion-text-wrap" label="Agrega la descripción: " [(ngModel)]="itemMenu.description"
-                           placeholder="Descripción"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input class="ion-text-wrap" label="Agrega el precio: " [(ngModel)]="itemMenu.price"
-                           placeholder="Precio"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input class="ion-text-wrap" label="Cantidad de productos disponible: " [(ngModel)]="itemMenu.quantity"
-                           placeholder="Cantidad"></ion-input>
-              </ion-item>
-            </ion-content>
-            <ion-footer>
-              <ion-toolbar>
-                <ion-buttons slot="end">
-                  <ion-button (click)="setOpenItem(false, undefined); saveItems()">Guardar</ion-button>
-                </ion-buttons>
-              </ion-toolbar>
-            </ion-footer>
-          </ng-template>
-        </ion-modal>
+  <ion-modal [isOpen]="isModalOpen2" [backdropDismiss]="false">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Ítems del Menú</ion-title>
+          <ion-fab (click)="setOpenItem(false,undefined)" slot="end" horizontal="end">
+            <ion-fab-button color="medium" size="small">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <p>Ítems</p>
+        <ion-item>
+          <ion-input class="ion-text-wrap" label="Agrega el nombre del ítem: " [(ngModel)]="itemMenu.name"
+                     placeholder="Nombre del ítem"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input class="ion-text-wrap" label="Agrega la descripción: " [(ngModel)]="itemMenu.description"
+                     placeholder="Descripción"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input class="ion-text-wrap" label="Agrega el precio: " [(ngModel)]="itemMenu.price"
+                     placeholder="Precio"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input class="ion-text-wrap" label="Cantidad de productos disponible: " [(ngModel)]="itemMenu.quantity"
+                     placeholder="Cantidad"></ion-input>
+        </ion-item>
+      </ion-content>
+      <ion-footer>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpenItem(false, undefined); saveItems()">Guardar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
 
 
   <ion-modal [isOpen]="isItemUpdateModalOpen" [backdropDismiss]="false">
@@ -214,21 +214,21 @@
   </ion-modal>
 
 
-<!--      <ion-card>-->
-<!--        <img src="/assets/Items.png"/>-->
-<!--        <ion-card-content>-->
-<!--          <ion-card-title>Nombre del Ítem</ion-card-title>-->
-<!--          <ion-card-subtitle>Descripcion</ion-card-subtitle>-->
-<!--          <ion-item>-->
-<!--            <ion-label>Precio</ion-label>-->
-<!--          </ion-item>-->
-<!--          <ion-item>-->
-<!--            <ion-label>Cantidad</ion-label>-->
-<!--          </ion-item>-->
-<!--        </ion-card-content>-->
-<!--        <ion-button fill="clear" color="warning" >Editar</ion-button>-->
-<!--        <ion-button fill="clear" color="danger" >Eliminar</ion-button>-->
-<!--      </ion-card>-->
+  <!--      <ion-card>-->
+  <!--        <img src="/assets/Items.png"/>-->
+  <!--        <ion-card-content>-->
+  <!--          <ion-card-title>Nombre del Ítem</ion-card-title>-->
+  <!--          <ion-card-subtitle>Descripcion</ion-card-subtitle>-->
+  <!--          <ion-item>-->
+  <!--            <ion-label>Precio</ion-label>-->
+  <!--          </ion-item>-->
+  <!--          <ion-item>-->
+  <!--            <ion-label>Cantidad</ion-label>-->
+  <!--          </ion-item>-->
+  <!--        </ion-card-content>-->
+  <!--        <ion-button fill="clear" color="warning" >Editar</ion-button>-->
+  <!--        <ion-button fill="clear" color="danger" >Eliminar</ion-button>-->
+  <!--      </ion-card>-->
 
 
 

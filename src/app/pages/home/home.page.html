@@ -1,11 +1,53 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="dark">
     <ion-buttons>
-      <ion-menu-button color="warning" menu="sidebar"></ion-menu-button>
+      <ion-menu-button menu="sidebar" color="warning"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" color="dark">
+  <ion-grid class="ion-padding">
+    <ion-row class="ion-padding">
+      <ion-title class="ion-padding">Bienvenido user</ion-title>
+    </ion-row>
+    <ion-row class="ion-padding">
+      <ion-col size="3" class="ion-padding">
+        <ion-card color="dark" class="ion-padding ion-text-center">
+          <ion-card-header>
+            <ion-card-title>10</ion-card-title>
+            <ion-card-subtitle>Ordenes del dia</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="3" class="ion-padding">
+        <ion-card color="dark" class="ion-padding ion-text-center">
+          <ion-card-header>
+            <ion-card-title>21</ion-card-title>
+            <ion-card-subtitle>Ordenes pendientes de aprobar</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="3" class="ion-padding">
+        <ion-card color="dark" class="ion-padding ion-text-center">
+          <ion-card-header>
+            <ion-card-title>254</ion-card-title>
+            <ion-card-subtitle>Ordenes aprobadas</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="3" class="ion-padding">
+        <ion-card color="dark" class="ion-padding ion-text-center">
+          <ion-card-header>
+            <ion-card-title>3</ion-card-title>
+            <ion-card-subtitle>Ordenes canceladas</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding">
+      <ion-title class="ion-padding">Resumen diario</ion-title>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

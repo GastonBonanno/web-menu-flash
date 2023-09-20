@@ -14,6 +14,7 @@ import {MenuResponse} from "../../interfaces/menu.interface";
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class HomePage implements OnInit {
+  datetime: any;
 
 
   constructor(private menuService: MenuService, private navCtrl: NavController, private toast: Toast) {
