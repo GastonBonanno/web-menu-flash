@@ -23,6 +23,10 @@ export interface CategoryRequest{
   name: string;
   companyMenuId: number;
 }
+export interface CategoryMenu{
+  id: number;
+  name: string;
+}
 
 export interface CategoryResponse{
   id: number;

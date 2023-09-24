@@ -20,7 +20,7 @@
       </ion-card>
     </ion-col>
   </ion-row>
-  <ion-modal [isOpen]="isModalOpen" [backdropDismiss]="false">
+  <ion-modal (keydown.enter)="setOpenCategory(false); saveCategory()" [isOpen]="isModalOpen" [backdropDismiss]="false">
     <ng-template>
       <ion-header>
         <ion-toolbar>
@@ -33,11 +33,10 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <p>Categorías</p>
         <ion-list class="ion-color-dark">
           <ion-item>
-            <ion-input class="ion-text-wrap" label="Agrega las categorías: " [(ngModel)]="category.name"
-                       placeholder="Categorías"></ion-input>
+            <ion-input class="ion-text-wrap" label="Nombre: " [(ngModel)]="category.name"
+                       placeholder="Nombre de la Categoría"></ion-input>
             <ion-fab-button size="small" color="warning">
               <ion-icon (click)="addCategory()" color="medium" name="add"></ion-icon>
             </ion-fab-button>
@@ -72,7 +71,7 @@
             <ion-item-divider color="dark">
               <ion-title class="title-category"> {{category.name}}</ion-title>
 
-              <ion-button slot="end" color="warning">
+              <ion-button slot="end" color="warning" (click)="setUpdateOpenCategory(true, category)">
 
                 Editar
                 <ion-icon name="restaurant-outline" ></ion-icon>
@@ -130,7 +129,7 @@
   </ion-list>
 
 
-  <ion-modal [isOpen]="isModalOpen2" [backdropDismiss]="false">
+  <ion-modal (keydown.enter)="setOpenItem(false, undefined); saveItems()" [isOpen]="isModalOpen2" [backdropDismiss]="false">
     <ng-template>
       <ion-header>
         <ion-toolbar>
@@ -143,21 +142,20 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <p>Ítems</p>
         <ion-item>
-          <ion-input class="ion-text-wrap" label="Agrega el nombre del ítem: " [(ngModel)]="itemMenu.name"
+          <ion-input class="ion-text-wrap" label="Nombre: " [(ngModel)]="itemMenu.name"
                      placeholder="Nombre del ítem"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input class="ion-text-wrap" label="Agrega la descripción: " [(ngModel)]="itemMenu.description"
+          <ion-input class="ion-text-wrap" label="Descripción: " [(ngModel)]="itemMenu.description"
                      placeholder="Descripción"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input class="ion-text-wrap" label="Agrega el precio: " [(ngModel)]="itemMenu.price"
+          <ion-input class="ion-text-wrap" label="Precio: " [(ngModel)]="itemMenu.price"
                      placeholder="Precio"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input class="ion-text-wrap" label="Cantidad de productos disponible: " [(ngModel)]="itemMenu.quantity"
+          <ion-input class="ion-text-wrap" label="Cantidad: " [(ngModel)]="itemMenu.quantity"
                      placeholder="Cantidad"></ion-input>
         </ion-item>
       </ion-content>
@@ -172,11 +170,11 @@
   </ion-modal>
 
 
-  <ion-modal [isOpen]="isItemUpdateModalOpen" [backdropDismiss]="false">
+  <ion-modal (keydown.enter)="editItem(itemMenuUpdate); setUpdateOpenItem(false, undefined)" [isOpen]="isItemUpdateModalOpen" [backdropDismiss]="false">
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-title>Ítems del Menú</ion-title>
+          <ion-title>Editar Ítem</ion-title>
           <ion-fab (click)="setUpdateOpenItem(false,undefined)" slot="end" horizontal="end">
             <ion-fab-button color="medium" size="small">
               <ion-icon name="close-outline"></ion-icon>
@@ -185,21 +183,20 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <p>Ítems</p>
         <ion-item>
-          <ion-input class="ion-text-wrap" label="Agrega el nombre del ítem: " [(ngModel)]="itemMenuUpdate.name"
-                     placeholder="Nombre del ítem"></ion-input>
+          <ion-input class="ion-text-wrap" label="Nombre: " [(ngModel)]="itemMenuUpdate.name"
+                     placeholder="Nombre"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input class="ion-text-wrap" label="Agrega la descripción: " [(ngModel)]="itemMenuUpdate.description"
+          <ion-input class="ion-text-wrap" label="Descripción: " [(ngModel)]="itemMenuUpdate.description"
                      placeholder="Descripción"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input class="ion-text-wrap" label="Agrega el precio: " [(ngModel)]="itemMenuUpdate.price"
+          <ion-input class="ion-text-wrap" label="Precio: " [(ngModel)]="itemMenuUpdate.price"
                      placeholder="Precio"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input class="ion-text-wrap" label="Cantidad de productos disponible: " [(ngModel)]="itemMenuUpdate.quantity"
+          <ion-input class="ion-text-wrap" label="Cantidad: " [(ngModel)]="itemMenuUpdate.quantity"
                      placeholder="Cantidad"></ion-input>
         </ion-item>
       </ion-content>
@@ -213,52 +210,33 @@
     </ng-template>
   </ion-modal>
 
-
-  <!--      <ion-card>-->
-  <!--        <img src="/assets/Items.png"/>-->
-  <!--        <ion-card-content>-->
-  <!--          <ion-card-title>Nombre del Ítem</ion-card-title>-->
-  <!--          <ion-card-subtitle>Descripcion</ion-card-subtitle>-->
-  <!--          <ion-item>-->
-  <!--            <ion-label>Precio</ion-label>-->
-  <!--          </ion-item>-->
-  <!--          <ion-item>-->
-  <!--            <ion-label>Cantidad</ion-label>-->
-  <!--          </ion-item>-->
-  <!--        </ion-card-content>-->
-  <!--        <ion-button fill="clear" color="warning" >Editar</ion-button>-->
-  <!--        <ion-button fill="clear" color="danger" >Eliminar</ion-button>-->
-  <!--      </ion-card>-->
-
-
-
-  <!--  <ion-grid>-->
-
-  <!--    <ion-row>-->
-  <!--      <ion-col size="2">-->
-  <!--        <ion-list>-->
-  <!--          <ion-card>-->
-  <!--            <img src="/assets/Items.png"/>-->
-  <!--            <ion-card-header>-->
-
-  <!--            </ion-card-header>-->
-  <!--            <ion-card-content>-->
-  <!--              <ion-card-title>Nombre del Ítem</ion-card-title>-->
-  <!--              <ion-card-subtitle>Descripcion</ion-card-subtitle>-->
-  <!--              <ion-item>-->
-  <!--                <ion-label>Precio</ion-label>-->
-  <!--              </ion-item>-->
-  <!--              <ion-item>-->
-  <!--                <ion-label>Cantidad</ion-label>-->
-  <!--              </ion-item>-->
-  <!--            </ion-card-content>-->
-  <!--            <ion-button fill="clear" color="warning" >Editar</ion-button>-->
-  <!--            <ion-button fill="clear" color="danger" >Eliminar</ion-button>-->
-  <!--          </ion-card>-->
-  <!--        </ion-list>-->
-  <!--      </ion-col>-->
-  <!--    </ion-row>-->
-  <!--  </ion-grid>-->
+  <ion-modal (keydown.enter)="editCategory(categoryMenuUpdate); setUpdateOpenCategory(false, undefined);" [isOpen]="isCategoryUpdateModalOpen" [backdropDismiss]="false">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Editar Categoría</ion-title>
+          <ion-fab (click)="setUpdateOpenCategory(false,undefined)" slot="end" horizontal="end">
+            <ion-fab-button color="medium" size="small">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input class="ion-text-wrap" label="Nombre: " [(ngModel)]="categoryMenuUpdate.name"
+                     placeholder="Nombre de categoría"></ion-input>
+        </ion-item>
+      </ion-content>
+      <ion-footer>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button (click)="editCategory(categoryMenuUpdate); setUpdateOpenCategory(false, undefined); ">Guardar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
 
 </ion-content>
 

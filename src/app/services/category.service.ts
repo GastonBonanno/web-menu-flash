@@ -3,7 +3,14 @@ import { environment } from 'src/environments/environment';
 import {CreateUserRequest, CreateUserResponse, LoginUserRequest, LoginUserResponse} from "../interfaces/user.interface";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {catchError, map, Observable, tap} from "rxjs";
-import {CategoryRequest, CategoryResponse, MenuRequest, MenuResponse} from "../interfaces/menu.interface";
+import {
+  CategoryMenu,
+  CategoryRequest,
+  CategoryResponse,
+  ItemMenuResponse,
+  MenuRequest,
+  MenuResponse
+} from "../interfaces/menu.interface";
 import {SecureService} from "../utils/secure.service";
 
 const URL = environment.url;
@@ -30,6 +37,10 @@ export class CategoryService {
 
   deleteCategory(id: number): Observable<void>{
     return this.secureService.delete(`/category-menu/${id}`)
+  }
+
+  editCategory(category: CategoryMenu): Observable<void>{
+    return this.secureService.patch(`/category-menu/${category.id}`, category)
   }
 
 }

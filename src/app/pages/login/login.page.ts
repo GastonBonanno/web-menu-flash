@@ -32,6 +32,10 @@ export class LoginPage implements OnInit {
     email: '',
     password: '',
     repeatedPassword: '',
+    name: '',
+    cuit: 0,
+    address: '',
+    phone: 0
   };
 
   constructor(

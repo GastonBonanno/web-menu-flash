@@ -19,11 +19,11 @@
       </ion-col>
     </ion-row>
 
-    <ion-modal [isOpen]="isModalOpen" [backdropDismiss]="false">
+    <ion-modal (keydown.enter)="setOpen(false)" (click)="saveMenu()" [isOpen]="isModalOpen" [backdropDismiss]="false">
       <ng-template>
         <ion-header>
           <ion-toolbar>
-            <ion-title>Menú</ion-title>
+            <ion-title>Datos del Menú</ion-title>
             <ion-fab (click)="setOpen(false)" slot="end" horizontal="end">
               <ion-fab-button color="medium" size="small">
                 <ion-icon name="close-outline"></ion-icon>
@@ -32,25 +32,24 @@
           </ion-toolbar>
         </ion-header>
         <ion-content>
-          <p>Datos generales del Menú</p>
           <ion-list>
             <ion-item>
-              <ion-input labelPlacement="stacked" label="Ingresa el encabezado de tu menú" [(ngModel)]="menu.header"
-                         placeholder="Encabezado"></ion-input>
+              <ion-input labelPlacement="stacked" label="Encabezado" [(ngModel)]="menu.header"
+                         placeholder="Ingresa el encabezado de tu menú"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input labelPlacement="stacked" label="Ingresa el título de tu menú" [(ngModel)]="menu.title"
-                         placeholder="Título"></ion-input>
+              <ion-input labelPlacement="stacked" label="Título" [(ngModel)]="menu.title"
+                         placeholder="Ingresa el título de tu menú"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input labelPlacement="stacked" label="Podés ingresar una descripción de tu Empresa"
+              <ion-input labelPlacement="stacked" label="Descripción"
                          [(ngModel)]="menu.description"
-                         placeholder="Descripción"></ion-input>
+                         placeholder="Podés ingresar una descripción de tu Empresa"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input labelPlacement="stacked" label="Ingresa el pié de página de tu menú"
+              <ion-input labelPlacement="stacked" label="Pié de Página"
                          [(ngModel)]="menu.footer"
-                         placeholder="Pié de Página"></ion-input>
+                         placeholder="Ingresa el pié de página de tu menú"></ion-input>
             </ion-item>
           </ion-list>
         </ion-content>
@@ -64,66 +63,8 @@
       </ng-template>
     </ion-modal>
 
-
-    <!--      <ion-modal [isOpen]="isModalOpen3" [backdropDismiss]="false">-->
-    <!--        <ng-template>-->
-    <!--          <ion-header>-->
-    <!--            <ion-toolbar>-->
-    <!--              <ion-title>Ítems del Menú</ion-title>-->
-    <!--              <ion-fab (click)="setOpen3(false)" slot="end" horizontal="end">-->
-    <!--                <ion-fab-button color="medium" size="small">-->
-    <!--                  <ion-icon name="close-outline"></ion-icon>-->
-    <!--                </ion-fab-button>-->
-    <!--              </ion-fab>-->
-    <!--            </ion-toolbar>-->
-    <!--          </ion-header>-->
-    <!--          <ion-content class="ion-padding">-->
-    <!--            <p>Ítems</p>-->
-    <!--            <ion-item>-->
-    <!--              <ion-input class="ion-text-wrap" label="Agrega el nombre del ítem: " [(ngModel)]="itemMenu.name"-->
-    <!--                         placeholder="Nombre del ítem"></ion-input>-->
-    <!--            </ion-item>-->
-    <!--            <ion-item>-->
-    <!--              <ion-input class="ion-text-wrap" label="Agrega la descripción: " [(ngModel)]="itemMenu.description"-->
-    <!--                         placeholder="Descripción"></ion-input>-->
-    <!--            </ion-item>-->
-    <!--            <ion-item>-->
-    <!--              <ion-input class="ion-text-wrap" label="Agrega el precio: " [(ngModel)]="itemMenu.price"-->
-    <!--                         placeholder="Precio"></ion-input>-->
-    <!--            </ion-item>-->
-    <!--            <ion-item>-->
-    <!--              <ion-input class="ion-text-wrap" label="Cantidad de productos disponible: " [(ngModel)]="itemMenu.quantity"-->
-    <!--                         placeholder="Cantidad"></ion-input>-->
-    <!--            </ion-item>-->
-    <!--            <ion-fab-button size="small" color="warning">-->
-    <!--              <ion-icon (click)="addItem()" color="medium" name="add"></ion-icon>-->
-    <!--            </ion-fab-button>-->
-    <!--            <ion-row *ngFor="let itemMenu of listItem">-->
-    <!--              <ion-col>-->
-    <!--                {{itemMenu.name}}-->
-    <!--              </ion-col>-->
-    <!--              <ion-col>-->
-    <!--                {{itemMenu.description}}-->
-    <!--              </ion-col>-->
-    <!--            </ion-row>-->
-    <!--          </ion-content>-->
-    <!--          <ion-footer>-->
-    <!--            <ion-toolbar>-->
-    <!--              <ion-buttons slot="end">-->
-    <!--                <ion-button (click)="setOpen3(false); saveItems()">Guardar</ion-button>-->
-    <!--              </ion-buttons>-->
-    <!--            </ion-toolbar>-->
-    <!--          </ion-footer>-->
-    <!--        </ng-template>-->
-    <!--      </ion-modal>-->
-
-
-
-
-
     <ion-title class="ion-padding titulo">
       <ion-icon name="flash-outline" color="warning"></ion-icon>Mis menús</ion-title>
-
 
     <ion-list class="card-contenedor">
       <ion-row class="card-contenedor ion-padding" *ngFor="let menu of listMenu">

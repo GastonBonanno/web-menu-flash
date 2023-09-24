@@ -5,6 +5,7 @@ import {IonicModule, NavController} from '@ionic/angular';
 import {MenuService} from "../../services/menu.service";
 import {Toast} from "../../utils/toast";
 import {
+  CategoryMenu,
   CategoryRequest,
   CategoryResponse,
   ItemMenuRequest,
@@ -26,6 +27,7 @@ export class MenuViewPage implements OnInit {
   isModalOpen = false;
   isModalOpen2 = false;
   isItemUpdateModalOpen = false;
+  isCategoryUpdateModalOpen = false;
   modifiedItemCategoryId: number | undefined;
   menuResponse: MenuResponse = {
     id: 0,
@@ -59,7 +61,10 @@ export class MenuViewPage implements OnInit {
     createdAt: undefined,
     modifiedAt: undefined,
     deletedAt: undefined
-
+  };
+  categoryMenuUpdate: CategoryMenu = {
+    id: 0,
+    name: ''
   };
   listCategory: CategoryRequest[] = [];
   category: CategoryRequest = {
@@ -95,6 +100,14 @@ export class MenuViewPage implements OnInit {
       this.itemMenuUpdate.modifiedAt = item.modifiedAt,
       this.itemMenuUpdate.price = item.price;
       this.itemMenuUpdate.quantity = item.quantity;
+    }
+  }
+  setUpdateOpenCategory(isOpen: boolean, category: CategoryMenu | undefined) {
+    this.isCategoryUpdateModalOpen = isOpen;
+    console.log(category)
+    if (isOpen && category){
+      this.categoryMenuUpdate.id = category.id,
+      this.categoryMenuUpdate.name = category.name
     }
   }
 
@@ -138,6 +151,19 @@ export class MenuViewPage implements OnInit {
       },
       error: (err) => {
         this.toast.present('bottom', "Error borrando el categoría").then()
+        console.log('error: ', err)
+      }
+    })
+  }
+
+  editCategory(category: CategoryMenu){
+    this.categoryService.editCategory(category).subscribe({
+      next: () => {
+        this.ngOnInit()
+        this.toast.present("bottom", "Actualizado con éxito").then()
+      },
+      error: (err) => {
+        this.toast.present('bottom', "Error editando la categoría").then()
         console.log('error: ', err)
       }
     })
