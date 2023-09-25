@@ -19,7 +19,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-modal (keydown.enter)="setOpen(false)" (click)="saveMenu()" [isOpen]="isModalOpen" [backdropDismiss]="false">
+    <ion-modal (keydown.enter)="setOpen(false); saveMenu()" [isOpen]="isModalOpen" [backdropDismiss]="false">
       <ng-template>
         <ion-header>
           <ion-toolbar>

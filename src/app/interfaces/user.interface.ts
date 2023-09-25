@@ -20,10 +20,6 @@ export interface CreateUserRequest {
   email: string;
   password: string;
   repeatedPassword: string;
-  name: string;
-  cuit: number;
-  address: string;
-  phone: number;
 }
 
 export interface CreateUserResponse {
