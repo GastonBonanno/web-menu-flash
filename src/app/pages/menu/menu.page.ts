@@ -42,12 +42,14 @@ export class MenuPage implements OnInit {
 
   category: CategoryRequest = {
     name: '',
+    position: undefined,
     companyMenuId: 0
   };
 
   itemMenu: ItemMenuRequest = {
     categoryMenuId: 0,
     name: '',
+    position: undefined,
     description: '',
     price: 0,
     quantity: 0
@@ -90,6 +92,7 @@ export class MenuPage implements OnInit {
   addCategory() {
     let categoryClone: CategoryRequest = {
       name: this.category.name,
+      position: this.category.position,
       companyMenuId: this.menuResponse.id
     }
     this.listCategory.push(categoryClone)
@@ -111,6 +114,7 @@ export class MenuPage implements OnInit {
     let itemClone: ItemMenuRequest = {
       categoryMenuId: this.itemMenu.categoryMenuId,
       name: this.itemMenu.name,
+      position: this.itemMenu.position,
       description: this.itemMenu.description,
       price: this.itemMenu.price,
       quantity: this.itemMenu.quantity

@@ -58,7 +58,7 @@
   /* Establece la orientación horizontal // Alinea los elementos verticalmente en el centro, si es necesario /
     / Puedes agregar otros estilos según tus preferencias, como width, padding, etc. */
 }
-.ion-card img {
+.ion-card {
   width: 100%;
   height: auto; /* Esto mantiene la proporción de la imagen */
 }
@@ -67,7 +67,6 @@
   -webkit-text-fill-color: rgba(255, 206, 1, 0.8);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   border: solid 1px #fff;
-
   text-align: center;
   margin-bottom: 4px;
 }
@@ -105,7 +104,12 @@
 //  --ion-grid-column-padding-xl: 30px;
 //}
 
-.grid {
+.left-item-column {
   display: grid;
-  grid-template-rows: 1fr 4fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.right-item-column {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
 }

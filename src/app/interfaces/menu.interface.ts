@@ -21,16 +21,19 @@ export interface MenuRequest{
 
 export interface CategoryRequest{
   name: string;
+  position: number | undefined;
   companyMenuId: number;
 }
 export interface CategoryMenu{
   id: number;
+  position: number | undefined;
   name: string;
 }
 
 export interface CategoryResponse{
   id: number;
   name: string;
+  position: number | undefined;
   active: boolean;
   menuItems: ItemMenuResponse[];
 }
@@ -38,6 +41,7 @@ export interface CategoryResponse{
 export interface ItemMenuRequest{
   categoryMenuId: number | undefined;
   name: string;
+  position: number | undefined;
   description: string;
   price: number;
   quantity: number;
@@ -47,6 +51,7 @@ export interface ItemMenuResponse{
   id: number;
   categoryMenuId: number;
   name: string;
+  position: number | undefined;
   description: string;
   price: number;
   active: boolean

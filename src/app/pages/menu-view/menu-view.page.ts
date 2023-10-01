@@ -40,35 +40,40 @@ export class MenuViewPage implements OnInit {
     createdAt: null,
     modifiedAt: null,
     deletedAt: null,
-    listCategory: []
+    listCategory: [],
   };
   listItem: ItemMenuRequest[] = [];
   itemMenu: ItemMenuRequest = {
     categoryMenuId: 0,
     name: '',
+    position: undefined,
     description: '',
     price: 0,
-    quantity: 0
+    quantity: 0,
   };
   itemMenuUpdate: ItemMenuResponse = {
     id: 0,
     categoryMenuId: 0,
     name: '',
+    position: undefined,
     description: '',
     price: 0,
     quantity: 0,
     active: true,
     createdAt: undefined,
     modifiedAt: undefined,
-    deletedAt: undefined
+    deletedAt: undefined,
   };
   categoryMenuUpdate: CategoryMenu = {
     id: 0,
-    name: ''
+    name: '',
+    position: undefined,
   };
+
   listCategory: CategoryRequest[] = [];
   category: CategoryRequest = {
     name: '',
+    position: undefined,
     companyMenuId: 0
   };
   constructor(private menuService: MenuService,
@@ -90,31 +95,34 @@ export class MenuViewPage implements OnInit {
   setUpdateOpenItem(isOpen: boolean, item: ItemMenuResponse | undefined) {
     this.isItemUpdateModalOpen = isOpen;
     if (isOpen && item){
-      this.itemMenuUpdate.id = item.id,
-      this.itemMenuUpdate.categoryMenuId = item.categoryMenuId,
-      this.itemMenuUpdate.description = item.description,
-      this.itemMenuUpdate.name = item.name,
-      this.itemMenuUpdate.active = item.active,
-      this.itemMenuUpdate.createdAt = item.createdAt,
-      this.itemMenuUpdate.deletedAt = item.deletedAt,
-      this.itemMenuUpdate.modifiedAt = item.modifiedAt,
-      this.itemMenuUpdate.price = item.price;
-      this.itemMenuUpdate.quantity = item.quantity;
+      this.itemMenuUpdate.id = item.id
+      this.itemMenuUpdate.categoryMenuId = item.categoryMenuId
+      this.itemMenuUpdate.description = item.description
+      this.itemMenuUpdate.name = item.name
+      this.itemMenuUpdate.position = item.position
+      this.itemMenuUpdate.active = item.active
+      this.itemMenuUpdate.createdAt = item.createdAt
+      this.itemMenuUpdate.deletedAt = item.deletedAt
+      this.itemMenuUpdate.modifiedAt = item.modifiedAt
+      this.itemMenuUpdate.price = item.price
+      this.itemMenuUpdate.quantity = item.quantity
     }
   }
   setUpdateOpenCategory(isOpen: boolean, category: CategoryMenu | undefined) {
     this.isCategoryUpdateModalOpen = isOpen;
     console.log(category)
     if (isOpen && category){
-      this.categoryMenuUpdate.id = category.id,
+      this.categoryMenuUpdate.id = category.id
       this.categoryMenuUpdate.name = category.name
+      this.categoryMenuUpdate.position = category.position
     }
   }
 
    addCategory() {
    let categoryClone: CategoryRequest = {
       name: this.category.name,
-      companyMenuId: this.menuResponse.id
+      companyMenuId: this.menuResponse.id,
+      position: this.menuResponse.listCategory.length + this.listCategory.length + 1 ,
     }
     this.listCategory.push(categoryClone)
   }
@@ -132,6 +140,8 @@ export class MenuViewPage implements OnInit {
    }
    saveItems(){
     this.itemMenu.categoryMenuId = this.modifiedItemCategoryId;
+    this.itemMenu.position = this.getCategoryItems(this.modifiedItemCategoryId).length + 1
+
      this.itemService.saveItem(this.itemMenu).subscribe({
        next: (resp: ItemMenuResponse) => {
          this.toast.present('bottom', "Cargado con éxito")
@@ -209,4 +219,34 @@ export class MenuViewPage implements OnInit {
       }
     );
   }
+
+  clearListCategory() {
+    this.listCategory = []
+    this.category = {
+      name: '',
+      position: undefined,
+      companyMenuId: 0
+    }
+  }
+
+  clearItem() {
+    this.itemMenu = {
+      categoryMenuId: 0,
+      name: '',
+      position: undefined,
+      description: '',
+      price: 0,
+      quantity: 0,
+    };
+  }
+
+  getCategoryItems(categoryId: number | undefined): ItemMenuResponse[]  {
+    let categoryFound = this.menuResponse.listCategory.find(ele => ele.id === categoryId)
+    if(categoryFound)
+      return categoryFound.menuItems
+    else
+      return []
+
+  }
+
 }
