@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-buttons>
+      <ion-menu-button color="warning" menu="sidebar"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true" color="dark">
+    <ion-grid fixed="true">
+
+
+      <ion-row (keydown.enter)="saveData()" class="form">
+        <ion-col size="8">
+          <ion-list>
+            <ion-item>
+              <ion-input name="name"
+                         type="text"
+                         placeholder="Nombre"
+                         [(ngModel)]="profileData.name"
+                         required="true"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="cuit"
+                         type="text"
+                         placeholder="Cuit"
+                         [(ngModel)]="profileData.cuit"
+                         required="true"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="address"
+                         type="text"
+                         placeholder="Dirección"
+                         [(ngModel)]="profileData.address"
+                         required="true"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="phonenumber"
+                         type="text"
+                         placeholder="Teléfono"
+                         [(ngModel)]="profileData.phoneNumber"
+                         required="true"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="buttons">
+        <ion-col>
+          <ion-button (click)="saveData()" color="warning"
+                      shape="round">
+            Guardar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+</ion-content>

@@ -28,11 +28,16 @@ export const routes: Routes = [
     canMatch: [(route: Route, segments: UrlSegment[])=> inject(TokenGuard).canMatch()]
   },
   {
+    path: 'profile',
+    loadComponent: () => import('./pages/profile/profile.page').then( m => m.ProfilePage),
+    canMatch: [(route: Route, segments: UrlSegment[])=> inject(TokenGuard).canMatch()]
+  },
+  {
     path: '**',
     redirectTo: 'page-not-found',
   },
   {
     path: 'page-not-found',
     loadComponent: () => import('./pages/page-not-found/page-not-found.page').then( m => m.PageNotFoundPage)
-  },
+  }
 ];

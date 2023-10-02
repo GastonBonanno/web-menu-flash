@@ -31,3 +31,11 @@ export interface CreateUserResponse {
   modificated_at: string;
   deleted_at: string;
 }
+
+export interface ProfileData {
+  name: string | undefined;
+  cuit: number | undefined;
+  address: string | undefined;
+  phoneNumber: string | undefined;
+}
+
