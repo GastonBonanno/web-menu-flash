@@ -25,7 +25,15 @@ export class ProfilePage implements OnInit {
   constructor(private userService: UserService, private toast: Toast) { }
 
   saveData() {
-
+    this.userService.updateCompanyData(this.profileData).subscribe({
+      next: () => {
+        this.toast.present('bottom', 'Datos actualizados correctamente').then();
+      },
+      error: (err) => {
+        console.log('error: ', err);
+        this.toast.present('bottom', 'Error actualizando datos').then();
+      },
+    });
   }
 
   ngOnInit() {

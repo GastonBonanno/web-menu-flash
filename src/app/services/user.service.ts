@@ -37,5 +37,8 @@ export class UserService {
     return this.secureService.get('/user/company-data');
   }
 
+  updateCompanyData(profileData: ProfileData): Observable<ProfileData>{
+    return this.secureService.patch('/user/company-data',profileData);
+  }
 
 }
