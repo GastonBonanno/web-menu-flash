@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-buttons>
+      <ion-menu-button menu="sidebar" color="warning"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="dark">
+
+  <!-- en el ngOnInit del .ts traer los datos de la company, la lista de menus, y la lista de la tabla qr -->
+  <!-- hacer el for que tome una lista (Lista de mesas de la tabla qr) del qr-tables.page.ts, que recorra esa lista y arme todos los menú -->
+  <!-- string del qr: primer campo id de la company, 2do id de menu, 3ro id de la mesa -->
+
+  <ion-title> Menu 1</ion-title>
+
+  <ion-text> Mesa 1 </ion-text>
+  <qrcode [qrdata]="'01,05,10'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+
+
+</ion-content>

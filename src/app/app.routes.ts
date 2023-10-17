@@ -33,6 +33,11 @@ export const routes: Routes = [
     canMatch: [(route: Route, segments: UrlSegment[])=> inject(TokenGuard).canMatch()]
   },
   {
+    path: 'tables',
+    loadComponent: () => import('./pages/qr-tables/qr-tables.page').then( m => m.QrTablesPage),
+    canMatch: [(route: Route, segments: UrlSegment[])=> inject(TokenGuard).canMatch()]
+  },
+  {
     path: '**',
     redirectTo: 'page-not-found',
   },
