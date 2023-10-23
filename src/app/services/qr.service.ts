@@ -22,8 +22,11 @@ export class QrService {
 
   constructor(private secureService: SecureService) {
   }
-  saveQr(qrRequest: QrRequest): Observable<QrResponse> {
+  saveQr(qrRequest: QrRequest[]): Observable<void> {
     return this.secureService.post( `/qr`, qrRequest)
   }
 
+  getAllQrByCompanyMenuId(id: number): Observable<QrResponse[]>{
+    return this.secureService.get(`/qr/${id}`)
+  }
 }

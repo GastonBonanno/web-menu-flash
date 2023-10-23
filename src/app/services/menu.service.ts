@@ -17,10 +17,6 @@ export class MenuService {
   }
 
   getMenuList(): Observable<MenuResponse[]> {
-    // let params = new HttpParams()
-    //   .set('companyId', companyId);
-    // return this.http.get<MenuResponse>( `${URL}/company-menu/`, {params: params})
-    // return this.http.get<MenuResponse[]>( `${URL}/company-menu/`)
     return this.secureService.get('/company-menu');
   }
 

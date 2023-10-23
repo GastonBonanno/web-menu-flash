@@ -5,10 +5,7 @@ export interface QrRequest {
 }
 
 export interface QrResponse {
+  id : number | undefined;
   tableName: string | undefined;
   companyMenuId: number | undefined;
-  active: boolean | undefined;
-  createdAt: Date | undefined;
-  modifiedAt: Date | undefined ;
-  deletedAt: Date | undefined;
 }
