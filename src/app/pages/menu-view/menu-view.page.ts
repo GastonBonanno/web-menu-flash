@@ -31,6 +31,7 @@ export class MenuViewPage implements OnInit {
   modifiedItemCategoryId: number | undefined;
   menuResponse: MenuResponse = {
     id: 0,
+    branch: '',
     title: '',
     description: '',
     header: '',

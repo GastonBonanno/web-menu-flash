@@ -20,6 +20,7 @@ import {ActivatedRoute} from "@angular/router";
 export class MenuPage implements OnInit {
 
   menu: MenuRequest = {
+    branch: '',
     title: '',
     description: '',
     header: '',
@@ -28,6 +29,7 @@ export class MenuPage implements OnInit {
 
   menuResponse: MenuResponse = {
     id: 0,
+    branch: '',
     title: '',
     description: '',
     header: '',

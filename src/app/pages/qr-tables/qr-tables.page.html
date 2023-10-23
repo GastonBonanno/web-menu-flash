@@ -12,10 +12,52 @@
   <!-- hacer el for que tome una lista (Lista de mesas de la tabla qr) del qr-tables.page.ts, que recorra esa lista y arme todos los menú -->
   <!-- string del qr: primer campo id de la company, 2do id de menu, 3ro id de la mesa -->
 
-  <ion-title> Menu 1</ion-title>
+
+  <ion-list>
+    <ion-item>
+      <ion-select aria-label="Position" interface="popover" placeholder="Seleccionar sucursal" [(ngModel)]="selectedMenu">
+        <ion-select-option value="{{menu.id}}" *ngFor="let menu of listMenu"> {{menu.branch}} </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-button (click)="setOpenQrModal(true); clearInputs()" [disabled]="!selectedMenu" class="button-center">Crear QR</ion-button>
+
 
   <ion-text> Mesa 1 </ion-text>
   <qrcode [qrdata]="'01,05,10'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+
+
+
+
+
+  <ion-modal (keydown.enter)="setOpenQrModal(false); saveQr()" [isOpen]="isModalOpen" [backdropDismiss]="false">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>QR</ion-title>
+          <ion-fab (click)="setOpenQrModal(false)" slot="end" horizontal="end">
+            <ion-fab-button color="medium" size="small">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input class="ion-text-wrap" label="Mesa: " [(ngModel)]="qrRequest.tableName"
+                     placeholder="Nombre"></ion-input>
+        </ion-item>
+        </ion-content>
+      <ion-footer>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpenQrModal(false); saveQr()">Guardar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
 
 
 </ion-content>

@@ -20,7 +20,7 @@ const URL = environment.url;
 })
 export class CategoryService {
 
-  constructor( private http: HttpClient, private secureService: SecureService) {
+  constructor(private secureService: SecureService) {
   }
 
   // getCategoryList(): Observable<MenuResponse[]> {

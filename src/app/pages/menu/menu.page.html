@@ -34,6 +34,11 @@
         <ion-content>
           <ion-list>
             <ion-item>
+              <ion-input labelPlacement="stacked" label="Sucursal"
+                         [(ngModel)]="menu.branch"
+                         placeholder="Nombre de la sucursal"></ion-input>
+            </ion-item>
+            <ion-item>
               <ion-input labelPlacement="stacked" label="Encabezado" [(ngModel)]="menu.header"
                          placeholder="Ingresa el encabezado de tu menú"></ion-input>
             </ion-item>
@@ -71,6 +76,7 @@
         <ion-col size="4">
           <ion-card class="img-menu-mini">
             <ion-card-header class="card-menu-list">
+              <ion-card-title>{{menu.branch}}</ion-card-title>
               <ion-card-title>{{menu.title}}</ion-card-title>
               <ion-text class="ion-padding">{{menu.description}}</ion-text>
             </ion-card-header>

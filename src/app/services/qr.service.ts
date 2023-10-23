@@ -11,26 +11,19 @@ import {
   MenuResponse
 } from "../interfaces/menu.interface";
 import {SecureService} from "../utils/secure.service";
+import {QrRequest, QrResponse} from "../interfaces/qr.interface";
 
 const URL = environment.url;
 
 @Injectable({
   providedIn: 'root'
 })
-export class ItemService {
+export class QrService {
 
   constructor(private secureService: SecureService) {
   }
-  saveItem(itemMenu: ItemMenuRequest): Observable<ItemMenuResponse> {
-    return this.secureService.post( `/item-menu`, itemMenu)
-  }
-
-  deleteItem(id: number): Observable<void>{
-    return this.secureService.delete(`/item-menu/${id}`)
-  }
-
-  editItem(item: ItemMenuResponse): Observable<void>{
-    return this.secureService.patch(`/item-menu/`, item)
+  saveQr(qrRequest: QrRequest): Observable<QrResponse> {
+    return this.secureService.post( `/qr`, qrRequest)
   }
 
 }

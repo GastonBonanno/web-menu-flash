@@ -13,7 +13,7 @@ const URL = environment.url;
 })
 export class MenuService {
 
-  constructor( private http: HttpClient, private secureService: SecureService) {
+  constructor(private secureService: SecureService) {
   }
 
   getMenuList(): Observable<MenuResponse[]> {

@@ -18,7 +18,7 @@ const URL = environment.url;
 })
 export class UserService {
 
-  constructor( private http: HttpClient, private secureService: SecureService) {
+  constructor(private secureService: SecureService) {
   }
 
    login(loginUser: LoginUserRequest): Observable<LoginUserResponse> {

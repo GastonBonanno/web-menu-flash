@@ -1,5 +1,6 @@
 export interface MenuResponse {
   id: number;
+  branch: string
   title: string;
   description: string;
   header: string;
@@ -13,6 +14,7 @@ export interface MenuResponse {
 }
 
 export interface MenuRequest{
+  branch: string;
   title: string;
   description: string;
   header: string;
