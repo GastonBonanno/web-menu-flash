@@ -1,15 +1,6 @@
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import {CreateUserRequest, CreateUserResponse, LoginUserRequest, LoginUserResponse} from "../interfaces/user.interface";
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {catchError, map, Observable, tap} from "rxjs";
-import {
-  CategoryRequest,
-  CategoryResponse,
-  ItemMenuRequest, ItemMenuResponse,
-  MenuRequest,
-  MenuResponse
-} from "../interfaces/menu.interface";
+import {Injectable} from '@angular/core';
+import {environment} from 'src/environments/environment';
+import {Observable} from "rxjs";
 import {SecureService} from "../utils/secure.service";
 import {QrRequest, QrResponse} from "../interfaces/qr.interface";
 
@@ -32,4 +23,5 @@ export class QrService {
   deleteQr(id: number | undefined): Observable<void> {
     return this.secureService.delete( `/qr/${id}`)
   }
+
 }

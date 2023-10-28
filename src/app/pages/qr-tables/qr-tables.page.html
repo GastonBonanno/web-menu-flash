@@ -8,11 +8,6 @@
 
 <ion-content [fullscreen]="true" color="dark">
 
-  <!-- en el ngOnInit del .ts traer los datos de la company, la lista de menus, y la lista de la tabla qr -->
-  <!-- hacer el for que tome una lista (Lista de mesas de la tabla qr) del qr-tables.page.ts, que recorra esa lista y arme todos los menú -->
-  <!-- string del qr: primer campo id de la company, 2do id de menu, 3ro id de la mesa -->
-
-
   <ion-list>
     <ion-item>
       <ion-select aria-label="Position" interface="popover" placeholder="Seleccionar sucursal"
@@ -25,19 +20,28 @@
   <ion-button (click)="setOpenQrModal(true); clearInputs()" [disabled]="!selectedMenu" class="button-center">Crear QR
   </ion-button>
 
-  <!--traer lista de mesas con qr y generarlos con un for-->
   <ion-grid class="qr-grid">
     <ion-row *ngFor="let qr of listAllQr; let i = index">
         <ion-col>
-          <ion-title>{{qr.tableName}}</ion-title>
-          <qrcode [qrdata]="selectedMenu + ',' + qr.id" [width]="170" [errorCorrectionLevel]="'M'"></qrcode>
-          <ion-button color="warning" (click)="deleteQr(qr.id)">
-            Eliminar
-            <ion-icon name="restaurant-outline" ></ion-icon>
-          </ion-button>
+          <ion-title class="center">{{qr.tableName}}</ion-title>
+          <qrcode (qrCodeURL)="onChangeURL($event, i)" [qrdata]="selectedMenu + ',' + qr.id" [width]="170" [errorCorrectionLevel]="'M'"></qrcode>
+          <ion-row class="center">
+            <ion-button class="center" color="warning" (click)="deleteQr(qr.id)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+            <ion-row class="center">
+              <a [href]="listQrUrl[i]" download="{{qr.tableName}}">
+                <ion-button class="center" color="warning">
+                  <ion-icon name="download-outline"></ion-icon>
+                </ion-button>
+              </a>
+            </ion-row>
+          </ion-row>
         </ion-col>
     </ion-row>
   </ion-grid>
+
+
 
   <ion-modal (keydown.enter)="setOpenQrModal(false); saveQr()" [isOpen]="isModalOpen" [backdropDismiss]="false">
     <ng-template>

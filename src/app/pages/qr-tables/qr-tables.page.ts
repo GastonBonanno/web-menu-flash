@@ -8,6 +8,8 @@ import {MenuService} from "../../services/menu.service";
 import {Toast} from "../../utils/toast";
 import {QrRequest, QrResponse} from "../../interfaces/qr.interface";
 import {QrService} from "../../services/qr.service";
+import {SafeUrl} from "@angular/platform-browser";
+
 
 @Component({
   selector: 'app-qr-tables',
@@ -22,10 +24,12 @@ export class QrTablesPage implements OnInit {
   listMenuQrModalRequest: QrRequest[] = [];
   listMenu: MenuResponse[] = [];
   listAllQr: QrResponse[] = [];
+  listQrUrl: any[] = [];
 
   constructor(private menuService: MenuService, private qrService: QrService, private toast: Toast) { }
 
   isModalOpen = false;
+  qrCodeDownloadLink: SafeUrl = ""
 
   qrRequest: QrRequest = {
     tableName: undefined,
@@ -115,5 +119,11 @@ export class QrTablesPage implements OnInit {
     )
   }
 
-  protected readonly undefined = undefined;
+  onChangeURL(url: SafeUrl, id: number) {
+    this.listQrUrl[id] = url
+  }
+
+  async downloadQrCode() {
+    this.toast.present('bottom', "ToDo Envio de mail").then()
+  }
 }
