@@ -149,7 +149,7 @@ export class MenuPage implements OnInit {
   }
 
   async deleteMenu(id: number): Promise<void> {
-    const confirm = await this.toast.alertConfirmation("Estas seguro que queres borrar el menu")
+    const confirm = await this.toast.alertConfirmation("¿Desea borrar el menu?")
     if (confirm) {
       this.menuService.deleteMenu(id).subscribe({
         next: () => {

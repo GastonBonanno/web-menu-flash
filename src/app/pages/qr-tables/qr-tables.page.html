@@ -15,22 +15,29 @@
 
   <ion-list>
     <ion-item>
-      <ion-select aria-label="Position" interface="popover" placeholder="Seleccionar sucursal" [(ngModel)]="selectedMenu" (ionChange)="getAllQrByBranch()">
+      <ion-select aria-label="Position" interface="popover" placeholder="Seleccionar sucursal"
+                  [(ngModel)]="selectedMenu" (ionChange)="getAllQrByBranch()">
         <ion-select-option value="{{menu.id}}" *ngFor="let menu of listMenu"> {{menu.branch}} </ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
 
-  <ion-button (click)="setOpenQrModal(true); clearInputs()" [disabled]="!selectedMenu" class="button-center">Crear QR</ion-button>
+  <ion-button (click)="setOpenQrModal(true); clearInputs()" [disabled]="!selectedMenu" class="button-center">Crear QR
+  </ion-button>
 
-<!--traer lista de mesas con qr y generarlos con un for-->
-
-  <ion-text> Mesa 1 </ion-text>
-  <qrcode *ngFor="let qr of listAllQr" [qrdata]="selectedMenu + ',' + qr.id" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-
-
-
-
+  <!--traer lista de mesas con qr y generarlos con un for-->
+  <ion-grid class="qr-grid">
+    <ion-row *ngFor="let qr of listAllQr; let i = index">
+        <ion-col>
+          <ion-title>{{qr.tableName}}</ion-title>
+          <qrcode [qrdata]="selectedMenu + ',' + qr.id" [width]="170" [errorCorrectionLevel]="'M'"></qrcode>
+          <ion-button color="warning" (click)="deleteQr(qr.id)">
+            Eliminar
+            <ion-icon name="restaurant-outline" ></ion-icon>
+          </ion-button>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <ion-modal (keydown.enter)="setOpenQrModal(false); saveQr()" [isOpen]="isModalOpen" [backdropDismiss]="false">
     <ng-template>

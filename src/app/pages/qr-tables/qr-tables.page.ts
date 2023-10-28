@@ -41,12 +41,13 @@ export class QrTablesPage implements OnInit {
       companyMenuId: this.selectedMenu,
     }
     this.listMenuQrModalRequest.push(menuQrClone)
+    this.qrRequest.tableName = undefined
   }
   saveQr(){
-    //this.qrRequest.companyMenuId = this.selectedMenu;
     this.qrService.saveQr(this.listMenuQrModalRequest).subscribe({
       next: () => {
         this.toast.present('bottom', "Qr creado correctamente").then()
+        this.getAllQrByBranch()
       },
       error: (err) => {
         this.toast.present('bottom', "Error al cargar la lista de menú").then()
@@ -74,6 +75,22 @@ export class QrTablesPage implements OnInit {
       })
     }
   }
+
+  async deleteQr(id: number | undefined) {
+    const confirm = await this.toast.alertConfirmation("¿Desea borrar el QR?")
+    if (confirm) {
+      this.qrService.deleteQr(id).subscribe({
+        next: () => {
+          this.ngOnInit()
+        },
+        error: (err) => {
+          this.toast.present('bottom', "Error borrando el QR").then()
+          console.log('error: ', err)
+        }
+      })
+    }
+  }
+
   ngOnInit() {
     if (this.selectedMenu){
       this.qrService.getAllQrByCompanyMenuId(this.selectedMenu).subscribe({

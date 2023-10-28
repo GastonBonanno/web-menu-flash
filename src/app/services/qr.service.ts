@@ -29,4 +29,7 @@ export class QrService {
   getAllQrByCompanyMenuId(id: number): Observable<QrResponse[]>{
     return this.secureService.get(`/qr/${id}`)
   }
+  deleteQr(id: number | undefined): Observable<void> {
+    return this.secureService.delete( `/qr/${id}`)
+  }
 }
