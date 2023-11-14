@@ -1,0 +1,68 @@
+.imagen-boton {
+  cursor: pointer; /* Cambia el cursor a una mano cuando se coloca sobre la tarjeta */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Alineación del contenido al centro */
+  padding: 0; /* Elimina el relleno para que la imagen ocupe todo el espacio */
+
+
+}
+
+.card-contenedor {
+  justify-content: center;
+  background-color: transparent;
+
+}
+
+.tarjeta {
+  /* Card styles */
+  transition: box-shadow 0.2s; /* Add a transition for smooth effect */
+
+  &:hover {
+    box-shadow: 0px 4px 8px rgba(255, 206, 1, 1); /* Add a shadow effect on hover */
+  }
+}
+
+.bloque-superior {
+  background-color:rgba(255, 206, 1, 0.7);
+  height: 200px; /* Altura del bloque */
+  width: 100%; /* Ancho completo */
+  display: flex; /* Usar Flexbox para centrar vertical y horizontalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+}
+
+.titulo {
+  font-size: 24px;
+  text-align: center;
+}
+
+.boton {
+  --ion-color-medium-shade: #808289;
+}
+
+.ion-modal {
+  ion-content {
+    max-width: 90%; /* Ajusta el ancho máximo del contenido del modal */
+    margin: 0 auto; /* Centra el contenido horizontalmente */
+  }
+}
+.banner {
+  background-image: url("/assets/menuData.png");
+  background-size: inherit;
+  background-position: center;
+  padding: 50px;
+  text-align: center;
+}
+
+.img-menu-mini {
+  background-image: url("/assets/fondoCard.png");
+}
+.card-menu-list {
+  align-items: center;
+}
+.card-contenedor-list {
+  justify-content: center;
+  height: 300px;
+  width: 100%;
+  display: flex;
+}
