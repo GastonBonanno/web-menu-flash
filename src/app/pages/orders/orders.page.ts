@@ -18,6 +18,13 @@ export class OrdersPage implements OnInit {
   pendingClientOrderResponse: ClientOrderResponse[] = []
   finishedClientOrderResponse: ClientOrderResponse[] = []
   pendingOrdersId: string[] = []
+  // refresh: boolean
+
+  timer = setInterval(()=> {
+    this.ngOnInit()
+  }, 10000);
+
+  //ToDo Poner un flag para que no refresque los pedidos
 
   constructor(private orderService: OrderService) { }
 
@@ -25,14 +32,13 @@ export class OrdersPage implements OnInit {
     this.orderService.findAllbyCompanyId().subscribe(
       {
         next: (resp: ClientOrderResponse[]) => {
-          // console.log(resp)
           this.pendingClientOrderResponse = resp.filter((order) => 'PENDIENTE' === order.state.name)
-          this.pendingOrdersId = this.pendingClientOrderResponse.map((order) => order.id.toString())
           this.finishedClientOrderResponse = resp.filter((order) => 'PENDIENTE' !== order.state.name)
+          this.pendingOrdersId = this.pendingClientOrderResponse.map((order) => order.id.toString())
         },
         error: (err) => {
           console.log('error: ', err)
-        }
+        },
       }
     );
   }
