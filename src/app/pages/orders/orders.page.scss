@@ -27,3 +27,9 @@ ion-accordion-group {
 .cancelado-style {
   --background: #EBABAA;
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

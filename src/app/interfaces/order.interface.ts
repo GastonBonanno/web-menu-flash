@@ -5,6 +5,7 @@ export interface ClientOrderResponse{
   orderId: number | undefined;
   state: StateResponse;
   tableName: string | undefined;
+  client_email: string | undefined;
   companyMenuId: number | undefined;
   active: number | undefined;
   createdAt: Date | undefined;

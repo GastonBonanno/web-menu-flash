@@ -43,5 +43,17 @@ export class OrdersPage implements OnInit {
     );
   }
 
+  changeState(id: number, state: string) {
+    this.orderService.changeState(id, state).subscribe(
+      {
+        next: () => {
+          this.ngOnInit()
+        },
+        error: (err) => { console.log('error: ', err) },
+      }
+    );
+
+  }
+
   protected readonly console = console;
 }
