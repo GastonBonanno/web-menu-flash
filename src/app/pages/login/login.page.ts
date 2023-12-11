@@ -35,6 +35,7 @@ export class LoginPage implements OnInit {
   };
   emailError: string | null = null;
   passwordError: string | null = null;
+  repeatedPasswordError: string | null = null;
 
   constructor(
     private userService: UserService,
@@ -82,13 +83,20 @@ export class LoginPage implements OnInit {
   }
 
   validatePassword() {
-    // Valida la contraseña aquí (puedes ajustar los criterios según tu requerimiento)
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
 
     if (!regex.test(this.userToCreate.password)) {
-      this.passwordError = 'La contraseña debe contener Mayusculas, minusculas, numeros y al menos 8 caracteres';
+      this.passwordError = 'Debe contener mayusculas, minusculas, numeros y al menos 8 caracteres';
     } else {
       this.passwordError = null;
+    }
+  }
+
+  validateRepeatedPasswordError() {
+    if (this.userToCreate.password !== this.userToCreate.repeatedPassword) {
+      this.repeatedPasswordError = 'La contraseña no coincide';
+    } else {
+      this.repeatedPasswordError = null;
     }
   }
 

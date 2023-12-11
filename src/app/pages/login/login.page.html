@@ -67,22 +67,25 @@
           </ion-item>
           <div class="error-text" *ngIf="emailError">{{ emailError }}</div>
           <ion-item>
-            <ion-input name="password"
+            <ion-input class= "{{passwordError?'error-input':'no-error-input'}}"
+                       name="password"
                        type="password"
                        placeholder="Contraseña"
                        [(ngModel)]="userToCreate.password"
                        (focusout)="validatePassword()"
                        required="true"></ion-input>
           </ion-item>
-          <div class="large-texts" *ngIf="passwordError">{{passwordError}}</div>
+          <div class="error-text" *ngIf="passwordError">{{passwordError}}</div>
           <ion-item>
-            <ion-input name="repetead-password"
+            <ion-input class= "{{repeatedPasswordError?'error-input':'no-error-input'}}"
+                       name="repetead-password"
                        type="password"
                        placeholder="Repita contraseña"
                        [(ngModel)]="userToCreate.repeatedPassword"
+                       (focusout)="validateRepeatedPasswordError()"
                        required="true"></ion-input>
           </ion-item>
-
+          <div class="error-text" *ngIf="repeatedPasswordError">{{ repeatedPasswordError }}</div>
 
         </ion-list>
 
