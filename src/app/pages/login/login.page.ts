@@ -33,6 +33,8 @@ export class LoginPage implements OnInit {
     password: '',
     repeatedPassword: '',
   };
+  emailError: string | null = null;
+  passwordError: string | null = null;
 
   constructor(
     private userService: UserService,
@@ -67,6 +69,27 @@ export class LoginPage implements OnInit {
         modal.dismiss();
       },
     });
+  }
+  validateEmail(): void {
+    // Expresión regular para validar un email básico
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(this.userToCreate.email)) {
+      this.emailError = 'Ingrese un mail valido';
+    } else {
+      this.emailError = null;
+    }
+  }
+
+  validatePassword() {
+    // Valida la contraseña aquí (puedes ajustar los criterios según tu requerimiento)
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if (!regex.test(this.userToCreate.password)) {
+      this.passwordError = 'La contraseña debe contener Mayusculas, minusculas, numeros y al menos 8 caracteres';
+    } else {
+      this.passwordError = null;
+    }
   }
 
   ngOnInit(): void {

@@ -6,7 +6,6 @@
 
     <ion-grid fixed="true">
 
-
       <ion-row (keydown.enter)="login()" class="form">
         <ion-col size="8">
           <ion-list>
@@ -57,19 +56,25 @@
         <ion-list lines="none">
 
           <ion-item>
-            <ion-input name="email"
+            <ion-input class= "{{emailError?'error-input':'no-error-input'}}"
+                       name="email"
                        type="text"
                        placeholder="Email"
                        [(ngModel)]="userToCreate.email"
+                       (focusout)="validateEmail()"
                        required="true"></ion-input>
+
           </ion-item>
+          <div class="error-text" *ngIf="emailError">{{ emailError }}</div>
           <ion-item>
             <ion-input name="password"
                        type="password"
                        placeholder="Contraseña"
                        [(ngModel)]="userToCreate.password"
+                       (focusout)="validatePassword()"
                        required="true"></ion-input>
           </ion-item>
+          <div class="large-texts" *ngIf="passwordError">{{passwordError}}</div>
           <ion-item>
             <ion-input name="repetead-password"
                        type="password"
