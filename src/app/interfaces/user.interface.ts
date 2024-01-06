@@ -34,7 +34,7 @@ export interface CreateUserResponse {
 
 export interface ProfileData {
   name: string | undefined;
-  cuit: number | undefined;
+  cuit: string | undefined;
   address: string | undefined;
   phoneNumber: string | undefined;
 }

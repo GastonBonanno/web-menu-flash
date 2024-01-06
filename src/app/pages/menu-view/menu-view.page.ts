@@ -15,6 +15,8 @@ import {
 import {ActivatedRoute} from "@angular/router";
 import {CategoryService} from "../../services/category.service";
 import {ItemService} from "../../services/item.service";
+import {FieldValidation} from "../../interfaces/validations.interface";
+import {Validations} from "../../utils/validations";
 
 @Component({
   selector: 'app-menu-view',
@@ -50,7 +52,7 @@ export class MenuViewPage implements OnInit {
     position: undefined,
     description: '',
     price: 0,
-    quantity: 0,
+    quantity: undefined,
   };
   itemMenuUpdate: ItemMenuResponse = {
     id: 0,
@@ -77,12 +79,28 @@ export class MenuViewPage implements OnInit {
     position: undefined,
     companyMenuId: 0
   };
+
+  nameError: FieldValidation = {
+    size: 60,
+    error: null
+  }
+
+  descriptionError: FieldValidation = {
+    size: 60,
+    error: null
+  }
+
+  validations: Validations
+
   constructor(private menuService: MenuService,
               private itemService : ItemService,
               private categoryService: CategoryService,
               private toast: Toast,
               private navCtrl: NavController,
-              private route: ActivatedRoute) { }
+              private validationService: Validations,
+              private route: ActivatedRoute) {
+    this.validations = validationService
+  }
 
   setOpenCategory(isOpen: boolean) {
     this.isModalOpen = isOpen;
@@ -181,16 +199,19 @@ export class MenuViewPage implements OnInit {
   }
 
   editItem(item: ItemMenuResponse){
-    this.itemService.editItem(item).subscribe({
-      next: () => {
-        this.ngOnInit()
-        this.toast.present("bottom", "Actualizado con éxito").then()
-      },
-      error: (err) => {
-        this.toast.present('bottom', "Error borrando el item").then()
-        console.log('error: ', err)
-      }
-    })
+    if(this.validateErrors()){
+      console.log('item.active: ', item.active)
+      this.itemService.editItem(item).subscribe({
+        next: () => {
+          this.ngOnInit()
+          this.toast.present("bottom", "Actualizado con éxito").then()
+        },
+        error: (err) => {
+          this.toast.present('bottom', "Error borrando el item").then()
+          console.log('error: ', err)
+        }
+      })
+    }
   }
 
    deleteItem(id: number){
@@ -237,7 +258,7 @@ export class MenuViewPage implements OnInit {
       position: undefined,
       description: '',
       price: 0,
-      quantity: 0,
+      quantity: undefined,
     };
   }
 
@@ -250,4 +271,9 @@ export class MenuViewPage implements OnInit {
 
   }
 
+  validateErrors(){
+    return this.nameError.error === null && this.descriptionError.error === null
+  }
+
+  protected readonly name = name;
 }

@@ -94,7 +94,8 @@
             <ion-button (click)="createUser(modal)"
                         color="tertiary"
                         shape="round"
-                        id="create">
+                        id="create"
+                        disabled="{{!validateErrors()}}">
               Crear
             </ion-button>
           </ion-col>

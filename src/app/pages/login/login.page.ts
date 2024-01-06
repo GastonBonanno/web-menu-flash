@@ -58,18 +58,21 @@ export class LoginPage implements OnInit {
   }
 
   async createUser(modal: IonModal) {
-    this.userService.createUser(this.userToCreate).subscribe({
-      next: (resp: CreateUserResponse) => {
-        this.toast.present('bottom', 'Usuario creado correctamente');
-        modal.dismiss();
-        return resp;
-      },
-      error: (err) => {
-        console.log('error createUser: ', err);
-        this.toast.present('bottom', 'Error al crear usuario');
-        modal.dismiss();
-      },
-    });
+    if(this.validateErrors()) {
+      this.userService.createUser(this.userToCreate).subscribe({
+        next: (resp: CreateUserResponse) => {
+          this.toast.present('bottom', 'Usuario creado correctamente');
+          modal.dismiss();
+          return resp;
+        },
+        error: (err) => {
+          console.log('error createUser: ', err);
+          this.toast.present('bottom', 'Error al crear usuario');
+          modal.dismiss();
+        },
+      });
+    }
+
   }
   validateEmail(): void {
     // Expresión regular para validar un email básico
@@ -98,6 +101,10 @@ export class LoginPage implements OnInit {
     } else {
       this.repeatedPasswordError = null;
     }
+  }
+
+  validateErrors(): boolean {
+    return this.emailError === null && this.passwordError === null && this.repeatedPasswordError === null;
   }
 
   ngOnInit(): void {

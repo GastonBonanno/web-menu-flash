@@ -9,6 +9,8 @@ import {LoginUserResponse} from "../../interfaces/user.interface";
 import {menu} from "ionicons/icons";
 import {tap} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
+import {Validations} from "../../utils/validations";
+import {FieldValidation} from "../../interfaces/validations.interface";
 
 @Component({
   selector: 'app-menu',
@@ -18,6 +20,31 @@ import {ActivatedRoute} from "@angular/router";
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class MenuPage implements OnInit {
+
+  branchError: FieldValidation = {
+    size: 60,
+    error: null
+  }
+
+  headerError: FieldValidation = {
+    size: 60,
+    error: null
+  }
+
+  titleError: FieldValidation = {
+    size: 60,
+    error: null
+  }
+
+  descriptionError: FieldValidation = {
+    size: 60,
+    error: null
+  }
+
+  footerError: FieldValidation = {
+    size: 60,
+    error: null
+  }
 
   menu: MenuRequest = {
     branch: '',
@@ -57,33 +84,27 @@ export class MenuPage implements OnInit {
     quantity: 0
   };
 
-
-
-  listCategory: CategoryRequest[] = [];
-  listItem: ItemMenuRequest[] = [];
   listMenu: MenuResponse[] = [];
   isModalOpen = false;
-  isModalOpen2 = false;
-  isModalOpen3 = false;
+  validations: Validations
 
-  constructor(private menuService: MenuService,  private toast: Toast, private navCtrl: NavController, route: ActivatedRoute) {
-    // console.log('constructorrrr: ')
-    // route.params.subscribe(val => {
-    //   console.log('route: ', route)
-    // });
+  constructor(private menuService: MenuService,  private toast: Toast, private navCtrl: NavController, route: ActivatedRoute, validations: Validations) {
+    this.validations = validations
   }
 
   saveMenu() {
-    this.menuService.saveMenu(this.menu).subscribe({
-      next: (resp: MenuResponse) => {
-        this.navCtrl.navigateRoot(['/menu-view', resp.id], {animated: true})
-        return resp
-      },
-      error: (err) => {
-        this.toast.present('bottom', "Error menu").then()
-        console.log('error: ', err)
-      }
-    })
+    if(this.validateErrors()) {
+      this.menuService.saveMenu(this.menu).subscribe({
+        next: (resp: MenuResponse) => {
+          this.navCtrl.navigateRoot(['/menu-view', resp.id], {animated: true})
+          return resp
+        },
+        error: (err) => {
+          this.toast.present('bottom', "Error menu").then()
+          console.log('error: ', err)
+        }
+      })
+    }
   }
 
   editMenu(menuId: number) {
@@ -91,61 +112,8 @@ export class MenuPage implements OnInit {
     return menuId
   }
 
-  addCategory() {
-    let categoryClone: CategoryRequest = {
-      name: this.category.name,
-      position: this.category.position,
-      companyMenuId: this.menuResponse.id
-    }
-    this.listCategory.push(categoryClone)
-  }
-
-   saveCategory() {
-  //   this.menuService.saveCategory(this.listCategory).subscribe({
-  //     next: (resp: MenuResponse) => {
-  //       this.toast.present('bottom', "Cargado con éxito").then()
-  //       this.menuResponse = resp
-  //     },
-  //     error: (err) => {
-  //       console.log('error: ', err)
-  //     }
-  //   })
-   }
-
-  addItem() {
-    let itemClone: ItemMenuRequest = {
-      categoryMenuId: this.itemMenu.categoryMenuId,
-      name: this.itemMenu.name,
-      position: this.itemMenu.position,
-      description: this.itemMenu.description,
-      price: this.itemMenu.price,
-      quantity: this.itemMenu.quantity
-    }
-    this.listItem.push(itemClone)
-  }
-  saveItems(){}
-
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
-  }
-  setOpen2(isOpen: boolean) {
-    this.isModalOpen2 = isOpen;
-  }
-  setOpen3(isOpen: boolean) {
-    this.isModalOpen3 = isOpen;
-  }
-
-  ngOnInit() {
-    this.menuService.getMenuList().subscribe({
-      next: (resp: MenuResponse[]) => {
-        console.log('resp: ', resp)
-        this.listMenu = resp
-      },
-      error: (err) => {
-        this.toast.present('bottom', "Error al cargar la lista de menú").then()
-        console.log('error: ', err)
-      }
-    })
   }
 
   async deleteMenu(id: number): Promise<void> {
@@ -162,5 +130,29 @@ export class MenuPage implements OnInit {
         }
       })
     }
+  }
+
+
+  validateErrors(): boolean {
+    return this.branchError.error === null
+      && this.headerError.error === null
+      && this.titleError.error === null
+      && this.descriptionError.error === null
+      && this.footerError.error === null
+  }
+
+
+
+  ngOnInit() {
+    this.menuService.getMenuList().subscribe({
+      next: (resp: MenuResponse[]) => {
+        console.log('resp: ', resp)
+        this.listMenu = resp
+      },
+      error: (err) => {
+        this.toast.present('bottom', "Error al cargar la lista de menú").then()
+        console.log('error: ', err)
+      }
+    })
   }
 }

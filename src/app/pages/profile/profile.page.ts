@@ -15,6 +15,11 @@ import {Toast} from "../../utils/toast";
 })
 export class ProfilePage implements OnInit {
 
+  nameError: string | null = null;
+  cuitError: string | null = null;
+  addressError: string | null = null;
+  phoneNumberError: string | null = null;
+
   profileData: ProfileData = {
     name: undefined,
     cuit: undefined,
@@ -25,15 +30,18 @@ export class ProfilePage implements OnInit {
   constructor(private userService: UserService, private toast: Toast) { }
 
   saveData() {
-    this.userService.updateCompanyData(this.profileData).subscribe({
-      next: () => {
-        this.toast.present('bottom', 'Datos actualizados correctamente').then();
-      },
-      error: (err) => {
-        console.log('error: ', err);
-        this.toast.present('bottom', 'Error actualizando datos').then();
-      },
-    });
+    if(this.validateErrors()) {
+      this.userService.updateCompanyData(this.profileData).subscribe({
+        next: () => {
+          this.toast.present('bottom', 'Datos actualizados correctamente').then();
+        },
+        error: (err) => {
+          console.log('error: ', err);
+          this.toast.present('bottom', 'Error actualizando datos').then();
+        },
+      });
+    }
+
   }
 
   ngOnInit() {
@@ -46,9 +54,49 @@ export class ProfilePage implements OnInit {
       },
       error: (err) => {
         console.log('error: ', err);
-        this.toast.present('bottom', 'Usuario o contraseña incorrectos').then();
+        this.toast.present('bottom', 'Error al obtener datos del perfil').then();
       },
     });
   }
+
+  validateErrors(): boolean {
+    return this.nameError === null && this.cuitError === null && this.addressError === null && this.phoneNumberError === null
+  }
+
+  validateName() {
+    if(this.profileData.name != undefined) {
+      if (this.profileData.name?.length >= 100) {
+        this.nameError = 'Debe ser menor a 100 caracteres';
+      } else {
+        this.nameError = null;
+      }
+    }
+  }
+
+  validateCuit() {
+    if (this.profileData.cuit != undefined && this.profileData.cuit.toString().length !== 11) {
+      this.cuitError = 'Debe contener 11 caracteres';
+    } else {
+      this.cuitError = null;
+    }
+  }
+
+  validateAddress() {
+    if (this.profileData.address != undefined && this.profileData.address.toString().length >= 100) {
+      this.addressError = 'Debe ser menor a 100 caracteres';
+    } else {
+      this.addressError = null;
+    }
+  }
+
+  validatePhoneNumber() {
+    if (this.profileData.phoneNumber != undefined && this.profileData.phoneNumber.toString().length >= 15) {
+      this.phoneNumberError = 'Debe ser menor a 15 caracteres';
+    } else {
+      this.phoneNumberError = null;
+    }
+  }
+
+
 
 }

@@ -36,32 +36,49 @@
             <ion-item>
               <ion-input labelPlacement="stacked" label="Sucursal"
                          [(ngModel)]="menu.branch"
+                         (focusout)="validations.validateField(menu.branch, branchError)"
                          placeholder="Nombre de la sucursal"></ion-input>
             </ion-item>
+            <div class="error-text" *ngIf="branchError.error">{{ branchError.error }}</div>
+
             <ion-item>
-              <ion-input labelPlacement="stacked" label="Encabezado" [(ngModel)]="menu.header"
+              <ion-input labelPlacement="stacked" label="Encabezado"
+                         [(ngModel)]="menu.header"
+                         (focusout)="validations.validateField(menu.header, headerError)"
                          placeholder="Ingresa el encabezado de tu menú"></ion-input>
             </ion-item>
+            <div class="error-text" *ngIf="headerError.error">{{ headerError.error }}</div>
+
             <ion-item>
-              <ion-input labelPlacement="stacked" label="Título" [(ngModel)]="menu.title"
+              <ion-input labelPlacement="stacked" label="Título"
+                         [(ngModel)]="menu.title"
+                         (focusout)="validations.validateField(menu.title, titleError)"
                          placeholder="Ingresa el título de tu menú"></ion-input>
             </ion-item>
+            <div class="error-text" *ngIf="titleError.error">{{ titleError.error }}</div>
+
             <ion-item>
               <ion-input labelPlacement="stacked" label="Descripción"
                          [(ngModel)]="menu.description"
+                         (focusout)="validations.validateField(menu.description, descriptionError)"
                          placeholder="Podés ingresar una descripción de tu Empresa"></ion-input>
             </ion-item>
+            <div class="error-text" *ngIf="descriptionError.error">{{ descriptionError.error }}</div>
+
             <ion-item>
               <ion-input labelPlacement="stacked" label="Pié de Página"
                          [(ngModel)]="menu.footer"
+                         (focusout)="validations.validateField(menu.footer, footerError)"
                          placeholder="Ingresa el pié de página de tu menú"></ion-input>
             </ion-item>
+            <div class="error-text" *ngIf="footerError.error">{{ footerError.error }}</div>
+
           </ion-list>
         </ion-content>
         <ion-footer>
           <ion-toolbar>
             <ion-buttons slot="end">
-              <ion-button (click)="setOpen(false)" (click)="saveMenu()">Crear</ion-button>
+              <ion-button (click)="setOpen(false)" (click)="saveMenu()" disabled="{{!validateErrors()}}">Crear</ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-footer>

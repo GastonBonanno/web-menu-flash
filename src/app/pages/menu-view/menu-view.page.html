@@ -103,7 +103,7 @@
             <ion-col class="right-item-column">
 
               <ion-row> <ion-card-subtitle>Cantidad: {{item.quantity}}</ion-card-subtitle></ion-row>
-              <ion-row> <ion-toggle [checked]="item.active" disabled="true">Habilitado/Deshabilitado</ion-toggle></ion-row>
+              <ion-row><ion-text>{{item.active ? 'Habilitado': 'Deshabilitado'}}</ion-text></ion-row>
               <ion-row><ion-text>posición: {{item.position}}</ion-text></ion-row>
 
               <ion-row>
@@ -155,6 +155,7 @@
         </ion-item>
         <ion-item>
           <ion-input class="ion-text-wrap" label="Precio: " [(ngModel)]="itemMenu.price"
+                     type="number"
                      placeholder="Precio"></ion-input>
         </ion-item>
         <ion-item>
@@ -188,33 +189,72 @@
       </ion-header>
       <ion-content class="ion-padding">
         <ion-item>
-          <ion-input class="ion-text-wrap" label="Nombre: " [(ngModel)]="itemMenuUpdate.name"
+          <ion-grid>
+            <ion-row>
+              <ion-input class="ion-text-wrap" label="Nombre: " [(ngModel)]="itemMenuUpdate.name"
+                     (focusout)="validations.validateField(itemMenuUpdate.name, nameError)"
                      placeholder="Nombre"></ion-input>
+            </ion-row>
+            <ion-row>
+              <div class="error-text" *ngIf="nameError.error">{{ nameError.error }}</div>
+            </ion-row>
+          </ion-grid>
         </ion-item>
         <ion-item>
-          <ion-input class="ion-text-wrap" label="Descripción: " [(ngModel)]="itemMenuUpdate.description"
-                     placeholder="Descripción"></ion-input>
+          <ion-grid>
+            <ion-row>
+              <ion-input class="ion-text-wrap" label="Descripción: " [(ngModel)]="itemMenuUpdate.description"
+                         (focusout)="validations.validateField(itemMenuUpdate.description, descriptionError)"
+                         placeholder="Descripción"></ion-input>
+            </ion-row>
+            <ion-row>
+              <div class="error-text" *ngIf="descriptionError.error">{{ descriptionError.error }}</div>
+            </ion-row>
+          </ion-grid>
         </ion-item>
+
+
         <ion-item>
-          <ion-input class="ion-text-wrap" label="Precio: " [(ngModel)]="itemMenuUpdate.price"
+          <ion-grid>
+            <ion-row>
+          <ion-input class="ion-text-wrap" type="number" label="Precio: " [(ngModel)]="itemMenuUpdate.price"
                      placeholder="Precio"></ion-input>
+            </ion-row>
+          </ion-grid>
         </ion-item>
         <ion-item>
-          <ion-input class="ion-text-wrap" label="Cantidad: " [(ngModel)]="itemMenuUpdate.quantity"
+          <ion-grid>
+            <ion-row>
+          <ion-input class="ion-text-wrap" type="number" label="Cantidad: " [(ngModel)]="itemMenuUpdate.quantity"
                      placeholder="Cantidad"></ion-input>
+            </ion-row>
+          </ion-grid>
         </ion-item>
+
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+          <ion-row> <ion-toggle  [(ngModel)]="itemMenuUpdate.active" [checked]="itemMenuUpdate.active">Habilitado</ion-toggle></ion-row>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+
         <ion-list>
           <ion-item>
-            <ion-select aria-label="Position" interface="popover" placeholder="{{itemMenuUpdate.position ? itemMenuUpdate.position : 'Seleccionar posición'}}" [(ngModel)]="itemMenuUpdate.position">
+            <ion-grid>
+              <ion-row>
+            <ion-select aria-label="Position" interface="popover" label="Posición:" placeholder="{{itemMenuUpdate.position ? itemMenuUpdate.position : 'Seleccionar posición'}}" [(ngModel)]="itemMenuUpdate.position">
               <ion-select-option value="{{i+1}}" *ngFor="let item of getCategoryItems(itemMenuUpdate.categoryMenuId); index as i">{{i+1}}</ion-select-option>
             </ion-select>
+              </ion-row>
+            </ion-grid>
           </ion-item>
         </ion-list>
       </ion-content>
       <ion-footer>
         <ion-toolbar>
           <ion-buttons slot="end">
-            <ion-button (click)="editItem(itemMenuUpdate); setUpdateOpenItem(false, undefined); ">Guardar</ion-button>
+            <ion-button disabled="{{!validateErrors()}}" (click)="editItem(itemMenuUpdate); setUpdateOpenItem(false, undefined); ">Guardar</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-footer>
