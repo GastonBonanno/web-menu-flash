@@ -80,12 +80,32 @@ export class MenuViewPage implements OnInit {
     companyMenuId: 0
   };
 
-  nameError: FieldValidation = {
+  itemUpdateNameError: FieldValidation = {
     size: 60,
     error: null
   }
 
-  descriptionError: FieldValidation = {
+  itemUpdateDescriptionError: FieldValidation = {
+    size: 60,
+    error: null
+  }
+
+  itemNameError: FieldValidation = {
+    size: 60,
+    error: null
+  }
+
+  itemDescriptionError: FieldValidation = {
+    size: 60,
+    error: null
+  }
+
+  categoryUpdateNameError: FieldValidation = {
+    size: 60,
+    error: null
+  }
+
+  categoryNameError: FieldValidation = {
     size: 60,
     error: null
   }
@@ -138,12 +158,14 @@ export class MenuViewPage implements OnInit {
   }
 
    addCategory() {
-   let categoryClone: CategoryRequest = {
-      name: this.category.name,
-      companyMenuId: this.menuResponse.id,
-      position: this.menuResponse.listCategory.length + this.listCategory.length + 1 ,
+    if(this.category.name != undefined && this.categoryNameError.error === null){
+      let categoryClone: CategoryRequest = {
+        name: this.category.name,
+        companyMenuId: this.menuResponse.id,
+        position: this.menuResponse.listCategory.length + this.listCategory.length + 1 ,
+      }
+      this.listCategory.push(categoryClone)
     }
-    this.listCategory.push(categoryClone)
   }
 
    saveCategory() {
@@ -199,7 +221,7 @@ export class MenuViewPage implements OnInit {
   }
 
   editItem(item: ItemMenuResponse){
-    if(this.validateErrors()){
+    if(this.validateUpdateErrors()){
       console.log('item.active: ', item.active)
       this.itemService.editItem(item).subscribe({
         next: () => {
@@ -249,6 +271,16 @@ export class MenuViewPage implements OnInit {
       position: undefined,
       companyMenuId: 0
     }
+    this.clearErrors()
+  }
+
+  clearErrors() {
+    this.categoryNameError.error = null
+    this.itemDescriptionError.error = null
+    this.itemNameError.error = null
+    this.categoryUpdateNameError.error = null
+    this.itemUpdateNameError.error = null
+    this.itemUpdateDescriptionError.error = null
   }
 
   clearItem() {
@@ -259,7 +291,8 @@ export class MenuViewPage implements OnInit {
       description: '',
       price: 0,
       quantity: undefined,
-    };
+    }
+    this.clearErrors()
   }
 
   getCategoryItems(categoryId: number | undefined): ItemMenuResponse[]  {
@@ -271,8 +304,17 @@ export class MenuViewPage implements OnInit {
 
   }
 
+  validateUpdateErrors(){
+    return this.itemUpdateNameError.error === null && this.itemUpdateDescriptionError.error === null
+  }
   validateErrors(){
-    return this.nameError.error === null && this.descriptionError.error === null
+    return this.itemNameError.error === null && this.itemDescriptionError.error === null
+  }
+  validateUpdateCategoryErrors(){
+    return this.categoryUpdateNameError.error === null
+  }
+  validateCategoryErrors(){
+    return this.categoryNameError.error === null
   }
 
   protected readonly name = name;

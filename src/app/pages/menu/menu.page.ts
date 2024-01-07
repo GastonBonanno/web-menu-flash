@@ -132,6 +132,26 @@ export class MenuPage implements OnInit {
     }
   }
 
+  clearItem() {
+    this.menu = {
+      branch: '',
+      description: '',
+      header: '',
+      title: '',
+      footer: ''
+    }
+    this.clearErrors()
+  }
+
+
+  clearErrors() {
+    this.branchError.error = null
+    this.titleError.error = null
+    this.footerError.error = null
+    this.descriptionError.error = null
+    this.headerError.error = null
+  }
+
 
   validateErrors(): boolean {
     return this.branchError.error === null

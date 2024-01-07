@@ -12,15 +12,16 @@
     <ion-card-title class="title">{{menuResponse.title}}</ion-card-title>
     <ion-text class="text">{{menuResponse.description}}</ion-text>
   </ion-card-content>
-
   <ion-row class="card-contenedor">
-    <ion-col size="1">
-      <ion-card  (click)="setOpenCategory(true)" class="imagen-boton tarjeta">
+    <ion-col size="1.4">
+      <ion-title>Crear Categorias</ion-title>
+      <ion-card (click)="setOpenCategory(true)" class="imagen-boton tarjeta">
         <ion-img src='/assets/categoriasBoton.png'></ion-img>
       </ion-card>
     </ion-col>
   </ion-row>
-  <ion-modal (keydown.enter)="setOpenCategory(false); saveCategory(); clearListCategory()" [isOpen]="isModalOpen" [backdropDismiss]="false">
+  <ion-modal (keydown.enter)="setOpenCategory(false); saveCategory(); clearListCategory()" [isOpen]="isModalOpen"
+             [backdropDismiss]="false">
     <ng-template>
       <ion-header>
         <ion-toolbar>
@@ -36,11 +37,16 @@
         <ion-list class="ion-color-dark">
           <ion-item>
             <ion-input class="ion-text-wrap" label="Nombre: " [(ngModel)]="category.name"
+                       (focusout)="validations.validateField(category.name, categoryNameError)"
+                       (ionInput)="clearErrors()"
                        placeholder="Nombre de la Categoría"></ion-input>
-            <ion-fab-button size="small" color="warning" (click)="addCategory()">
+            <ion-fab-button size="small" color="warning" (click)="validations.validateField(category.name, categoryNameError); addCategory()" disabled="{{!validateCategoryErrors()}}">
               <ion-icon color="medium" name="add"></ion-icon>
             </ion-fab-button>
           </ion-item>
+          <ion-row>
+            <div class="error-text" *ngIf="categoryNameError.error">{{ categoryNameError.error }}</div>
+          </ion-row>
         </ion-list>
         <ion-list *ngFor="let category of listCategory">
           <ion-col>
@@ -57,7 +63,7 @@
       </ion-footer>
     </ng-template>
   </ion-modal>
-  <ion-title>Categorias</ion-title>
+
 
   <ion-list class="contenedor">
     <ion-item-group>
@@ -76,12 +82,12 @@
               <ion-button slot="end" color="warning" (click)="setUpdateOpenCategory(true, category)">
 
                 Editar
-                <ion-icon name="restaurant-outline" ></ion-icon>
+                <ion-icon name="restaurant-outline"></ion-icon>
               </ion-button>
 
               <ion-button slot="end" color="warning" (click)="deleteCategory(category.id)">
                 Eliminar
-                <ion-icon name="restaurant-outline" ></ion-icon>
+                <ion-icon name="restaurant-outline"></ion-icon>
               </ion-button>
 
             </ion-item-divider>
@@ -95,20 +101,32 @@
             <ion-col size="4" class="left-item-column">
 
 
-              <ion-row> <ion-card-title >{{item.name}}</ion-card-title></ion-row>
-              <ion-row> <ion-card-subtitle>{{item.description}}</ion-card-subtitle></ion-row>
-              <ion-row> <ion-card-subtitle>$ {{item.price}}</ion-card-subtitle></ion-row>
+              <ion-row>
+                <ion-card-title>{{item.name}}</ion-card-title>
+              </ion-row>
+              <ion-row>
+                <ion-card-subtitle>{{item.description}}</ion-card-subtitle>
+              </ion-row>
+              <ion-row>
+                <ion-card-subtitle>$ {{item.price}}</ion-card-subtitle>
+              </ion-row>
 
             </ion-col>
             <ion-col class="right-item-column">
 
-              <ion-row> <ion-card-subtitle>Cantidad: {{item.quantity}}</ion-card-subtitle></ion-row>
-              <ion-row><ion-text>{{item.active ? 'Habilitado': 'Deshabilitado'}}</ion-text></ion-row>
-              <ion-row><ion-text>posición: {{item.position}}</ion-text></ion-row>
+              <ion-row>
+                <ion-card-subtitle>Cantidad: {{item.quantity}}</ion-card-subtitle>
+              </ion-row>
+              <ion-row>
+                <ion-text>{{item.active ? 'Habilitado' : 'Deshabilitado'}}</ion-text>
+              </ion-row>
+              <ion-row>
+                <ion-text>posición: {{item.position}}</ion-text>
+              </ion-row>
 
               <ion-row>
-                <ion-button fill="clear" color="warning" (click)="setUpdateOpenItem(true, item);" >Editar</ion-button>
-                <ion-button fill="clear" color="danger" (click)="deleteItem(item.id)" >Eliminar</ion-button>
+                <ion-button fill="clear" color="warning" (click)="setUpdateOpenItem(true, item);">Editar</ion-button>
+                <ion-button fill="clear" color="danger" (click)="deleteItem(item.id)">Eliminar</ion-button>
               </ion-row>
 
 
@@ -117,10 +135,10 @@
           </ion-row>
           <ion-col class="button-center" size="12">
 
-            <ion-button  color="warning"  (click)="setOpenItem(true, category.id)">
+            <ion-button color="warning" (click)="setOpenItem(true, category.id)">
 
               Agregar Producto
-              <ion-icon slot="start" name="restaurant-outline" ></ion-icon>
+              <ion-icon slot="start" name="restaurant-outline"></ion-icon>
             </ion-button>
 
           </ion-col>
@@ -132,12 +150,13 @@
   </ion-list>
 
 
-  <ion-modal (keydown.enter)="setOpenItem(false, undefined); saveItems(); clearItem()" [isOpen]="isModalOpen2" [backdropDismiss]="false">
+  <ion-modal (keydown.enter)="setOpenItem(false, undefined); saveItems(); clearItem()" [isOpen]="isModalOpen2"
+             [backdropDismiss]="false">
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-title>Ítems del Menú</ion-title>
-          <ion-fab (click)="setOpenItem(false,undefined); clearItem()" slot="end" horizontal="end">
+          <ion-fab (click)="setOpenItem(false,undefined); clearItem(); clearErrors() " slot="end" horizontal="end">
             <ion-fab-button color="medium" size="small">
               <ion-icon name="close-outline"></ion-icon>
             </ion-fab-button>
@@ -147,12 +166,20 @@
       <ion-content class="ion-padding">
         <ion-item>
           <ion-input class="ion-text-wrap" label="Nombre: " [(ngModel)]="itemMenu.name"
+                     (focusout)="validations.validateField(itemMenu.name, itemNameError)"
                      placeholder="Nombre del ítem"></ion-input>
         </ion-item>
+        <ion-row>
+          <div class="error-text" *ngIf="itemNameError.error">{{ itemNameError.error }}</div>
+        </ion-row>
         <ion-item>
           <ion-input class="ion-text-wrap" label="Descripción: " [(ngModel)]="itemMenu.description"
+                     (focusout)="validations.validateField(itemMenu.description, itemDescriptionError)"
                      placeholder="Descripción"></ion-input>
         </ion-item>
+        <ion-row>
+          <div class="error-text" *ngIf="itemDescriptionError.error">{{ itemDescriptionError.error }}</div>
+        </ion-row>
         <ion-item>
           <ion-input class="ion-text-wrap" label="Precio: " [(ngModel)]="itemMenu.price"
                      type="number"
@@ -160,6 +187,7 @@
         </ion-item>
         <ion-item>
           <ion-input class="ion-text-wrap" label="Cantidad: " [(ngModel)]="itemMenu.quantity"
+                     type="number"
                      placeholder="Cantidad"></ion-input>
         </ion-item>
 
@@ -167,7 +195,7 @@
       <ion-footer>
         <ion-toolbar>
           <ion-buttons slot="end">
-            <ion-button (click)="setOpenItem(false, undefined); saveItems(); clearItem()">Guardar</ion-button>
+            <ion-button (click)="setOpenItem(false, undefined); saveItems(); clearItem();" disabled="{{!validateErrors()}}">Guardar</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-footer>
@@ -175,12 +203,13 @@
   </ion-modal>
 
 
-  <ion-modal (keydown.enter)="editItem(itemMenuUpdate); setUpdateOpenItem(false, undefined)" [isOpen]="isItemUpdateModalOpen" [backdropDismiss]="false">
+  <ion-modal (keydown.enter)="editItem(itemMenuUpdate); setUpdateOpenItem(false, undefined)"
+             [isOpen]="isItemUpdateModalOpen" [backdropDismiss]="false">
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-title>Editar Ítem</ion-title>
-          <ion-fab (click)="setUpdateOpenItem(false,undefined)" slot="end" horizontal="end">
+          <ion-fab (click)="setUpdateOpenItem(false,undefined); clearErrors()" slot="end" horizontal="end">
             <ion-fab-button color="medium" size="small">
               <ion-icon name="close-outline"></ion-icon>
             </ion-fab-button>
@@ -192,11 +221,11 @@
           <ion-grid>
             <ion-row>
               <ion-input class="ion-text-wrap" label="Nombre: " [(ngModel)]="itemMenuUpdate.name"
-                     (focusout)="validations.validateField(itemMenuUpdate.name, nameError)"
-                     placeholder="Nombre"></ion-input>
+                         (focusout)="validations.validateField(itemMenuUpdate.name, itemUpdateNameError)"
+                         placeholder="Nombre"></ion-input>
             </ion-row>
             <ion-row>
-              <div class="error-text" *ngIf="nameError.error">{{ nameError.error }}</div>
+              <div class="error-text" *ngIf="itemUpdateNameError.error">{{ itemUpdateNameError.error }}</div>
             </ion-row>
           </ion-grid>
         </ion-item>
@@ -204,11 +233,12 @@
           <ion-grid>
             <ion-row>
               <ion-input class="ion-text-wrap" label="Descripción: " [(ngModel)]="itemMenuUpdate.description"
-                         (focusout)="validations.validateField(itemMenuUpdate.description, descriptionError)"
+                         (focusout)="validations.validateField(itemMenuUpdate.description, itemUpdateDescriptionError)"
                          placeholder="Descripción"></ion-input>
             </ion-row>
             <ion-row>
-              <div class="error-text" *ngIf="descriptionError.error">{{ descriptionError.error }}</div>
+              <div class="error-text"
+                   *ngIf="itemUpdateDescriptionError.error">{{ itemUpdateDescriptionError.error }}</div>
             </ion-row>
           </ion-grid>
         </ion-item>
@@ -217,16 +247,16 @@
         <ion-item>
           <ion-grid>
             <ion-row>
-          <ion-input class="ion-text-wrap" type="number" label="Precio: " [(ngModel)]="itemMenuUpdate.price"
-                     placeholder="Precio"></ion-input>
+              <ion-input class="ion-text-wrap" type="number" label="Precio: " [(ngModel)]="itemMenuUpdate.price"
+                         placeholder="Precio"></ion-input>
             </ion-row>
           </ion-grid>
         </ion-item>
         <ion-item>
           <ion-grid>
             <ion-row>
-          <ion-input class="ion-text-wrap" type="number" label="Cantidad: " [(ngModel)]="itemMenuUpdate.quantity"
-                     placeholder="Cantidad"></ion-input>
+              <ion-input class="ion-text-wrap" type="number" label="Cantidad: " [(ngModel)]="itemMenuUpdate.quantity"
+                         placeholder="Cantidad"></ion-input>
             </ion-row>
           </ion-grid>
         </ion-item>
@@ -234,7 +264,10 @@
         <ion-item>
           <ion-grid>
             <ion-row>
-          <ion-row> <ion-toggle  [(ngModel)]="itemMenuUpdate.active" [checked]="itemMenuUpdate.active">Habilitado</ion-toggle></ion-row>
+              <ion-row>
+                <ion-toggle [(ngModel)]="itemMenuUpdate.active" [checked]="itemMenuUpdate.active">Habilitado
+                </ion-toggle>
+              </ion-row>
             </ion-row>
           </ion-grid>
         </ion-item>
@@ -243,9 +276,12 @@
           <ion-item>
             <ion-grid>
               <ion-row>
-            <ion-select aria-label="Position" interface="popover" label="Posición:" placeholder="{{itemMenuUpdate.position ? itemMenuUpdate.position : 'Seleccionar posición'}}" [(ngModel)]="itemMenuUpdate.position">
-              <ion-select-option value="{{i+1}}" *ngFor="let item of getCategoryItems(itemMenuUpdate.categoryMenuId); index as i">{{i+1}}</ion-select-option>
-            </ion-select>
+                <ion-select aria-label="Position" interface="popover" label="Posición:"
+                            placeholder="{{itemMenuUpdate.position ? itemMenuUpdate.position : 'Seleccionar posición'}}"
+                            [(ngModel)]="itemMenuUpdate.position">
+                  <ion-select-option value="{{i+1}}"
+                                     *ngFor="let item of getCategoryItems(itemMenuUpdate.categoryMenuId); index as i">{{i + 1}}</ion-select-option>
+                </ion-select>
               </ion-row>
             </ion-grid>
           </ion-item>
@@ -254,19 +290,22 @@
       <ion-footer>
         <ion-toolbar>
           <ion-buttons slot="end">
-            <ion-button disabled="{{!validateErrors()}}" (click)="editItem(itemMenuUpdate); setUpdateOpenItem(false, undefined); ">Guardar</ion-button>
+            <ion-button disabled="{{!validateUpdateErrors()}}"
+                        (click)="editItem(itemMenuUpdate); setUpdateOpenItem(false, undefined); ">Guardar
+            </ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-footer>
     </ng-template>
   </ion-modal>
 
-  <ion-modal (keydown.enter)="editCategory(categoryMenuUpdate); setUpdateOpenCategory(false, undefined);" [isOpen]="isCategoryUpdateModalOpen" [backdropDismiss]="false">
+  <ion-modal (keydown.enter)="editCategory(categoryMenuUpdate); setUpdateOpenCategory(false, undefined);"
+             [isOpen]="isCategoryUpdateModalOpen" [backdropDismiss]="false">
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-title>Editar Categoría</ion-title>
-          <ion-fab (click)="setUpdateOpenCategory(false,undefined)" slot="end" horizontal="end">
+          <ion-fab (click)="setUpdateOpenCategory(false,undefined); clearErrors()" slot="end" horizontal="end">
             <ion-fab-button color="medium" size="small">
               <ion-icon name="close-outline"></ion-icon>
             </ion-fab-button>
@@ -275,21 +314,34 @@
       </ion-header>
       <ion-content class="ion-padding">
         <ion-item>
-          <ion-input class="ion-text-wrap" label="Nombre: " [(ngModel)]="categoryMenuUpdate.name"
-                     placeholder="Nombre de categoría"></ion-input>
+          <ion-grid>
+            <ion-row>
+              <ion-input class="ion-text-wrap" label="Nombre: " [(ngModel)]="categoryMenuUpdate.name"
+                         (focusout)="validations.validateField(categoryMenuUpdate.name, categoryUpdateNameError)"
+                         placeholder="Nombre de categoría"></ion-input>
+            </ion-row>
+            <ion-row>
+              <div class="error-text" *ngIf="categoryUpdateNameError.error">{{ categoryUpdateNameError.error }}</div>
+            </ion-row>
+
+
+            <ion-select aria-label="Position" label="Posición" interface="popover"
+                        placeholder="{{categoryMenuUpdate.position ? categoryMenuUpdate.position : 'Seleccionar posición'}}"
+                        [(ngModel)]="categoryMenuUpdate.position">
+              <ion-select-option value="{{i+1}}"
+                                 *ngFor="let cat of menuResponse.listCategory; index as i">{{i + 1}}</ion-select-option>
+            </ion-select>
+
+
+          </ion-grid>
         </ion-item>
-          <ion-list>
-            <ion-item>
-              <ion-select aria-label="Position" interface="popover" placeholder="{{categoryMenuUpdate.position ? categoryMenuUpdate.position : 'Seleccionar posición'}}" [(ngModel)]="categoryMenuUpdate.position">
-                <ion-select-option value="{{i+1}}" *ngFor="let cat of menuResponse.listCategory; index as i">{{i+1}}</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
       </ion-content>
       <ion-footer>
         <ion-toolbar>
           <ion-buttons slot="end">
-            <ion-button (click)="editCategory(categoryMenuUpdate); setUpdateOpenCategory(false, undefined); ">Guardar</ion-button>
+            <ion-button (click)="editCategory(categoryMenuUpdate); setUpdateOpenCategory(false, undefined);"
+                        disabled="{{!validateUpdateCategoryErrors()}}">Guardar
+            </ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-footer>

@@ -48,7 +48,7 @@
       <ion-header>
         <ion-toolbar>
           <ion-title>QR</ion-title>
-          <ion-fab (click)="setOpenQrModal(false)" slot="end" horizontal="end">
+          <ion-fab (click)="setOpenQrModal(false); clearErrors()" slot="end" horizontal="end">
             <ion-fab-button color="medium" size="small">
               <ion-icon name="close-outline"></ion-icon>
             </ion-fab-button>
@@ -59,11 +59,16 @@
         <ion-list class="ion-color-dark">
           <ion-item>
             <ion-input class="ion-text-wrap" label="Mesa: " [(ngModel)]="qrRequest.tableName"
+                       (focusout)="validations.validateField(qrRequest.tableName, qrError)"
+                       (ionInput)="clearErrors()"
                        placeholder="Nombre"></ion-input>
-            <ion-fab-button size="small" color="warning" (click)="addMenuQr()">
+            <ion-fab-button size="small" color="warning" (click)="addMenuQr()" disabled="{{!validateErrors()}}">
               <ion-icon color="medium" name="add"></ion-icon>
             </ion-fab-button>
           </ion-item>
+          <ion-row>
+            <div class="error-text" *ngIf="qrError.error">{{ qrError.error }}</div>
+          </ion-row>
         </ion-list>
         <ion-list *ngFor="let qrTable of listMenuQrModalRequest">
           <ion-col>
@@ -80,6 +85,4 @@
       </ion-footer>
     </ng-template>
   </ion-modal>
-
-
 </ion-content>

@@ -9,6 +9,8 @@ import {Toast} from "../../utils/toast";
 import {QrRequest, QrResponse} from "../../interfaces/qr.interface";
 import {QrService} from "../../services/qr.service";
 import {SafeUrl} from "@angular/platform-browser";
+import {Validations} from "../../utils/validations";
+import {FieldValidation} from "../../interfaces/validations.interface";
 
 
 @Component({
@@ -25,8 +27,9 @@ export class QrTablesPage implements OnInit {
   listMenu: MenuResponse[] = [];
   listAllQr: QrResponse[] = [];
   listQrUrl: any[] = [];
+  validations: Validations;
 
-  constructor(private menuService: MenuService, private qrService: QrService, private toast: Toast) { }
+  constructor(private menuService: MenuService, private qrService: QrService, private toast: Toast, validationService: Validations) {this.validations = validationService }
 
   isModalOpen = false;
   qrCodeDownloadLink: SafeUrl = ""
@@ -36,16 +39,23 @@ export class QrTablesPage implements OnInit {
     companyMenuId: undefined
   }
 
+  qrError: FieldValidation = {
+    size: 60,
+    error: null
+  }
+
   setOpenQrModal(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }
   addMenuQr() {
-    let menuQrClone: QrRequest = {
-      tableName: this.qrRequest.tableName,
-      companyMenuId: this.selectedMenu,
+    if(this.qrRequest.tableName != undefined && this.qrRequest.tableName.toString().length > 0){
+      let menuQrClone: QrRequest = {
+        tableName: this.qrRequest.tableName,
+        companyMenuId: this.selectedMenu,
+      }
+      this.listMenuQrModalRequest.push(menuQrClone)
+      this.qrRequest.tableName = undefined
     }
-    this.listMenuQrModalRequest.push(menuQrClone)
-    this.qrRequest.tableName = undefined
   }
   saveQr(){
     this.qrService.saveQr(this.listMenuQrModalRequest).subscribe({
@@ -64,6 +74,15 @@ export class QrTablesPage implements OnInit {
     this.listMenuQrModalRequest = []
     this.qrRequest.tableName = undefined
     this.qrRequest.companyMenuId = undefined
+    this.clearErrors()
+  }
+
+  clearErrors() {
+    this.qrError.error = null
+  }
+
+  validateErrors(){
+    return this.qrError.error === null
   }
 
   getAllQrByBranch(){
