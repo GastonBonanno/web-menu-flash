@@ -5,14 +5,14 @@
     "redirectTo": "/profile"
   },
   {
-    "icon": "qr-code-outline",
-    "name": "Mesas",
-    "redirectTo": "/tables"
-  },
-  {
     "icon": "restaurant-outline",
     "name": "Menú",
     "redirectTo": "/menu"
+  },
+  {
+    "icon": "qr-code-outline",
+    "name": "Mesas",
+    "redirectTo": "/tables"
   },
   {
     "icon": "reader-outline",
