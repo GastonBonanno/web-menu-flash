@@ -1,24 +1,27 @@
-  <ion-menu swipe-gesture="false" side="start" menuId="sidebar" contentId="main">
-    <ion-header>
-      <ion-toolbar color="warning">
-        <ion-item class="ion-no-padding" lines="none" [routerLink]="redirectHome">
-          <ion-avatar slot="start">
-            <ion-img [src]="itemSrc"></ion-img>
-          </ion-avatar>
-          <ion-label>Menú Flash</ion-label>
-        </ion-item>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content color="dark">
-
-      <ion-list>
-        <ion-menu-toggle *ngFor="let c of components | async">
-          <ion-item [routerLink]="c.redirectTo">
+<ion-menu swipe-gesture="false" side="start" menuId="sidebar" contentId="main">
+  <ion-header>
+    <ion-toolbar color="warning">
+      <ion-item
+        class="ion-no-padding"
+        lines="none"
+        [routerLink]="redirectHome"
+        color="none"
+      >
+        <ion-avatar slot="start">
+          <ion-img [src]="itemSrc"></ion-img>
+        </ion-avatar>
+        <ion-label>Menú Flash</ion-label>
+      </ion-item>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content color="dark">
+    <ion-list>
+      <ion-menu-toggle *ngFor="let c of components | async">
+        <ion-item [routerLink]="c.redirectTo">
           <ion-icon slot="start" [name]="c.icon"></ion-icon>
-          <ion-label>{{c.name}}</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
-      </ion-list>
-
-    </ion-content>
-  </ion-menu>
+          <ion-label>{{ c.name }}</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>
