@@ -4,16 +4,22 @@
   justify-content: center;
 }
 .qr-grid {
-  display: grid;
+  display: flex;
   grid-template-columns: auto auto auto auto;
   gap: 10px;
   justify-content: center;
+  padding-top: 50px;
 }
 
 .center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.title-text{
+  text-align: center;
+  padding-bottom: 5px;
 }
 
 .qrcodeImage {
