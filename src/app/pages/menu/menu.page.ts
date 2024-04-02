@@ -11,13 +11,14 @@ import {tap} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {Validations} from "../../utils/validations";
 import {FieldValidation} from "../../interfaces/validations.interface";
+import {QRCodeModule} from "angularx-qrcode";
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.page.html',
   styleUrls: ['./menu.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, QRCodeModule]
 })
 export class MenuPage implements OnInit {
 

@@ -3,16 +3,17 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center; /* Alineación del contenido al centro */
   padding: 0; /* Elimina el relleno para que la imagen ocupe todo el espacio */
-
+}
+.button-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
 }
-
 .card-contenedor {
   justify-content: center;
   background-color: transparent;
-
 }
-
 .tarjeta {
   /* Card styles */
   transition: box-shadow 0.2s; /* Add a transition for smooth effect */
@@ -21,7 +22,6 @@
     box-shadow: 0px 4px 8px rgba(255, 206, 1, 1); /* Add a shadow effect on hover */
   }
 }
-
 .bloque-superior {
   background-color:rgba(255, 206, 1, 0.7);
   height: 200px; /* Altura del bloque */
@@ -30,16 +30,13 @@
   justify-content: center; /* Centrar horizontalmente */
   align-items: center; /* Centrar verticalmente */
 }
-
 .titulo {
   font-size: 24px;
   text-align: center;
 }
-
 .boton {
   --ion-color-medium-shade: #808289;
 }
-
 .ion-modal {
   ion-content {
     max-width: 90%; /* Ajusta el ancho máximo del contenido del modal */
@@ -53,7 +50,6 @@
   padding: 50px;
   text-align: center;
 }
-
 .img-menu-mini {
   background-image: url("/assets/fondoCard.png");
 }
@@ -65,4 +61,30 @@
    height: 300px;
    width: 100%;
    display: flex;
- }
+}
+.menu-grid {
+  display: flex;
+  grid-template-columns: auto auto auto auto;
+  gap: 10px;
+  justify-content: center;
+  padding-top: 50px;
+}
+.local-col{
+  border: 1px solid;
+  border-radius: 10px;
+  border-color: #e0ac08;
+  background-color: #383a3e;
+}
+.local-text{
+  overflow: hidden;
+  white-space: nowrap;
+}
+.title-text{
+  text-align: center;
+  padding-bottom: 5px;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

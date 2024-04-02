@@ -11,13 +11,16 @@
     <div class="banner">
       <ion-title class="titulo">Acá podés crear tu menú</ion-title>
     </div>
-    <ion-row class="card-contenedor">
+
+    <ion-button color="warning" (click)="setOpen(true)" class="button-center">Crear Menu</ion-button>
+
+    <!--<ion-row class="card-contenedor">
       <ion-col size="2">
         <ion-card  (click)="setOpen(true)" class="imagen-boton tarjeta">
           <ion-img src='/assets/menu.png'></ion-img>
         </ion-card>
       </ion-col>
-    </ion-row>
+    </ion-row>-->
 
     <ion-modal (keydown.enter)="setOpen(false); saveMenu()" [isOpen]="isModalOpen" [backdropDismiss]="false">
       <ng-template>
@@ -86,9 +89,30 @@
     </ion-modal>
 
     <ion-title class="ion-padding titulo">
-      <ion-icon name="flash-outline" color="warning"></ion-icon>Mis menús</ion-title>
+      <ion-icon name="flash-outline" color="warning"></ion-icon>Mis menús
+    </ion-title>
 
-    <ion-list class="card-contenedor">
+    <ion-grid class="menu-grid">
+      <ion-row>
+        <ion-col class="local-col" size="12" size-sm="12" size-md="6" size-lg="4" size-xl="3" *ngFor="let menu of listMenu">
+          <ion-title class="center title-text">{{menu.branch}}</ion-title>
+          <ion-title class="center title-text">{{menu.title}}</ion-title>
+          <ion-text class="center title-text">{{menu.description}}</ion-text>
+          <ion-row class="center">
+            <ion-button class="center" color="warning" (click)="editMenu(menu.id)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+            <ion-row class="center">
+              <ion-button class="center" color="warning" (click)="deleteMenu(menu.id)">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+            </ion-row>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!--<ion-list class="card-contenedor">
       <ion-row class="card-contenedor ion-padding" *ngFor="let menu of listMenu">
         <ion-col size="4">
           <ion-card class="img-menu-mini">
@@ -102,7 +126,7 @@
           </ion-card>
         </ion-col>
       </ion-row>
-    </ion-list>
+    </ion-list>-->
 
   </ion-grid>
 </ion-content>

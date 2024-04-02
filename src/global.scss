@@ -16,7 +16,7 @@
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
-@import '@ionic/angular/css/display.css';
+@import "@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
@@ -25,10 +25,10 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-ion-content{
+ion-content {
   background-color: var(--ion-color-dark);
 }
-ion-header{
+ion-header {
   background-color: var(--ion-color-dark);
 }
 
@@ -38,7 +38,7 @@ ion-header{
   font-size: 13px;
   font-weight: bold;
   line-height: 20px;
-  text-shadow: 1px 1px rgba(250, 250, 250, .3);
+  text-shadow: 1px 1px rgba(250, 250, 250, 0.3);
   display: grid;
   justify-content: center;
   word-wrap: break-word;
@@ -53,4 +53,15 @@ ion-header{
 .no-error-input {
   border: 2px solid rgba(169, 169, 169, 0.5);
   outline: none;
+}
+
+ion-title {
+  color: #ffc409;
+}
+
+.form ion-list {
+  border-radius: 20px;
+  border-width: 2px;
+  border: 2px solid #ffc409;
+  box-shadow: 0 4px 10px rgba(255, 255, 0, 0.5);
 }
