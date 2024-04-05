@@ -41,3 +41,18 @@ ion-datetime::part(wheel-item) {
 ion-datetime::part(wheel-item active) {
   color: rgb(255, 206, 1, 0.8);
 }
+
+.card-style{
+  border: 1px solid;
+  border-radius: 10px;
+  border-color: #e0ac08;
+  background-color: #383a3e;
+}
+
+.button-card-style{
+  height: 100%;
+  border: 1px solid ;
+  border-color: #e0ac08;
+  color: #e0ac08;
+  --background: #383a3e;
+}

@@ -6,47 +6,27 @@
   </ion-toolbar>
 </ion-header>
 
+
+
 <ion-content [fullscreen]="true" color="dark">
+
   <ion-grid class="ion-padding">
     <ion-row class="ion-padding">
-      <ion-title class="ion-padding">Bienvenido user</ion-title>
+      <ion-title class="ion-padding">Bienvenido {{profileData.name}}</ion-title>
     </ion-row>
     <ion-row class="ion-padding">
       <ion-col size="3" class="ion-padding">
-        <ion-card color="dark" class="ion-padding ion-text-center">
-          <ion-card-header>
-            <ion-card-title>10</ion-card-title>
-            <ion-card-subtitle>Ordenes del dia</ion-card-subtitle>
-          </ion-card-header>
-        </ion-card>
+        <ion-button (click)="navigateTo('/profile')" expand="full" class="button-card-style">Perfil</ion-button>
       </ion-col>
       <ion-col size="3" class="ion-padding">
-        <ion-card color="dark" class="ion-padding ion-text-center">
-          <ion-card-header>
-            <ion-card-title>21</ion-card-title>
-            <ion-card-subtitle>Ordenes pendientes de aprobar</ion-card-subtitle>
-          </ion-card-header>
-        </ion-card>
+        <ion-button (click)="navigateTo('/menu')" expand="full" class="button-card-style">Menu</ion-button>
       </ion-col>
       <ion-col size="3" class="ion-padding">
-        <ion-card color="dark" class="ion-padding ion-text-center">
-          <ion-card-header>
-            <ion-card-title>254</ion-card-title>
-            <ion-card-subtitle>Ordenes aprobadas</ion-card-subtitle>
-          </ion-card-header>
-        </ion-card>
+        <ion-button (click)="navigateTo('/tables')" expand="full" class="button-card-style">Mesas</ion-button>
       </ion-col>
       <ion-col size="3" class="ion-padding">
-        <ion-card color="dark" class="ion-padding ion-text-center">
-          <ion-card-header>
-            <ion-card-title>3</ion-card-title>
-            <ion-card-subtitle>Ordenes canceladas</ion-card-subtitle>
-          </ion-card-header>
-        </ion-card>
+        <ion-button (click)="navigateTo('/orders')" expand="full" class="button-card-style">Ordenes</ion-button>
       </ion-col>
-    </ion-row>
-    <ion-row class="ion-padding">
-      <ion-title class="ion-padding">Resumen diario</ion-title>
     </ion-row>
   </ion-grid>
 
