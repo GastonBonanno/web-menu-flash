@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {IonicModule} from '@ionic/angular';
 import {QRCodeModule} from "angularx-qrcode";
-import {CategoryRequest, MenuResponse} from "../../interfaces/menu.interface";
+import {MenuResponse} from "../../interfaces/menu.interface";
 import {MenuService} from "../../services/menu.service";
 import {Toast} from "../../utils/toast";
 import {QrRequest, QrResponse} from "../../interfaces/qr.interface";
@@ -36,7 +36,8 @@ export class QrTablesPage implements OnInit {
 
   qrRequest: QrRequest = {
     tableName: undefined,
-    companyMenuId: undefined
+    companyMenuId: undefined,
+    companyId: undefined,
   }
 
   qrError: FieldValidation = {
@@ -52,6 +53,7 @@ export class QrTablesPage implements OnInit {
       let menuQrClone: QrRequest = {
         tableName: this.qrRequest.tableName,
         companyMenuId: this.selectedMenu,
+        companyId: this.qrRequest.companyId,
       }
       this.listMenuQrModalRequest.push(menuQrClone)
       this.qrRequest.tableName = undefined
@@ -74,6 +76,7 @@ export class QrTablesPage implements OnInit {
     this.listMenuQrModalRequest = []
     this.qrRequest.tableName = undefined
     this.qrRequest.companyMenuId = undefined
+    this.qrRequest.companyId = undefined
     this.clearErrors()
   }
 

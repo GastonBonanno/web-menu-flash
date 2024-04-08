@@ -25,6 +25,8 @@ export class ProfilePage implements OnInit {
     cuit: undefined,
     address: undefined,
     phoneNumber: undefined,
+    publicKey: undefined,
+    accessToken: undefined,
   };
 
   constructor(private userService: UserService, private toast: Toast) { }
@@ -51,6 +53,8 @@ export class ProfilePage implements OnInit {
         this.profileData.cuit = resp.cuit
         this.profileData.address = resp.address
         this.profileData.phoneNumber = resp.phoneNumber
+        this.profileData.publicKey = resp.publicKey
+        this.profileData.accessToken = resp.accessToken
       },
       error: (err) => {
         console.log('error: ', err);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -13,15 +13,14 @@ import {OrderService} from "../../services/order.service";
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class OrdersPage implements OnInit {
+export class OrdersPage implements OnInit, OnDestroy {
 
   pendingClientOrderResponse: ClientOrderResponse[] = []
   finishedClientOrderResponse: ClientOrderResponse[] = []
   pendingOrdersId: string[] = []
-  // refresh: boolean
 
   timer = setInterval(()=> {
-    this.ngOnInit()
+    this.findOrders()
   }, 10000);
 
   //ToDo Poner un flag para que no refresque los pedidos
@@ -29,6 +28,10 @@ export class OrdersPage implements OnInit {
   constructor(private orderService: OrderService) { }
 
   ngOnInit() {
+    this.findOrders();
+  }
+
+  private findOrders() {
     this.orderService.findAllbyCompanyId().subscribe(
       {
         next: (resp: ClientOrderResponse[]) => {
@@ -52,8 +55,11 @@ export class OrdersPage implements OnInit {
         error: (err) => { console.log('error: ', err) },
       }
     );
-
   }
 
   protected readonly console = console;
+
+  ngOnDestroy(): void {
+    clearInterval(this.timer)
+  }
 }

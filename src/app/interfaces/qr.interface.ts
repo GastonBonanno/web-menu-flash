@@ -1,11 +1,13 @@
 
 export interface QrRequest {
-  tableName: string | undefined;
+  companyId: string | undefined;
   companyMenuId: number | undefined;
+  tableName: string | undefined;
 }
 
 export interface QrResponse {
   id : number | undefined;
-  tableName: string | undefined;
+  companyId: string | undefined;
   companyMenuId: number | undefined;
+  tableName: string | undefined;
 }

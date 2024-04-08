@@ -24,7 +24,7 @@
     <ion-row>
       <ion-col size="12" size-sm="12" size-md="6" size-lg="4" size-xl="2" *ngFor="let qr of listAllQr; let i = index">
         <ion-title class="center title-text">{{qr.tableName}}</ion-title>
-        <qrcode class="center" (qrCodeURL)="onChangeURL($event, i)" [qrdata]="selectedMenu + ',' + qr.id" [width]="170" [errorCorrectionLevel]="'M'"></qrcode>
+        <qrcode class="center" (qrCodeURL)="onChangeURL($event, i)" [qrdata]="qr.companyId + ',' + selectedMenu + ',' + qr.tableName" [width]="170" [errorCorrectionLevel]="'M'"></qrcode>
         <ion-row class="center">
           <ion-button class="center" color="warning" (click)="deleteQr(qr.id)">
             <ion-icon name="trash-outline"></ion-icon>

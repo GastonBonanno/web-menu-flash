@@ -22,6 +22,8 @@ export class HomePage implements OnInit {
     cuit: undefined,
     address: undefined,
     phoneNumber: undefined,
+    publicKey: undefined,
+    accessToken: undefined,
   };
 
 

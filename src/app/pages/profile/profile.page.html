@@ -59,6 +59,25 @@
           <div class="error-text" *ngIf="phoneNumberError">
             {{ phoneNumberError }}
           </div>
+
+          <ion-item>
+            <ion-input
+              name="publicKey"
+              type="text"
+              placeholder="Public Key"
+              [(ngModel)]="profileData.publicKey"
+              required="true"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              name="accessToken"
+              type="text"
+              placeholder="Access Token"
+              [(ngModel)]="profileData.accessToken"
+              required="true"
+            ></ion-input>
+          </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
