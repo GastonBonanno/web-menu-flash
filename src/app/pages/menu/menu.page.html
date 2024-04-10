@@ -14,14 +14,6 @@
 
     <ion-button color="warning" (click)="setOpen(true)" class="button-center">Crear Menu</ion-button>
 
-    <!--<ion-row class="card-contenedor">
-      <ion-col size="2">
-        <ion-card  (click)="setOpen(true)" class="imagen-boton tarjeta">
-          <ion-img src='/assets/menu.png'></ion-img>
-        </ion-card>
-      </ion-col>
-    </ion-row>-->
-
     <ion-modal (keydown.enter)="setOpen(false); saveMenu()" [isOpen]="isModalOpen" [backdropDismiss]="false">
       <ng-template>
         <ion-header>
@@ -93,8 +85,8 @@
     </ion-title>
 
     <ion-grid class="menu-grid">
-      <ion-row>
-        <ion-col class="local-col" size="12" size-sm="12" size-md="6" size-lg="4" size-xl="3" *ngFor="let menu of listMenu">
+      <ion-row style="justify-content: center">
+        <ion-col size="12" size-xl="2" size-lg="3" size-md="6" size-sm="12" class="local-col" *ngFor="let menu of listMenu">
           <ion-title class="center title-text">{{menu.branch}}</ion-title>
           <ion-title class="center title-text">{{menu.title}}</ion-title>
           <ion-text class="center title-text">{{menu.description}}</ion-text>
@@ -111,22 +103,5 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
-    <!--<ion-list class="card-contenedor">
-      <ion-row class="card-contenedor ion-padding" *ngFor="let menu of listMenu">
-        <ion-col size="4">
-          <ion-card class="img-menu-mini">
-            <ion-card-header class="card-menu-list">
-              <ion-card-title>{{menu.branch}}</ion-card-title>
-              <ion-card-title>{{menu.title}}</ion-card-title>
-              <ion-text class="ion-padding">{{menu.description}}</ion-text>
-            </ion-card-header>
-            <ion-button fill="clear" color="warning" (click)="editMenu(menu.id)">Editar</ion-button>
-            <ion-button fill="clear" color="danger"(click)="deleteMenu(menu.id)">Eliminar</ion-button>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-list>-->
-
   </ion-grid>
 </ion-content>
