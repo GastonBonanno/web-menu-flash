@@ -123,9 +123,6 @@
             <ion-col class="right-item-column">
 
               <ion-row>
-                <ion-card-subtitle>Cantidad: {{item.quantity}}</ion-card-subtitle>
-              </ion-row>
-              <ion-row>
                 <ion-text>{{item.active ? 'Habilitado' : 'Deshabilitado'}}</ion-text>
               </ion-row>
               <ion-row>
@@ -192,11 +189,6 @@
           <ion-input class="ion-text-wrap" label="Precio: " [(ngModel)]="itemMenu.price"
                      type="number"
                      placeholder="Precio"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input class="ion-text-wrap" label="Cantidad: " [(ngModel)]="itemMenu.quantity"
-                     type="number"
-                     placeholder="Cantidad"></ion-input>
         </ion-item>
 
       </ion-content>
@@ -323,14 +315,6 @@
             <ion-row>
               <ion-input class="ion-text-wrap" type="number" label="Precio: " [(ngModel)]="itemMenuUpdate.price"
                          placeholder="Precio"></ion-input>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-        <ion-item>
-          <ion-grid>
-            <ion-row>
-              <ion-input class="ion-text-wrap" type="number" label="Cantidad: " [(ngModel)]="itemMenuUpdate.quantity"
-                         placeholder="Cantidad"></ion-input>
             </ion-row>
           </ion-grid>
         </ion-item>

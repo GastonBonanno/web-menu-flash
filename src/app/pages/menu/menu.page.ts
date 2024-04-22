@@ -82,7 +82,6 @@ export class MenuPage implements OnInit {
     position: undefined,
     description: '',
     price: 0,
-    quantity: 0
   };
 
   listMenu: MenuResponse[] = [];

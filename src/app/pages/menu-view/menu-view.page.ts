@@ -53,7 +53,6 @@ export class MenuViewPage implements OnInit {
     position: undefined,
     description: '',
     price: 0,
-    quantity: undefined,
   };
   itemMenuUpdate: ItemMenuResponse = {
     id: 0,
@@ -62,7 +61,6 @@ export class MenuViewPage implements OnInit {
     position: undefined,
     description: '',
     price: 0,
-    quantity: 0,
     active: true,
     createdAt: undefined,
     modifiedAt: undefined,
@@ -168,7 +166,6 @@ export class MenuViewPage implements OnInit {
       this.itemMenuUpdate.deletedAt = item.deletedAt
       this.itemMenuUpdate.modifiedAt = item.modifiedAt
       this.itemMenuUpdate.price = item.price
-      this.itemMenuUpdate.quantity = item.quantity
     }
   }
   setUpdateOpenCategory(isOpen: boolean, category: CategoryMenu | undefined) {
@@ -246,14 +243,13 @@ export class MenuViewPage implements OnInit {
 
   editItem(item: ItemMenuResponse){
     if(this.validateUpdateErrors()){
-      console.log('item.active: ', item.active)
       this.itemService.editItem(item).subscribe({
         next: () => {
           this.ngOnInit()
           this.toast.present("bottom", "Actualizado con éxito").then()
         },
         error: (err) => {
-          this.toast.present('bottom', "Error borrando el item").then()
+          this.toast.present('bottom', "Error editando el item").then()
           console.log('error: ', err)
         }
       })
@@ -314,7 +310,6 @@ export class MenuViewPage implements OnInit {
       position: undefined,
       description: '',
       price: 0,
-      quantity: undefined,
     }
     this.clearErrors()
   }

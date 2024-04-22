@@ -46,7 +46,6 @@ export interface ItemMenuRequest{
   position: number | undefined;
   description: string;
   price: number;
-  quantity: number | undefined;
 }
 
 export interface ItemMenuResponse{
@@ -57,7 +56,6 @@ export interface ItemMenuResponse{
   description: string;
   price: number;
   active: boolean
-  quantity: number;
   createdAt: Date | undefined;
   modifiedAt: Date | undefined ;
   deletedAt: Date | undefined;

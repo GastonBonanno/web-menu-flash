@@ -30,7 +30,7 @@ export class ItemService {
   }
 
   editItem(item: ItemMenuResponse): Observable<void>{
-    return this.secureService.patch(`/item-menu/`, item)
+    return this.secureService.patch(`/item-menu`, item)
   }
 
 }
