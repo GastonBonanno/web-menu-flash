@@ -4,7 +4,6 @@ export interface MenuResponse {
   title: string;
   description: string;
   header: string;
-  footer: string;
   companyDataId: number;
   active: boolean;
   createdAt: Date | null;
@@ -18,7 +17,6 @@ export interface MenuRequest{
   title: string;
   description: string;
   header: string;
-  footer: string;
 }
 
 export interface CategoryRequest{

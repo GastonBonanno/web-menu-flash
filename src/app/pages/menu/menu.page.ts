@@ -42,17 +42,12 @@ export class MenuPage implements OnInit {
     error: null
   }
 
-  footerError: FieldValidation = {
-    size: 60,
-    error: null
-  }
 
   menu: MenuRequest = {
     branch: '',
     title: '',
     description: '',
     header: '',
-    footer: ''
   };
 
   menuResponse: MenuResponse = {
@@ -61,7 +56,6 @@ export class MenuPage implements OnInit {
     title: '',
     description: '',
     header: '',
-    footer: '',
     companyDataId: 0,
     active: true,
     createdAt: null,
@@ -138,7 +132,6 @@ export class MenuPage implements OnInit {
       description: '',
       header: '',
       title: '',
-      footer: ''
     }
     this.clearErrors()
   }
@@ -147,7 +140,6 @@ export class MenuPage implements OnInit {
   clearErrors() {
     this.branchError.error = null
     this.titleError.error = null
-    this.footerError.error = null
     this.descriptionError.error = null
     this.headerError.error = null
   }
@@ -158,7 +150,6 @@ export class MenuPage implements OnInit {
       && this.headerError.error === null
       && this.titleError.error === null
       && this.descriptionError.error === null
-      && this.footerError.error === null
   }
 
 

@@ -60,14 +60,6 @@
             </ion-item>
             <div class="error-text" *ngIf="descriptionError.error">{{ descriptionError.error }}</div>
 
-            <ion-item>
-              <ion-input labelPlacement="stacked" label="Pié de Página"
-                         [(ngModel)]="menu.footer"
-                         (focusout)="validations.validateField(menu.footer, footerError)"
-                         placeholder="Ingresa el pié de página de tu menú"></ion-input>
-            </ion-item>
-            <div class="error-text" *ngIf="footerError.error">{{ footerError.error }}</div>
-
           </ion-list>
         </ion-content>
         <ion-footer>

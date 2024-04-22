@@ -38,7 +38,6 @@ export class MenuViewPage implements OnInit {
     title: '',
     description: '',
     header: '',
-    footer: '',
     companyDataId: 0,
     active: true,
     createdAt: null,
@@ -120,11 +119,6 @@ export class MenuViewPage implements OnInit {
   }
 
   descriptionError: FieldValidation = {
-    size: 60,
-    error: null
-  }
-
-  footerError: FieldValidation = {
     size: 60,
     error: null
   }
@@ -343,7 +337,6 @@ export class MenuViewPage implements OnInit {
         title: this.menuResponse.title,
         description: this.menuResponse.description,
         header: this.menuResponse.header,
-        footer: this.menuResponse.footer
       }
       this.menuService.updateMenu(menuRequest, this.menuResponse.id).subscribe({
         next: () => {
