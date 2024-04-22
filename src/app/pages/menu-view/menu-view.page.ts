@@ -9,7 +9,7 @@ import {
   CategoryRequest,
   CategoryResponse,
   ItemMenuRequest,
-  ItemMenuResponse,
+  ItemMenuResponse, MenuRequest,
   MenuResponse
 } from "../../interfaces/menu.interface";
 import {ActivatedRoute} from "@angular/router";
@@ -26,11 +26,12 @@ import {Validations} from "../../utils/validations";
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class MenuViewPage implements OnInit {
-  isModalOpen = false;
-  isModalOpen2 = false;
-  isItemUpdateModalOpen = false;
-  isCategoryUpdateModalOpen = false;
-  modifiedItemCategoryId: number | undefined;
+  isModalOpen = false
+  isModalOpen2 = false
+  isEditMenuModalOpen = false
+  isItemUpdateModalOpen = false
+  isCategoryUpdateModalOpen = false
+  modifiedItemCategoryId: number | undefined
   menuResponse: MenuResponse = {
     id: 0,
     branch: '',
@@ -110,6 +111,26 @@ export class MenuViewPage implements OnInit {
     error: null
   }
 
+  headerError: FieldValidation = {
+    size: 60,
+    error: null
+  }
+
+  titleError: FieldValidation = {
+    size: 60,
+    error: null
+  }
+
+  descriptionError: FieldValidation = {
+    size: 60,
+    error: null
+  }
+
+  footerError: FieldValidation = {
+    size: 60,
+    error: null
+  }
+
   validations: Validations
 
   constructor(private menuService: MenuService,
@@ -124,6 +145,9 @@ export class MenuViewPage implements OnInit {
 
   setOpenCategory(isOpen: boolean) {
     this.isModalOpen = isOpen;
+  }
+  setOpenEditMenu(isOpen: boolean) {
+    this.isEditMenuModalOpen = isOpen
   }
   setOpenItem(isOpen: boolean, id: number | undefined) {
     this.isModalOpen2 = isOpen;
@@ -316,6 +340,28 @@ export class MenuViewPage implements OnInit {
   validateCategoryErrors(){
     return this.categoryNameError.error === null
   }
+
+  updateMenu() {
+    if(this.validateErrors()) {
+      let menuRequest: MenuRequest = {
+        branch: this.menuResponse.branch,
+        title: this.menuResponse.title,
+        description: this.menuResponse.description,
+        header: this.menuResponse.header,
+        footer: this.menuResponse.footer
+      }
+      this.menuService.updateMenu(menuRequest, this.menuResponse.id).subscribe({
+        next: () => {
+          this.toast.present('bottom', "Menu editado correctamente").then()
+        },
+        error: (err) => {
+          this.toast.present('bottom', "Error menu").then()
+          console.log('error: ', err)
+        }
+      })
+    }
+  }
+
 
   protected readonly name = name;
 }

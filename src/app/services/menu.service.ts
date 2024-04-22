@@ -28,6 +28,10 @@ export class MenuService {
     return this.secureService.post( `/company-menu`, menu)
   }
 
+  updateMenu(menu: MenuRequest, id: number): Observable<MenuResponse> {
+    return this.secureService.patch( `/company-menu/${id}`, menu)
+  }
+
   deleteMenu(id: number): Observable<void> {
     return this.secureService.delete( `/company-menu/${id}`)
   }

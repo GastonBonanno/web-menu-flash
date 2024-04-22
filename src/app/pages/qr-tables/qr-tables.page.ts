@@ -145,7 +145,4 @@ export class QrTablesPage implements OnInit {
     this.listQrUrl[id] = url
   }
 
-  async downloadQrCode() {
-    this.toast.present('bottom', "ToDo Envio de mail").then()
-  }
 }

@@ -13,12 +13,20 @@
     <ion-text class="text">{{menuResponse.description}}</ion-text>
   </ion-card-content>
   <ion-row class="ion-justify-content-center">
-    <ion-col size="1.4">
-      <ion-title>Crear Categorias</ion-title>
-      <ion-card (click)="setOpenCategory(true)" class="imagen-boton tarjeta">
-        <ion-img src='/assets/categoriasBoton.png'></ion-img>
-      </ion-card>
-    </ion-col>
+    <ion-row class="buttons">
+      <ion-col>
+        <ion-button (click)="setOpenCategory(true)" color="warning"
+                    shape="round">
+          Crear Categorias
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="setOpenEditMenu(true)" color="warning"
+                    shape="round">
+          Editar cabecera del menu
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </ion-row>
   <ion-modal (keydown.enter)="setOpenCategory(false); saveCategory(); clearListCategory()" [isOpen]="isModalOpen"
              [backdropDismiss]="false">
@@ -201,6 +209,72 @@
       </ion-footer>
     </ng-template>
   </ion-modal>
+
+
+
+
+
+  <ion-modal (keydown.enter)="setOpenEditMenu(false); updateMenu();" [isOpen]="isEditMenuModalOpen"
+             [backdropDismiss]="false">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Menú</ion-title>
+          <ion-fab (click)="setOpenEditMenu(false)" slot="end" horizontal="end">
+            <ion-fab-button color="medium" size="small">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+
+          <ion-item>
+            <ion-input labelPlacement="stacked" label="Encabezado"
+                       [(ngModel)]="menuResponse.header"
+                       (focusout)="validations.validateField(menuResponse.header, headerError)"
+                       placeholder="Ingresa el encabezado de tu menú"></ion-input>
+          </ion-item>
+          <div class="error-text" *ngIf="headerError.error">{{ headerError.error }}</div>
+
+          <ion-item>
+            <ion-input labelPlacement="stacked" label="Título"
+                       [(ngModel)]="menuResponse.title"
+                       (focusout)="validations.validateField(menuResponse.title, titleError)"
+                       placeholder="Ingresa el título de tu menú"></ion-input>
+          </ion-item>
+          <div class="error-text" *ngIf="titleError.error">{{ titleError.error }}</div>
+
+          <ion-item>
+            <ion-input labelPlacement="stacked" label="Descripción"
+                       [(ngModel)]="menuResponse.description"
+                       (focusout)="validations.validateField(menuResponse.description, descriptionError)"
+                       placeholder="Podés ingresar una descripción de tu Empresa"></ion-input>
+          </ion-item>
+          <div class="error-text" *ngIf="descriptionError.error">{{ descriptionError.error }}</div>
+
+          <ion-item>
+            <ion-input labelPlacement="stacked" label="Pié de Página"
+                       [(ngModel)]="menuResponse.footer"
+                       (focusout)="validations.validateField(menuResponse.footer, footerError)"
+                       placeholder="Ingresa el pié de página de tu menú"></ion-input>
+          </ion-item>
+          <div class="error-text" *ngIf="footerError.error">{{ footerError.error }}</div>
+
+        </ion-list>
+      </ion-content>
+      <ion-footer>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpenEditMenu(false); updateMenu();" disabled="{{!validateErrors()}}">Guardar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
+
+
 
 
   <ion-modal (keydown.enter)="editItem(itemMenuUpdate); setUpdateOpenItem(false, undefined)"
