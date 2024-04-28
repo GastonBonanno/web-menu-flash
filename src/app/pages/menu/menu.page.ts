@@ -87,7 +87,9 @@ export class MenuPage implements OnInit {
   }
 
   saveMenu() {
+    this.validateFields();
     if(this.validateErrors()) {
+      this.setOpen(false);
       this.menuService.saveMenu(this.menu).subscribe({
         next: (resp: MenuResponse) => {
           this.navCtrl.navigateRoot(['/menu-view', resp.id], {animated: true})
@@ -150,6 +152,13 @@ export class MenuPage implements OnInit {
       && this.headerError.error === null
       && this.titleError.error === null
       && this.descriptionError.error === null
+  }
+
+  validateFields(): void {
+    this.validations.validateField(this.menu.branch, this.branchError)
+    this.validations.validateField(this.menu.header, this.headerError)
+    this.validations.validateField(this.menu.title, this.titleError)
+    this.validations.validateField(this.menu.description, this.descriptionError)
   }
 
 

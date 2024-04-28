@@ -4,6 +4,14 @@
       <ion-menu-button menu="sidebar" color="warning"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
+  <ion-list>
+    <ion-item>
+      <ion-select aria-label="Position" interface="popover" placeholder="Seleccionar sucursal"
+                  [(ngModel)]="selectedMenu" (ionChange)="findOrders(true)">
+        <ion-select-option value="{{menu.id}}" *ngFor="let menu of listMenu"> {{menu.branch}} </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
 </ion-header>
 
 <ion-content color="dark">
@@ -11,6 +19,7 @@
       <ion-title class="titulo">Gestión de pedidos</ion-title>
     </div>
 
+  <ion-toggle class="center-toggle" [(ngModel)]="isRefreshing" [checked]=isRefreshing>Refrescar automaticamente</ion-toggle>
 
 
   <ion-title>Pendientes</ion-title>

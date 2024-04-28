@@ -14,8 +14,8 @@ export class OrderService {
 
   constructor(private secureService: SecureService) {
   }
-  findAllbyCompanyId(): Observable<ClientOrderResponse[]> {
-    return this.secureService.get( `/order`)
+  findAllbyCompanyId(selectedMenu: number | undefined): Observable<ClientOrderResponse[]> {
+    return this.secureService.get( `/order/branch/${selectedMenu}`)
   }
 
   changeState(id: number, state: string): Observable<void> {
