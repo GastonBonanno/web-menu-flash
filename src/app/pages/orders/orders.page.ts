@@ -66,7 +66,7 @@ export class OrdersPage implements OnInit, OnDestroy {
     this.orderService.changeState(id, state).subscribe(
       {
         next: () => {
-          this.ngOnInit()
+          this.findOrders(true)
         },
         error: (err) => { console.log('error: ', err) },
       }
