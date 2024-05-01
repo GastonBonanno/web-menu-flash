@@ -1,0 +1,5 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { "namespace": "android_app", "package_name": "com.amagaspa.menuFlash",
+    "sha256_cert_fingerprints": ["6A:77:C7:A2:A9:D8:68:51:65:35:61:68:B2:66:E1:CF:86:69:47:36:29:98:01:A3:E1:D9:13:14:30:EF:AA:EB"] }
+}]
