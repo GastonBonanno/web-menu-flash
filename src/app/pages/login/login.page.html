@@ -51,7 +51,7 @@
   <ion-modal (keydown.enter)="createUser(modal)" id="create-user-modal" #modal trigger="create-user">
     <ng-template>
       <div class="wrapper">
-        <h1>Registro</h1>
+        <h1 class="color-texto">Registro</h1>
 
         <ion-list lines="none">
 
@@ -70,6 +70,7 @@
             <ion-input class= "{{passwordError?'error-input':'no-error-input'}}"
                        name="password"
                        type="password"
+                       helperText="Debe contener mayusculas, minusculas, numeros y al menos 8 caracteres"
                        placeholder="Contraseña"
                        [(ngModel)]="userToCreate.password"
                        (focusout)="validatePassword()"
@@ -92,7 +93,7 @@
         <ion-row class="buttons">
           <ion-col>
             <ion-button (click)="createUser(modal)"
-                        color="tertiary"
+                        color="warning"
                         shape="round"
                         id="create"
                         disabled="{{!validateErrors()}}">
