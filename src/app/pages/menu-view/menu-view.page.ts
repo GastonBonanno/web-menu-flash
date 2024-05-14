@@ -185,17 +185,19 @@ export class MenuViewPage implements OnInit {
 
    saveCategory() {
      this.setOpenCategory(false)
-     this.clearListCategory()
-     if(this.validateErrors())
-      this.categoryService.saveCategory(this.listCategory).subscribe({
-        next: (resp: CategoryResponse[]) => {
-          this.toast.present('bottom', "Cargado con éxito").then()
-          resp.forEach(category => this.menuResponse.listCategory.push(category))
-        },
-        error: (err) => {
-          console.log('error: ', err)
-        }
-      })
+     if(this.validateErrors()) {
+       this.categoryService.saveCategory(this.listCategory).subscribe({
+         next: (resp: CategoryResponse[]) => {
+           this.toast.present('bottom', "Cargado con éxito").then()
+           resp.forEach(category => this.menuResponse.listCategory.push(category))
+           this.clearListCategory()
+         },
+         error: (err) => {
+           console.log('error: ', err)
+           this.clearListCategory()
+         }
+       })
+     }
    }
    saveItems(){
     this.itemMenu.categoryMenuId = this.modifiedItemCategoryId;
